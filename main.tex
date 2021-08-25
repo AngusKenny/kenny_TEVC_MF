@@ -55,8 +55,9 @@
 % If IEEEtran.cls has not been installed into the LaTeX system files,
 % manually specify the path to it like:
 % \documentclass[journal]{../sty/IEEEtran}
-
-
+% toggle for showing comments
+\newif\ifprintcomments
+\printcommentstrue
 \input tevc_style.sty
 
 
@@ -441,6 +442,12 @@
 % in the abstract or keywords.
 \begin{abstract}
 The abstract goes here.
+
+\angus{Angus can make comments using \texttt{\textbackslash{}angus\{comment\}}}
+
+\ray{Ray can make comments using \texttt{\textbackslash{}ray\{comment\}}}
+
+\hemant{Hemant can make comments using \texttt{\textbackslash{}hemant\{comment\}}}
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -541,6 +548,8 @@ where $\phi$ is the \emph{fidelity level}, with $\tilde f(\V{x},10000) = f(\V{x}
 Because the error function is always independent of $f(\V{x})$, this method can be applied to any test function at all; and because $\phi$ is real-valued, many different fidelity levels can be modelled easily--- although some analysis must still be performed if specific correlation coefficients are required.
 
 \subsection{Kriging and co-kriging}
+
+\angus{I am still not entirely sure about this subsection, can someone please look at it for me?}
 
 Originally arising from geostatistical methods used for ore valuation in mining research --- but since being applied across a number of domains --- is the so-called \emph{kriging} method~\cite{forrester2008engineering}. Kriging is an interpolation technique that uses a limited set of sampled data to predict the objective value at a point that has not been sampled yet.
 

@@ -55,3 +55,13 @@
 \newtheorem{cor}[theorem]{Corollary}
 \newtheorem{conj}[theorem]{Conjecture}
 \newtheorem{lemma}[theorem]{Lemma}
+
+\ifprintcomments
+\newcommand{\angus}[1]{{\color{red}[Angus: #1]}}
+\newcommand{\ray}[1]{{\color{blue}[Ray: #1]}}
+\newcommand{\hemant}[1]{{\color{OliveGreen}[Hemant: #1]}}
+\else
+\newcommand{\angus}[1]{}
+\newcommand{\ray}[1]{}
+\newcommand{\hemant}[1]{}
+\fi
