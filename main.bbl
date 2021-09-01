@@ -140,8 +140,8 @@ J.~Xu, S.~Zhang, E.~Huang, C.-H. Chen, L.~H. Lee, and N.~Celik, ``An ordinal
   385--390.
 
 \bibitem{oodace}
-C.~I., D.~T., and D.~P., ``oodace toolbox: A flexible object-oriented kriging
-  implementation,'' \emph{Journal of Machine Learning Research}, vol.~15, pp.
-  3183--3186, 2014.
+I.~Couckuyt, T.~Dhaene, and P.~Demeester, ``oodace toolbox: A flexible
+  object-oriented kriging implementation,'' \emph{Journal of Machine Learning
+  Research}, vol.~15, pp. 3183--3186, 2014.
 
 \end{thebibliography}

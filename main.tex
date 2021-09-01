@@ -830,6 +830,8 @@ The experiments were run on a collection of bound-constrained, single-objective,
 
 The second set of problem instances is generated using three problems taken from the Virtual Library of Simulation Experiments~\cite{get-citation}. Each problem was instantiated with versions for three, four, five, six and eight decision variables. This matches the first dataset, and also allows the performance of the algorithms to be judged across different sized problems in a more controlled environment. These test problems are not naturally multi-fidelity optimisation problems, so low-fidelity evaluations must be made by applying the methods described in~\cite{wang2017generic}. An appropriate fidelity level $\phi$ for each problem was chosen by computing the square of the Pearson correlation coefficient $r^2$ for different fidelity values and selecting a value for $\phi$ such that $r^2$ was between 0.65 and 0.85, to be commensurate with the first dataset.
 
+\angus{put actual test functions in appendix?}
+
 \subsection{Baseline co-kriging algorithm}
 \begin{algorithm}[h!] 
 \caption{Baseline co-kriging multi-fidelity optimisation algorithm}

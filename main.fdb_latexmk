@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1630511987 "main.aux" "main.bbl" "main" 1630511988
+["bibtex main"] 1630512410 "main.aux" "main.bbl" "main" 1630512411
   "/usr/share/texlive/texmf-dist/bibtex/bst/IEEEtran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1630511987 8525 c220fa22d5514fd6da8bd5759b784bab "pdflatex"
-  "refs.bib" 1630511671 9464 275c60982bbcaa969f5db16a1b4b9ca5 ""
+  "main.aux" 1630512411 8525 6133f6c70357111d69dbce3cb9ce553e "pdflatex"
+  "refs.bib" 1630512367 9461 a311cf5db1a39b93600c45fe60333b0a ""
   (generated)
-  "main.bbl"
   "main.blg"
-["pdflatex"] 1630511987 "main.tex" "main.pdf" "main" 1630511988
+  "main.bbl"
+["pdflatex"] 1630512411 "main.tex" "main.pdf" "main" 1630512411
   "/etc/texmf/web2c/texmf.cnf" 1599592942 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -294,13 +294,13 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1599592974 4770781 1ed1abab22da9c3e2cc82e4db562318b ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1599592994 8257038 39c2268e8868ba3210190ef6a1a84fa4 ""
   "img/logistic.eps" 1624257983 17521 b160144720353e6802d882419fe3171e ""
-  "main.aux" 1630511987 8525 c220fa22d5514fd6da8bd5759b784bab "pdflatex"
-  "main.bbl" 1630511987 6529 5dacbb0820adbd8051253b978425f8d6 "bibtex main"
-  "main.out" 1630511987 1245 92583be8848c37d549c1b6b04a81fc80 "pdflatex"
-  "main.tex" 1630511986 79988 8e2f194ce13df26e1852297dbd23c33f ""
+  "main.aux" 1630512411 8525 6133f6c70357111d69dbce3cb9ce553e "pdflatex"
+  "main.bbl" 1630512411 6546 6b8154a9dae0823146da8c6a1b8a869c "bibtex main"
+  "main.out" 1630512411 1245 92583be8848c37d549c1b6b04a81fc80 "pdflatex"
+  "main.tex" 1630512410 80036 b2dab5c83b14b2b0dd23a61c49c8c2e5 ""
   "tevc_style.sty" 1630471239 1987 724cf0b55d51cf4ce57ad4f7f9852050 ""
   (generated)
-  "main.log"
-  "main.aux"
-  "main.out"
   "main.pdf"
+  "main.out"
+  "main.aux"
+  "main.log"
