@@ -489,10 +489,10 @@ IEEE, IEEEtran, journal, \LaTeX, paper, template.
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
 
-\hemant{IEEE requires use of US versions of the spelling ('-ize').}
-\IEEEPARstart{M}{any} real-world engineering design problems require estimation of responses that are intractable for exact or analytical methods. In such cases, two alternatives are commonly resorted to: numerical simulations and physical testing of a prototype. When used in-loop during design optimization using iterative methods such as evolutionary algorithms~(EAs), both of these methods tend to be prohibitively slow; as well as potentially cost and resource intensive. Such optimization problems where each design evaluation incurs significant cost in any form are referred to as computationally expensive optimization problems.
+% \hemant{IEEE requires use of US versions of the spelling ('-ize').}
+\IEEEPARstart{M}{any} real-world engineering design problems require estimation of responses that are intractable for exact or analytical methods. In such cases, two alternatives are commonly resorted to: numerical simulations and physical testing of a prototype~\cite{forrester2008engineering}. When used in-loop during design optimization using iterative methods such as evolutionary algorithms~(EAs), both of these methods tend to be prohibitively slow; as well as potentially cost and resource intensive~\cite{jin2009systems}. Such optimization problems where each design evaluation incurs significant cost in any form are referred to as computationally expensive optimization problems.
 
-Simulation-based optimization~(SO) refers to the methods that deal with optimization problems involving  numerical simulations\footnote{For brevity, the discussion is restricted to simulation-based design, but the same principles can be applied to other expensive optimization such as those involving physical prototyping.}. Typically, the these methods make use of surrogate approximations, also referred to as metamodels to the reduce the computational expense. The basic principle is to use historical information from previously evaluated designs to build a surrogate model of the response landscape. The predicted values from these surrogate models can be then utilized to determine new candidate solutions that are likely to be competent when evaluated using the true~(time consuming) simulation. Through this informed pre-selection, the number of expensive evaluations can be significantly reduced during the optimization. 
+Simulation-based optimization~(SO) refers to the methods that deal with optimization problems involving  numerical simulations\footnote{For brevity, the discussion is restricted to simulation-based design, but the same principles can be applied to other expensive optimization such as those involving physical prototyping.}. Typically, the these methods make use of surrogate approximations, also referred to as metamodels, to reduce the computational expense~\cite{amaran2016simulation}. The basic principle is to use historical information from previously evaluated designs to build a surrogate model of the response landscape. The predicted values from these surrogate models can be then utilized to determine new candidate solutions that are likely to be competent when evaluated using the true~(time consuming) simulation. Through this informed pre-selection, the number of expensive evaluations can be significantly reduced during the optimization. 
 
 % A the production and testing of a prototype model can be probitively expensive, in terms of both time and cost. For these types of problem instances, numerical simulations --- such as finite element analysis (FEA) and computational fluid dynammics (CFD) --- can be employed to predict the outcome of various design choices. Simulation optimisation (SO) is an important tool which allows large design spaces to be searched, the merits of various candidate solutions to be approximated and inferences to be made about how those candidates might be improved --- all relatively cheaply.
 
@@ -500,7 +500,7 @@ Simulation-based optimization~(SO) refers to the methods that deal with optimiza
 
 % Although conducting a numerical simulation is not usually as expensive as producing and testing a physical prototype, it does incur a significant cost; with some complex FEA or CFD simulations taking several days to complete. Often, the allowed computational budget is given as a fixed amount, therefore it is important to ensure that this budget is used as efficiently as possible. In order to address this concern, the field of multi-fidelity simulation optimisation (MFSO) was developed.
 
-Some numerical simulation processes allow control over the resolution, or fidelity, of the data they produce. For example, in Finite Element Analysis~(FEA) or Computational Fluid Dynamic~(CFD) simulations, the mesh size can be controlled to yield solutions with different fidelities. A coarse mesh yields a low-fidelity~(LF) performance estimate that is relatively fast but less accurate, while a fine mesh yields a high-fidelity~(HF) estimate that is relatively more time consuming but more accurate. Multi-fidelity SO methods~(MFSO) are a special class of SO methods that attempt to efficiently combine the information from different fidelities with an eventual aim of searching for optimal HF designs. 
+Some numerical simulation processes allow control over the resolution, or fidelity, of the data they produce. For example, in finite element analysis~(FEA) or computational fluid dynamic~(CFD) simulations, the mesh size can be controlled to yield solutions with different fidelities~\cite{branke2016efficient}. A coarse mesh yields a low-fidelity~(LF) performance estimate that is relatively fast but less accurate, while a fine mesh yields a high-fidelity~(HF) estimate that is relatively more time consuming but more accurate. Multi-fidelity SO methods~(MFSO) are a special class of SO methods that attempt to efficiently combine the information from different fidelities with an eventual aim of searching for optimal HF designs. 
 
 % 
 % However, by combining information from both high- and low-fidelity simulations, MFSO methods can produce good quality approximations for a much lower computational cost.
@@ -508,14 +508,20 @@ Some numerical simulation processes allow control over the resolution, or fideli
 % FEA simulations this can be controlled by the mesh density, and in CFD simulations it can be controlled by the number of iterations the simulation is run for. While these lower-fidelity simulations are cheaper to produce, there is a trade-off in the accuracy of their predictions.
 
 % However, by combining information from both high- and low-fidelity simulations, MFSO methods can produce good quality approximations for a much lower computational cost.
-\hemant{Insert all the references.}
-A number of different approaches to MFSO have been explored in the literature. Many of these approaches are based on Forrester's co-kriging technique which correlates the two sets of data, cheap and expensive, to produce a single prediction model. The two key aspects in which the different methods in this category deviate from each other, is in how they collect this data and also how they search the model for potential candidates. Among the approaches that do not use co-kriging models, some of the prominent ones include the following.  Lv et al.\ employ a canonical correlation analysis-based model, in which the least squares method is used to determine optimal parameters.  Ariyarit and Kanazaki\ use a hybrid method which employs a kriging model to estimate local deviations and a radial basis function to approximate the global model. Xu et al.\ use a two-stage process which first uses ordinal transformation to transform the original multi-dimensional design space into a one-dimensional ordinal space and then samples from this ordinal space using a method based on the optimal computational budget allocation (OCBA) algorithm.
+% \hemant{Insert all the references.}
+A number of different approaches to MFSO have been explored in the literature. Many of these approaches are based on the co-kriging technique described by Forrester et al.~\cite{forrester2007multi} which correlates the two sets of data, cheap and expensive, to produce a single prediction model. This technique is an extension of the autoregressive model first introduced by Kennedy and O'Hagan~\cite{kennedy2000predicting}. The two key aspects in which the different methods in this category deviate from each other, is in how they collect these data and also how they search the model for potential candidates. Laurenceau and Sagaut~\cite{laurenceau2008building} investigated a number of different sampling methods for use with kriging and co-kriging in an airfoil design problem. Perdikaris et al.~\cite{perdikaris2015multi} incorporate elements of statistical learning into a co-kriging framework to cross-correlate ensembles of multi-fidelity surrogate models. Yang et al.~\cite{yang2019physics} take a physics-informed approach, constructing models based on sparsely observed domain knowledge, representing unknowns as random variables or fields which are regressed using elements of co-kriging. Giraldo et al.~\cite{giraldo2020cokriging} provide an extension to co-kriging for use when the secondary variable is functional, based on the work of Goulard and Voltz~\cite{goulard1993geostatistical}.
 
-General limitations of the above techniques are that they either feature one-way information sharing, or treat the sets of data as completely independent of one another\hemant{Elaborate why that may be problematic}. To overcome these limitations and improve the performance of MFSO, this paper proposes an iterative two-stage algorithm called \AlgName{} for bound-constrained, single-objective multi-fidelity optimisation problems. It uses previously obtained information about promising areas of the search space to define a restricted neighbourhood using a guided differential evolution (DE) process on a kriging model of the low-fidelity data. This neighbourhood is then sampled from and searched, using a method derived from OCBA, to determine a set of candidates to undergo low-fidelity simulation. The information from these simulations is used to update the low-fidelity model and also a co-kriging-based surrogate model of the high-fidelity data, which is searched globally using DE to find a suitable candidate for high-fidelity simulation. Finally, this high-fidelity data is used to update the surrogate model and also to help determine the restricted neighbourhood in the next iteration. By using the high-fidelity simulation information to inform and restrict the region of interest while searching the low-fidelity model, \AlgName{} allows two-way information sharing between the sets of data. The performance of the \AlgName{} model is compared against a baseline co-kriging-based MFSO algorithm on two separate datasets. The first is a common set of multi-fidelity test-functions from the literature, and the second is a set of multi-fidelity test functions that are generated from standard test functions using the methods described in the paper by Wang et al. In addition to this, some important properties of \AlgName{} are also investigated.
+Among the approaches that do not use co-kriging models, some of the prominent ones include the following. Lv et al.~\cite{lv2021multi} employ a canonical correlation analysis-based model, in which the least squares method is used to determine optimal parameters.  Ariyarit and Kanazaki~\cite{ariyarit2017multi} use a hybrid method which employs a kriging model to estimate local deviations and a radial basis function to approximate the global model in airfoil design problems. Hebbal et al.~\cite{hebbal2021multi} and Cutajar et al.~\cite{cutajar2019deep} both use machine learning techniques that treat the layers of a deep Gaussian process as different fidelity levels to capture non-linear correlations between fidelities. Xu et al.~\cite{xu2016mo2tos} use a two-stage process which first uses ordinal transformation to transform the original multi-dimensional design space into a one-dimensional ordinal space and then samples from this ordinal space using a method based on the optimal computational budget allocation (OCBA) algorithm proposed by Chen and Lee~\cite{chen2011stochastic}. Branke et al.~\cite{branke2016efficient} and Lim et al.~\cite{lim2008evolutionary} both take evolutionary approaches to solving MFSO problems.
 
-The remainder of this paper is organised as follows. Section~\ref{sec:back} provides the fundamentals and background of the proposed model, along with a description of the type of problems tackled and related work. The \AlgName{} algorithm is detailed in Section~\ref{sec:method}, describing all of its constituent parts and detailing some similarities and differences with a related technique from the literature. Experimental design and datasets are discussed in Section~\ref{sec:exp}, with Section~\ref{sec:results} giving the results of these experiments and a discussion of their implications. Finally, Section~\ref{sec:conc} provides the conclusion and outlines any future directions of research.
+Many of these approaches sample the low- and high-fidelity data \emph{a priori}, then build models based on these data and use some global search method to optimize them. To ensure these constructed models are properly representative, it is important to maintain a diversity of samples across the entire the design space; however, sampling without any prior knowledge can result in many computaional resources being expended in areas which do not contain any promising candidates. Of those which do sample the data iteratively, information is typically only shared in one direction between the two datasets. Low-fidelity data is sampled randomly, or using some indepenent process, and used to inform where the high-fidelity data should be sampled from; but no information is then shared in the reverse direction, to inform the low-fidelity sampling in the next iteration. Again, this can result in computational resources being consumed unnecessarily in regions of the search space which are unproductive, especially in high-dimensional problems. 
 
-\hemant{I note that the discussion of existing works has been quite short. If the target is TEVC, a strategic decision is required at this point - whether we are going for a `Letter' (up to 9 pages) or a regular paper (up to 15 pages). If regular paper, then a more extensive  literature review section is required, discussing a much larger array of works and some trends in the approaches. If letter, then perhaps we can get away with short discussion as per current Section~I, but we should still provide a clear motivation by identifying the limitations of the previous approaches. For Section II, there needs to be a substantial reduction in the discussion of what's known to be standard. This includes, for example, the mathematical formulae with regards to Kriging/co-kriging formulation. The overall section in my opinion should not be more than 1 page (give or take)}. 
+% \hemant{Elaborate why that may be problematic}. 
+
+To overcome these limitations and improve the performance of MFSO, this paper proposes an iterative two-stage algorithm called \AlgName{} for bound-constrained, single-objective multi-fidelity optimisation problems. It uses previously obtained information about promising areas of the search space to define a restricted neighbourhood using a guided differential evolution (DE) process on a kriging model of the low-fidelity data. This neighbourhood is then sampled from and searched, using a method derived from OCBA, to determine a set of candidates to undergo low-fidelity simulation. The information from these simulations is used to update the low-fidelity model and also a co-kriging-based surrogate model of the high-fidelity data, which is searched globally using DE to find a suitable candidate for high-fidelity simulation. Finally, these high-fidelity data is used to update the surrogate model and also to help determine the restricted neighbourhood in the next iteration. By using the high-fidelity simulation information to inform and restrict the region of interest while searching the low-fidelity model, \AlgName{} allows two-way information sharing between the sets of data. The performance of the \AlgName{} model is compared against a baseline co-kriging-based MFSO algorithm on two separate datasets. The first is a common set of multi-fidelity test-functions from the literature, and the second is a set of multi-fidelity test functions that are generated from standard test functions using the methods described in the paper by Wang et al. In addition to this, some important properties of \AlgName{} are also investigated.
+
+The remainder of this paper is organized as follows. Section~\ref{sec:back} provides the fundamentals and background of the proposed model, along with a description of the type of problems tackled and related work. The \AlgName{} algorithm is detailed in Section~\ref{sec:method}, describing all of its constituent parts and detailing some similarities and differences with a related technique from the literature. Experimental design and datasets are discussed in Section~\ref{sec:exp}, with Section~\ref{sec:results} giving the results of these experiments and a discussion of their implications. Finally, Section~\ref{sec:conc} provides the conclusion and outlines any future directions of research.
+
+% \hemant{I note that the discussion of existing works has been quite short. If the target is TEVC, a strategic decision is required at this point - whether we are going for a `Letter' (up to 9 pages) or a regular paper (up to 15 pages). If regular paper, then a more extensive  literature review section is required, discussing a much larger array of works and some trends in the approaches. If letter, then perhaps we can get away with short discussion as per current Section~I, but we should still provide a clear motivation by identifying the limitations of the previous approaches. For Section II, there needs to be a substantial reduction in the discussion of what's known to be standard. This includes, for example, the mathematical formulae with regards to Kriging/co-kriging formulation. The overall section in my opinion should not be more than 1 page (give or take)}. 
 
 
 \section{Background and Related Work}\label{sec:back}
@@ -528,55 +534,57 @@ Let $P$ be a problem instance with $D$ decision variables and let $\V{x} \in \pr
 \begin{equation}
 f:\displaystyle\prod^D_{i=1}[l_i,u_i]\to \mathbb{R},\ \V{x} \mapsto f(\V{x})\,, \label{eq:objective}
 \end{equation}
-which is typically smooth. When this objective value is minimised, the so-called \emph{optimal} solution to $P$ is $\V{x}^*$, such that $f(\V{x}^*) \leq f(\V{x})$ for all $\V{x} \in \prod^D_{i=1}[l_i,u_i]$, although it may be maximised without loss of generality.
+which is typically smooth. When this objective value is minimized, the so-called \emph{optimal} solution to $P$ is $\V{x}^*$, such that $f(\V{x}^*) \leq f(\V{x})$ for all $\V{x} \in \prod^D_{i=1}[l_i,u_i]$, although it may be maximized without loss of generality.
 
-Examples of these types of problems abound in the field of engineering design~\cite{example1,example2,example3} and often they require some form of numerical simulation to compute the objective value of their solutions. This numerical simulation can be very computationally expensive, therefore researchers often employ artificial test functions when developing algorithms. While not generally being an accurate model for the behaviour of real-world problems, test functions are very fast to evaluate and can be customised to gauge the performance of algorithms on a variety of fitness landscapes.
+Examples of these types of problems abound in the field of engineering design~\cite{deb2012optimization,forrester2008engineering} and often they require some form of numerical simulation to compute the objective value of their solutions. This numerical simulation can be very computationally expensive, therefore researchers often employ artificial test functions when developing algorithms. While not generally being an accurate model for the behaviour of real-world problems, test functions are very fast to evaluate and can be customized to gauge the performance of algorithms on a variety of fitness landscapes.
 
-One advantage of numerical simulation is that the fidelity of evaluated objective values can often be controlled, trading accuracy of the simulation for computational budget~\cite{fidelity}. This effect is difficult to model using test functions as a low-fidelity function must still have some correlation to the true function in order to be useful, but also must contain enough noise to obfuscate its behaviour. The experiments detailed in Section~\ref{sec:exp} use datasets generated by two different methods from the literature.
+% One advantage of numerical simulation is that the fidelity of evaluated objective values can often be controlled, trading accuracy of the simulation for computational budget~\cite{branke2016efficient}. This effect is difficult to model using test functions as a low-fidelity function must still have some correlation to the true function in order to be useful, but also must contain enough noise to obfuscate its behaviour. The experiments detailed in Section~\ref{sec:exp} use datasets generated by two different methods from the literature.
 
-The dataset in Lv et al.~\cite{lv2021multi} uses the customised addition, removal and modification of terms to produce a transformed function with a desired correlation to the original. For example, the pair of high- and low-fidelity functions
-\begin{align*}
-f_H(\V{x}) &= \displaystyle\sum^2_{i=1}\left(x_i^4 - 16x_i^2 + 5x_i\right)\,,\\ 
-f_L(\V{x}) &= 0.5\displaystyle\sum^2_{i=1}\left(x_i^4 - 16x_i^2\right)\,, 
-\end{align*}
-have a correlation coefficient of $0.79$ over $\V{x} \in [0,1]^2$. While this method allows control over the shape of the fitness landscape, it requires analysing each test function individually and only permits a single level of fidelity for each transformation.
+The dataset in Lv et al.~\cite{lv2021multi} uses the customized addition, removal and modification of terms to produce a transformed function with a desired correlation to the original.
+% For example, the pair of high- and low-fidelity functions
+% \begin{align*}
+% f_H(\V{x}) &= \displaystyle\sum^2_{i=1}\left(x_i^4 - 16x_i^2 + 5x_i\right)\,,\\ 
+% f_L(\V{x}) &= 0.5\displaystyle\sum^2_{i=1}\left(x_i^4 - 16x_i^2\right)\,, 
+% \end{align*}
+% have a correlation coefficient of $0.79$ over $\V{x} \in [0,1]^2$. 
+While this method allows control over the shape of the fitness landscape, it requires analysing each test function individually and only permits a single level of fidelity for each transformation.
 
-The second strategy introduces external noise which models the errors that occur when simulation fidelity is decreased. Wang et al.~\cite{wang2017generic} analysed the behaviour of many numerical simulations under different fidelity conditions and identified the following three types of errors:
-\begin{enumerate}
-\item \emph{Resolution errors:} The landscape of resolution errors is multimodal due to the inconsistency of global and local errors. It is deterministic but gets smoother when the fidelity level increases.
-\item \emph{Stochastic errors:} The errors are stochastic, i.e., the fitness value of the same solution varies in different simulation runs. The stochastic error decreases as the fidelity level increases.
-\item \emph{Instability errors:} Representing failed simulations. A failure happens at a certain probability, and the probability decreases as the fidelity level increases.
-\end{enumerate}
-From this, they formulated a generic transformation function to turn any test function $f$ of the form in Equation~\ref{eq:objective} into a low-fidelity version $\tilde f$:
+The second strategy introduces external noise which models the errors that occur when simulation fidelity is decreased. Wang et al.~\cite{wang2017generic} analysed the behaviour of many numerical simulations under different fidelity conditions and 
+% the following three types of errors:
+% \begin{enumerate}
+% \item \emph{Resolution errors:} The landscape of resolution errors is multimodal due to the inconsistency of global and local errors. It is deterministic but gets smoother when the fidelity level increases.
+% \item \emph{Stochastic errors:} The errors are stochastic, i.e., the fitness value of the same solution varies in different simulation runs. The stochastic error decreases as the fidelity level increases.
+% \item \emph{Instability errors:} Representing failed simulations. A failure happens at a certain probability, and the probability decreases as the fidelity level increases.
+% \end{enumerate}
+% From this, they 
+formulated a generic transformation function to turn any test function $f$ of the form in Equation~\ref{eq:objective} into a low-fidelity version $\tilde f$:
 \begin{equation}
 \tilde f: \displaystyle\prod^D_{i=1}[l_i,u_i] \times [0,10000] \to \mathbb{R},\ (\V{x},\phi) \mapsto f(\V{x}) + e(\V{x},\phi)\,,\label{eq:error-fn}
 \end{equation}
 % \begin{equation*}
 % \tilde f(x,\phi) = f(x) + e(x,\phi),
 % \end{equation*}
-where $\phi$ is the \emph{fidelity level}, with $\tilde f(\V{x},10000) = f(\V{x})$ and $\tilde f(\V{x},0)$ having the worst possible correlation to $f(\V{x})$. The \emph{error function}, $e(\V{x},\phi)$ --- which returns a single real value --- can be one of ten different functions. Each models one of the identified errors, and are all independent of $f(\V{x})$.
+where $\phi$ is the \emph{fidelity level}, with $\tilde f(\V{x},10000) = f(\V{x})$ and $\tilde f(\V{x},0)$ having the worst possible correlation to $f(\V{x})$. The \emph{error function}, $e(\V{x},\phi)$ --- which returns a single real value --- can be one of ten different functions, all of which are independent of $f(\V{x})$.
 
 Because the error function is always independent of $f(\V{x})$, this method can be applied to any test function at all; and because $\phi$ is real-valued, many different fidelity levels can be modelled easily--- although some analysis must still be performed if specific correlation coefficients are required.
 
 \subsection{Kriging and co-kriging}
 
-\angus{I am still not entirely sure about this subsection, can someone please look at it for me?}
-
 Originally arising from geostatistical methods used for ore valuation in mining research --- but since being applied across a number of domains --- is the so-called \emph{kriging} method~\cite{forrester2008engineering}. Kriging is an interpolation technique that uses a limited set of sampled data to predict the objective value at a point that has not been sampled yet.
 
-Let $P$ be a problem instance with $D$ decision variables and let $X = \{\V{x}^1,\V{x}^2,\dots,\V{x}^n\}$ be a set of $n$ sample points with observed objective values $\V{y} = \{y_1,y_2,\dots,y_n\}$, where $\V{x}^i \in \mathbb{R}^D$ for $i \in [n]$. A kriging model of this sample data is the Gaussian process 
+Let $P$ be a problem instance with $D$ decision variables and let $X = \{\V{x}^1,\V{x}^2,\dots,\V{x}^n\}$ be a set of $n$ sample points with observed objective values $\V{y} = \{y_1,y_2,\dots,y_n\}$, where $\V{x}^i \in \mathbb{R}^D$ for $i \in [n]$. A kriging model of these sample data is the Gaussian process 
 \begin{equation}
 Y(\V{x}) = f(\V{x}) + Z(\V{x}),\label{eq:krig}
 \end{equation}
 where, $f(\V{x})$ is a polynomial regression function based on the sample data $\V{y}$ and encapsulates the main variations in the data. The function $Z(\V{x})$ is a Gaussian process with mean $0$, which models the residual error. As the mean of $Z(\V{x})$ is 0, $f(\V{x})$ is the mean of $Y(\V{x})$. 
 
-The correlation matrix $\Psi$ of $Y(\V{x})$ is
-\begin{equation}
-\text{cor}[Y(\V{x}^i),Y(\V{x}^l)] = \exp\left(-\displaystyle\sum^D_{j=1}\theta_j\mid x_j^i-x_j^l \mid ^{p_j}\right),
-\end{equation}
-where $p_j$ is a smoothness parameter (typically $p_j \in [1,2]$) and $\theta_j$ determines how much influence decision variable $j$ has for a given sample point. Both $\V{p}$ and $\V{\theta}$ have size $D$ and are usually determined using maximum likelihood estimation (MLE). Given the set of sample points $X$ and this correlation matrix $\Psi$, the predicted value $Y(\V{x}')$ can be computed using Equation~\ref{eq:krig}, employing regression to find $f(\V{x}')$ and by interpolation on $\Psi$ to find $Z(\V{x}')$.
+% The correlation matrix $\Psi$ of $Y(\V{x})$ is
+% \begin{equation}
+% \text{cor}[Y(\V{x}^i),Y(\V{x}^l)] = \exp\left(-\displaystyle\sum^D_{j=1}\theta_j\mid x_j^i-x_j^l \mid ^{p_j}\right),
+% \end{equation}
+% where $p_j$ is a smoothness parameter (typically $p_j \in [1,2]$) and $\theta_j$ determines how much influence decision variable $j$ has for a given sample point. Both $\V{p}$ and $\V{\theta}$ have size $D$ and are usually determined using maximum likelihood estimation (MLE). Given the set of sample points $X$ and this correlation matrix $\Psi$, the predicted value $Y(\V{x}')$ can be computed using Equation~\ref{eq:krig}, employing regression to find $f(\V{x}')$ and by interpolation on $\Psi$ to find $Z(\V{x}')$.
 
-\medskip
+% \medskip
 
 Low-fidelity data is typically much cheaper to produce than high-fidelity data, a fact which the \emph{co-kriging} technique exploits to great effect. Adapted from Kennedy and O'Hagan's autoregressive model~\cite{kennedy2000predicting}, co-kriging correlates multiple sets of data with different fidelities to produce a single model that approximates the high-fidelity data. The residual error for a sample point evaluated at a given fidelity is recursively modelled as a function of the error of the same point evaluated at the fidelity below it --- until some foundational model with lowest fidelity is reached. Because of this, the Markov property must be assumed, that given a sample point evaluated at some fidelity, no more information about that point can be gained by evaluating it at a lower fidelity.
 
@@ -586,27 +594,28 @@ Y_H(\V{x}) = \rho(\V{x})\mu_L(\V{x}) + Z_d(\V{x}),
 \end{equation} 
 where $\rho(\V{x})$ is a scaling factor, determined as part of the MLE of the second model; $\mu_L(\V{x})$ is the mean of $Y_L(\V{x})$; and $Z_d(\V{x})$ is a Gaussian process which models the difference between $Y_H(\V{x})$ and $\rho(\V{x})\mu_L(\V{x})$.
 
-A more in-depth mathematical treatment of kriging, co-kriging and how to use these models to make predictions can be found in~\cite{forrester2008engineering,forrester2007multi,kennedy2001bayesian,kennedy2000predicting}.
+An in-depth mathematical treatment of kriging, co-kriging and how to use these models to make predictions can be found in~\cite{forrester2008engineering,forrester2007multi,kennedy2001bayesian,kennedy2000predicting}.
 
 \subsection{Optimal computing budget allocation}
 
-Stochastic simulation is a noisy process, requiring multiple simulation replications in order to accurately approximate the true fitness value of a given design. Assuming a normal distribution, the mean fitness value for a design, $\mu$, is unknown, but it can be estimated by its sample mean $\hat{\mu}$. This estimation becomes more accurate with an increased volume of replications; however, performing more replications consumes finite computing resources. Therefore, in the interest of efficiency, it is best to concentrate efforts on simulating promising designs.
+Stochastic simulation is a noisy process, requiring multiple simulation replications in order to accurately approximate the true fitness value of a given design. 
+% This estimation becomes more accurate with an increased volume of replications; however, performing more replications consumes finite computing resources. Therefore, in the interest of efficiency, it is best to concentrate efforts on simulating promising designs.
 
-Given a set of $k$ candidate designs and a finite computing budget $T$, the optimal computing budget allocation (OCBA) method aims to find an allocation such that ${N_1 + N_2 + \dots + N_k = T}$, where $N_i$ is the total replications allocated to design $i$, in order to select the best design, $b \in [k]$, such that $\hat{\mu}_b < \hat{\mu}_i$ for all $i \in [k]$.
+Assuming a normal distribution, the mean fitness value for a design, $\mu$, is unknown, but it can be estimated by its sample mean $\hat{\mu}$. 
+Given a set of $k$ candidate designs and a finite computing budget $T$, the optimal computing budget allocation (OCBA)~\cite{chen2011stochastic} method aims to find an allocation such that ${N_1 + N_2 + \dots + N_k = T}$, where $N_i$ is the total replications allocated to design $i$, in order to select the best design, $b \in [k]$, such that $\hat{\mu}_b < \hat{\mu}_i$ for all $i \in [k]$.
 
-The probability that design $b$ actually \emph{is} the the best design is called the probability of correct selection (PCS),
-\begin{equation}
-PCS = P\{\tilde\mu_b < \tilde\mu_i,i \neq b\},
-\end{equation}
-where $\tilde\mu_i \sim \mathcal{N}\left(\hat{\mu}_i,\frac{\sigma_i^2}{N_i}\right)$ is the posterior distribution of the unknown mean of design $i$, $\mu_i$.
-
-The PCS can be estimated using Monte Carlo simulation, but this is time-consuming; therefore, the following problem is formulated in~\cite{ocbabook} to compute the approximate probability of correct selection (APCS):
+The probability that design $b$ actually \emph{is} the the best design is called the probability of correct selection (PCS).
+% \begin{equation}
+% PCS = P\{\tilde\mu_b < \tilde\mu_i,i \neq b\},
+% \end{equation}
+% where $\tilde\mu_i \sim \mathcal{N}\left(\hat{\mu}_i,\frac{\sigma_i^2}{N_i}\right)$ is the posterior distribution of the unknown mean of design $i$, $\mu_i$.
+The PCS can be estimated using Monte Carlo simulation, but this is time-consuming; therefore, the following problem is formulated in~\cite{chen2011stochastic} to compute the approximate probability of correct selection (APCS):
 \begin{align}
-\underset{N_1,\dots,N_k}{\text{maximise}}&\quad 1 - \displaystyle\sum^k_{i=1,i\neq b}P\{\tilde\mu_b < \tilde\mu_i\}\,,\nonumber\\
+\underset{N_1,\dots,N_k}{\text{maximize}}&\quad 1 - \displaystyle\sum^k_{i=1,i\neq b}P\{\tilde\mu_b < \tilde\mu_i\}\,,\nonumber\\
 \text{such that}& \quad \displaystyle\sum^k_{i=1}N_i = T\,, \quad N_i \geq 0,
 \end{align}
 
-Based on the work in~\cite{chen}, the APCS is asymptotically maximised (as $T \to \infty$) when
+Based on the work in~\cite{chen2011stochastic}, the APCS is asymptotically maximized (as $T \to \infty$) when
 \begin{align}
 \dfrac{N_i}{N_j} &= \left(\dfrac{\sigma_i/\delta_{b,i}}{\sigma_j/\delta_{b,j}}\right)^2\,,\label{eq:apcs1}\\[0.2cm]
 N_b &= \sigma_b \sqrt{\displaystyle\sum^k_{i=1,i\neq b}\dfrac{N_i^2}{\sigma_i^2}}\,,\label{eq:apcs2}
@@ -625,7 +634,7 @@ Using the above results, Algorithm~\ref{alg:ocba} details an iterative process t
 \begin{algorithmic}[1]
 \REQUIRE{$k$, number of designs; $T$, computing budget; $\Delta$, replications per update; $n_0$, initial replications.}
 \ENSURE{$b$, index of best design.}
-\STATE{$b \ot \emptyset$} \COMMENT{Initialise $b$}
+\STATE{$b \ot \emptyset$} \COMMENT{Initialize $b$}
 \STATE{$N_i \ot n_0\,,\ \forall i \in [k]$} \COMMENT{Count initial replications}
 \STATE{$\V{S}^i \ot Sim(n_0)\,,\ \forall i \in [k]$} \COMMENT{Perform initial replications}
 \WHILE{$\displaystyle\sum_{i \in [k]} N_i < T$}\label{while-loop}
@@ -654,8 +663,10 @@ Initially, each group has $n_0$ solutions selected --- without replacement --- a
 
 The value of $\Delta$ is typically quite small, as there may be significant bias between the low- and high-fidelity evaluated data. By keeping $\Delta$ small, it ensures that the sample statistics of the groups are updated more frequently, meaning that the allocations are based more on the statistics of each group, as opposed to their intial partitioning.
 
+The $MO^2TOS$ framework has some limitations, due to the fact that it samples the low-fidelity data \emph{a priori} and the fact that is a two-step process that operates directly on the high- and low-fidelity functions, as opposed to an iterative one. By sampling the data once, without any prior information, the sampling must occur uniformly across the entire design space. This means that unnecessary computational budget is likely to be expended in areas which are not helpful to the search. Similarly, it is necessary to initially evaluate $n_0$ solutions with high-fidelity from each partitioned group, which can result in unnecessary expenditure of computational budget as well.
+
 \section{\AlgName{} Algorithm}\label{sec:method}
-The multi-fidelity optimisation algorithm proposed in this paper is an iterative two-stage process, which maintains two separate surrogate models that share information between them. The first surrogate is a kriging model of the low-fidelity data. This model is searched to find the best potential candidates, within a restricted region, to evaluate with low-fidelity. The information from this search is used to update the first model and a co-kriging model that combines both low- and high-fidelity data to approximate the high-fidelity objective function. This second model is globally searched to determine a suitable candidate for high-fidelity evaluation, and this data is used to update the co-kriging model and to determine the neighbourhood for the next search of the low-fidelity surrogate. Algorithm~\ref{alg:main-alg} gives a description of this process, and the functions within are defined in the following subsections.
+The multi-fidelity optimisation algorithm proposed in this paper is an iterative two-stage process, which maintains two separate surrogate models that share information between them. The first surrogate is a kriging model of the low-fidelity data. This model is searched to find the best potential candidates, within a restricted region, to evaluate with low-fidelity. The information from this search is used to update the first model and a co-kriging model that combines both low- and high-fidelity data to approximate the high-fidelity objective function. This second model is globally searched to determine a suitable candidate for high-fidelity evaluation, and these data is used to update the co-kriging model and to determine the neighbourhood for the next search of the low-fidelity surrogate. Algorithm~\ref{alg:main-alg} gives a description of this process, and the functions within are defined in the following subsections.
 
 \begin{algorithm}[h!]
 \caption{\AlgName{}}
@@ -667,7 +678,7 @@ The multi-fidelity optimisation algorithm proposed in this paper is an iterative
 \ENSURE{Best solution found $\V{x}^\beta$.}
 \STATE{$X_v \ot LHS(P),\ \forall v \in \{L,H\}$} \COMMENT{Generate initial populations}
 \STATE{$A_v,N_e \ot f_v(X_v,0),\ \forall v \in \{L,H\}$} \COMMENT{Evaluate initial populations}
-\STATE{$\V{x}^\beta \ot \emptyset$} \COMMENT{Initialise $\V{x}^\beta$} 
+\STATE{$\V{x}^\beta \ot \emptyset$} \COMMENT{Initialize $\V{x}^\beta$} 
 \WHILE{$N_e < N_{e_{max}}$}
   \STATE{$M_L \ot Krige(A_L)$} \COMMENT{Update low-fidelity kriging model}
   \STATE{$M_C \ot CoKrige(A_L,A_H)$} \COMMENT{Update co-kriging model}
@@ -761,7 +772,7 @@ Using this value, $\V{g}$ can be computed as:
 where $\V{r} \in [0,1]^D$ is a random vector with $D$ components, making $\V{g} \in [\epsilon,1]^D$ also a random vector. This ensures the cloud of candidate solutions around $\V{x}^\beta$ is sparse at the beginning of the search, allowing for better global exploration, while focusing the search more tightly on promising regions towards the end --- crucially, without adding any extra parameters. 
 
 \subsection{LocalOCBA}\label{subsec:local}
-Once the candidate solutions have been been generated in the vicinity of $\V{x}^\beta$, they must be selected from. As already stated, the goal of evaluating solutions in low-fidelity is not to optimise the low-fidelity objective function, but to provide as much information for the model as possible. The optimal computing budget allocation (OCBA) algorithm selects from a set of solutions with the goal of reducing uncertainty within simulation models (by allocating computing resources). This principle can be applied here, with some modifications, as described in Algorithm~\ref{alg:local-ocba}.
+Once the candidate solutions have been been generated in the vicinity of $\V{x}^\beta$, they must be selected from. As already stated, the goal of evaluating solutions in low-fidelity is not to optimize the low-fidelity objective function, but to provide as much information for the model as possible. The optimal computing budget allocation (OCBA) algorithm selects from a set of solutions with the goal of reducing uncertainty within simulation models (by allocating computing resources). This principle can be applied here, with some modifications, as described in Algorithm~\ref{alg:local-ocba}.
 
 \begin{algorithm}[h!] 
 \caption{$LocalOCBA$}
@@ -804,13 +815,24 @@ There exist some similarities between \AlgName{} and the $MO^2TOS$ framework. Fo
 
 The biggest difference is that \AlgName{} is an iterative process, whereas $MO^2TOS$ is a two-step algorithm which is only run through one time. As $MO^2TOS$ only performs a single iteration, it cannot use any prior knowledge to determine where it should concentrate its resources when evaluating the initial low-fidelity population. Therefore, it must evaluate uniformly across the whole search space, and subsequently expend computational budget in areas which are not beneficial to the search. In contrast, \AlgName{} uses information from previous iterations, to identify promising areas of the search space that it can exploit.
 
-Another difference is that $MO^2TOS$ operates on the high- and low-fidelity objective functions directly, across the entire search space. Solutions are selected using information from low-fidelity evaluations, to be evaluated in high-fidelity. \AlgName{} uses its ranking and selection phases in order to select from a neighbourhood of solutions that have been identified in a promising region of the search space. These selections are informed by a kriging model of the low-fidelity function, and selected for low-fidelity evaluation. The high-fidelity evaluations are determined by a separate search that is perfomed on the co-kriging model, updated by the selected low-fidelity evaluations. Because of this, it is not necessary to perform the initial $n_0$ evaluations before computing the sample statistics, as the goal is not to optimise the low-fidelity objective function, just select from a set of ranked candidates.
+Another difference is that $MO^2TOS$ operates on the high- and low-fidelity objective functions directly, across the entire search space. Solutions are selected using information from low-fidelity evaluations, to be evaluated in high-fidelity. \AlgName{} uses its ranking and selection phases in order to select from a neighbourhood of solutions that have been identified in a promising region of the search space. These selections are informed by a kriging model of the low-fidelity function, and selected for low-fidelity evaluation. The high-fidelity evaluations are determined by a separate search that is perfomed on the co-kriging model, updated by the selected low-fidelity evaluations. Because of this, it is not necessary to perform the initial $n_0$ evaluations before computing the sample statistics, as the goal is not to optimize the low-fidelity objective function, just select from a set of ranked candidates.
 
-Finally, $MO^2TOS$ partitions the ranked population into equal-sized groups, whereas \AlgName{} uses a clustering algorithm to determine the number and size of partitions. This ensures that the average distance between groups in objective space is maximised.
+Finally, $MO^2TOS$ partitions the ranked population into equal-sized groups, whereas \AlgName{} uses a clustering algorithm to determine the number and size of partitions. This ensures that the average distance between groups in objective space is maximized.
 
 \section{Numerical Experiments}\label{sec:exp}
+The experiments were carried out on \angus{insert details of machine and OS here}. All code was implemented and executed in MATLAB\angus{version number}, with kriging and co-kriging models constructed using the ooDACE toolbox~\cite{oodace}.
+
+The \AlgName{} algorithm was compared against a baseline co-kriging algorithm. Both algorithms were run 30 times on each problem instance, recording the best objective value, the mean and standard deviation of the resulting solutions produced by each run.
+
+
+\subsection{Datasets}
+The experiments were run on a collection of bound-constrained, single-objective, multi-fidelity test functions that can be divided into two different datasets. The first set is a selection of problem instances taken from Lv~et~al.~\cite{lv2021multi}. Problems $f10$ to $f17$ were chosen from this dataset as they contain between three and eight decision variables, determined as a representative range of easy to difficult problems. The problem instances here are provided with explicit definitions for both the high- and low-fidelity functions.
+
+The second set of problem instances is generated using three problems taken from the Virtual Library of Simulation Experiments~\cite{get-citation}. Each problem was instantiated with versions for three, four, five, six and eight decision variables. This matches the first dataset, and also allows the performance of the algorithms to be judged across different sized problems in a more controlled environment. These test problems are not naturally multi-fidelity optimisation problems, so low-fidelity evaluations must be made by applying the methods described in~\cite{wang2017generic}. An appropriate fidelity level $\phi$ for each problem was chosen by computing the square of the Pearson correlation coefficient $r^2$ for different fidelity values and selecting a value for $\phi$ such that $r^2$ was between 0.65 and 0.85, to be commensurate with the first dataset.
+
+\subsection{Baseline co-kriging algorithm}
 \begin{algorithm}[h!] 
-\caption{Base-line co-kriging multi-fidelity optimisation algorithm}
+\caption{Baseline co-kriging multi-fidelity optimisation algorithm}
 \label{alg:co-kriging}
 \algsetup{linenosize=\footnotesize}
 {\footnotesize
@@ -818,7 +840,7 @@ Finally, $MO^2TOS$ partitions the ranked population into equal-sized groups, whe
 \REQUIRE{$D$, number of variables for problem;$N_{L_{max}}$, max size of low-fidelity population $N_{e_{max}}$, maximum low-fidelity evaluations; $\Delta$,  new low-fidelity solutions added to archive per iteration.}
 \ENSURE{Best solution found $\V{x}^\beta$.}
 \STATE{$A_{v_1} \ot LHS(v_2),\ \forall v \in \{(L,18D),(H,6D)\}$} \COMMENT{Generate initial populations using LHS}
-\STATE{$\V{x}^\beta \ot \emptyset$} \COMMENT{Initialise $x_\beta$} 
+\STATE{$\V{x}^\beta \ot \emptyset$} \COMMENT{Initialize $x_\beta$} 
 \WHILE{$N_e < N_{e_{max}}$}
   \STATE{$A_L \ot A_L \cup LHS(\Delta)$} \COMMENT{Add $\Delta$ new solutions to low-fidelity archive}
   \IF{$|A_L| > N_{L_{max}}$}
@@ -832,6 +854,9 @@ Finally, $MO^2TOS$ partitions the ranked population into equal-sized groups, whe
 \end{algorithmic}
 }
 \end{algorithm}
+
+\subsection{Parameters}
+
 \begin{itemize}
 \item datasets (Lv et al. and maybe Wang and Jin's paper)
 \item details of machine and run on MATLAB
@@ -843,6 +868,30 @@ Finally, $MO^2TOS$ partitions the ranked population into equal-sized groups, whe
 \end{itemize}
 
 \section{Results and Discussion}\label{sec:results}
+\begin{table*}[h!]
+\centering
+\caption{Results from first full run \angus{still more tests running} on problems $f10$-$f17$ comparing the base-line co-Kriging algorithm to our local OCBA one. Given are the best objective obtained, the mean best objective over the full set of runs ($\mu$) and the corresponding standard deviation ($\sigma$).}\label{tab:results}
+% \begin{adjustbox}{width=\columnwidth}
+\begin{tabular}{lrrrrrrr} \toprule
+& & \multicolumn{3}{c}{Co-Kriging} & \multicolumn{3}{c}{Local OCBA}\\
+\cmidrule(lr){3-5} \cmidrule(lr){6-8}
+Instance & Dim. & \multicolumn{1}{c}{best}&\multicolumn{1}{c}{\(\mu\)} & \multicolumn{1}{c}{\(\sigma\)}&\multicolumn{1}{c}{best}& \multicolumn{1}{c}{\(\mu\)}&\multicolumn{1}{c}{\(\sigma\)}\\ \midrule
+%
+% $f08$ & 3 &  -1.0000 & -0.9999  &  0.0006  & -1.0000 &  -1.0000 &       0\\
+% $f09$ & 3 &  -3.8620 & -3.8303  &  0.1409  & -3.8621 &  -3.8577 &  0.0030\\
+$f10$ & 3 &        0 &  2.2960  &  3.5445  &       0 &   3.9189 &  5.3296\\
+$f11$ & 3 &   0.0001 &  0.0110  &  0.0077  &  0.0004 &   0.0098 &  0.0064\\
+$f12$ & 4 &  -9.5783 & -5.8853  &  1.5123  & -8.1107 &  -3.8007 &  1.3426\\
+$f13$ & 4 &   0.6290 &  4.9366  &  5.0965  &  0.0519 &   0.3457 &  0.1971\\
+$f14$ & 5 &   0.2509 &  0.2583  &  0.0039  &  0.2522 &   0.2607 &  0.0037\\
+$f15$ & 6 & 104.2304 &  1700.28 &  2015.04 & 24.6278 & 152.9817 &144.6451\\
+$f16$ & 8 & 7.3904   &  196.810 &  171.7771&  7.9240 &  75.2898 & 59.3423\\
+$f17$ & 8 & -2.5859  &  42.0074 &  153.4414& -3.0161 & -2.8355 & 0.0967\\
+%
+\bottomrule
+\end{tabular}
+% \end{adjustbox}
+\end{table*}
 \begin{itemize}
 \item present results and analysis
 \item convergence plots
