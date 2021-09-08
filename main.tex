@@ -885,21 +885,21 @@ The kriging models used are from the ooDACE toolbox~\cite{oodace}, with the defa
 \section{Results and Discussion}\label{sec:results}
 \begin{table*}[h!]
 \centering
-\caption{Results from first full run \angus{still more tests running} on problems $f10$-$f17$ comparing the base-line co-Kriging algorithm to \AlgName{}. Given are the best objective obtained, the mean best objective over the full set of runs ($\mu$) and the corresponding standard deviation ($\sigma$).}\label{tab:results}
+\caption{Results from first full run \angus{still more tests running} on problems $f10$-$f17$ comparing the base-line co-Kriging algorithm to \AlgName{}. Given are the number of decision variables ($D$), the square of the Pearson correlation coefficient ($r^2$), the best objective obtained, the mean best objective over the full set of runs ($\mu$) and the corresponding standard deviation ($\sigma$).}\label{tab:results}
 % \begin{adjustbox}{width=\columnwidth}
-\begin{tabular}{lrrrrrrr} \toprule
-& & \multicolumn{3}{c}{Co-Kriging} & \multicolumn{3}{c}{\AlgName{}}\\
-\cmidrule(lr){3-5} \cmidrule(lr){6-8}
-Instance & Dim. & \multicolumn{1}{c}{best}&\multicolumn{1}{c}{\(\mu\)} & \multicolumn{1}{c}{\(\sigma\)}&\multicolumn{1}{c}{best}& \multicolumn{1}{c}{\(\mu\)}&\multicolumn{1}{c}{\(\sigma\)}\\ \midrule
+\begin{tabular}{lrrrrrrrr} \toprule
+& & & \multicolumn{3}{c}{Co-Kriging} & \multicolumn{3}{c}{\AlgName{}}\\
+\cmidrule(lr){4-6} \cmidrule(lr){7-9}
+Instance & $D$ & $r^2$ &\multicolumn{1}{c}{best}&\multicolumn{1}{c}{\(\mu\)} & \multicolumn{1}{c}{\(\sigma\)}&\multicolumn{1}{c}{best}& \multicolumn{1}{c}{\(\mu\)}&\multicolumn{1}{c}{\(\sigma\)}\\ \midrule
 %
-$f10$ & 3 &        0 &  2.2960  &  3.5445  &       0 &   3.9189 &  5.3296\\
-$f11$ & 3 &   0.0001 &  0.0110  &  0.0077  &  0.0004 &   0.0098 &  0.0064\\
-$f12$ & 4 &  -9.5783 & -5.8853  &  1.5123  & -8.1107 &  -3.8007 &  1.3426\\
-$f13$ & 4 &   0.6290 &  4.9366  &  5.0965  &  0.0519 &   0.3457 &  0.1971\\
-$f14$ & 5 &   0.2509 &  0.2583  &  0.0039  &  0.2522 &   0.2607 &  0.0037\\
-$f15$ & 6 & 104.2304 &  1700.28 &  2015.04 & 24.6278 & 152.9817 &144.6451\\
-$f16$ & 8 & 7.3904   &  196.810 &  171.7771&  7.9240 &  75.2898 & 59.3423\\
-$f17$ & 8 & -2.5859  &  42.0074 &  153.4414& -3.0161 & -2.8355 & 0.0967\\
+$f10$ & 3 & 0.64 &        0 &  2.2960  &  3.5445  &       0 &   3.9189 &  5.3296\\
+$f11$ & 3 & 0.74 &   0.0001 &  0.0110  &  0.0077  &  0.0004 &   0.0098 &  0.0064\\
+$f12$ & 4 & 0.79 &  -9.5783 & -5.8853  &  1.5123  & -8.1107 &  -3.8007 &  1.3426\\
+$f13$ & 4 & 0.89 &   0.6290 &  4.9366  &  5.0965  &  0.0519 &   0.3457 &  0.1971\\
+$f14$ & 5 & 0.75 &   0.2509 &  0.2583  &  0.0039  &  0.2522 &   0.2607 &  0.0037\\
+$f15$ & 6 & 0.78 & 104.2304 &  1700.28 &  2015.04 & 24.6278 & 152.9817 &144.6451\\
+$f16$ & 8 & 0.82 & 7.3904   &  196.810 &  171.7771&  7.9240 &  75.2898 & 59.3423\\
+$f17$ & 8 & 0.79 & -2.5859  &  42.0074 &  153.4414& -3.0161 & -2.8355 & 0.0967\\
 %
 \bottomrule
 \end{tabular}
@@ -908,26 +908,26 @@ $f17$ & 8 & -2.5859  &  42.0074 &  153.4414& -3.0161 & -2.8355 & 0.0967\\
 
 \begin{table*}[h!]
 \centering
-\caption{Results from first run \angus{still more tests running} on Griewank and Michalewicz test problems using Wang error functions 2 and 6 (indicated by subscript), comparing the base-line co-Kriging algorithm to \AlgName{}. Given are the best objective obtained, the mean best objective over the full set of runs ($\mu$) and the corresponding standard deviation ($\sigma$).}\label{tab:results}
+\caption{Results from first run \angus{still more tests running} on Griewank and Michalewicz test problems using Wang error functions 2 and 6 (indicated by subscript), comparing the base-line co-Kriging algorithm to \AlgName{}. Given are the number of decision variables ($D$), the square of the Pearson correlation coefficient ($r^2$), the best objective obtained, the mean best objective over the full set of runs ($\mu$) and the corresponding standard deviation ($\sigma$).}\label{tab:results}
 % \begin{adjustbox}{width=\columnwidth}
-\begin{tabular}{lrrrrrrr} \toprule
-& & \multicolumn{3}{c}{Co-Kriging} & \multicolumn{3}{c}{\AlgName{}}\\
-\cmidrule(lr){3-5} \cmidrule(lr){6-8}
-Instance & Dim. & \multicolumn{1}{c}{best}&\multicolumn{1}{c}{\(\mu\)} & \multicolumn{1}{c}{\(\sigma\)}&\multicolumn{1}{c}{best}& \multicolumn{1}{c}{\(\mu\)}&\multicolumn{1}{c}{\(\sigma\)}\\ \midrule
+\begin{tabular}{lrrrrrrrr} \toprule
+& & & \multicolumn{3}{c}{Co-Kriging} & \multicolumn{3}{c}{\AlgName{}}\\
+\cmidrule(lr){4-6} \cmidrule(lr){7-9}
+Instance & $D$ & $r^2$ & \multicolumn{1}{c}{best}&\multicolumn{1}{c}{\(\mu\)} & \multicolumn{1}{c}{\(\sigma\)}&\multicolumn{1}{c}{best}& \multicolumn{1}{c}{\(\mu\)}&\multicolumn{1}{c}{\(\sigma\)}\\ \midrule
 %
-$Griewank_{2}$    & 3 &        0 &       0 &       0 &       0 &        0 &       0\\
-                  & 5 &        0 &  0.0535 &  0.0733 &       0 &   0.0017 &  0.0381\\
-                  & 8 &   0.3050 &  0.7302 &  0.2722 &       0 &   0.2799 &  0.2271\\
-$Griewank_{6}$    & 3 &        0 &  0.0021 &  0.0047 &  0.0001 &   0.0092 &  0.0092\\
-                  & 5 &        0 &  0.0508 &  0.1136 &  0.0015 &   0.0097 &  0.0153\\
-                  & 8 &   0.0012 &  0.5053 &  0.4602 &       0 &   0.1077 &  0.2403\\
-\midrule
-$Michalewicz_{2}$ & 3 &  -2.4879 & -2.1276 &  0.2437 & -2.6716 &  -2.5468 &  0.1053\\
-                  & 5 &  -3.5164 & -3.1290 &  0.2418 & -3.2890 &  -2.9612 &  0.2461\\
-                  & 8 &  -3.3672 & -2.9478 &  0.3017 & -4.2150 &  -3.1352 &  0.7827\\
-$Michalewicz_{6}$ & 3 &  -2.5187 & -2.0680 &  0.2520 & -2.6071 &  -2.3142 &  0.2411\\
-                  & 5 &  -3.1459 & -2.6714 &  0.4223 & -3.2785 &  -2.9104 &  0.2823\\
-                  & 8 &  -3.6415 & -2.9136 &  0.5820 & -3.2006 &  -3.1363 &  0.0909\\
+$Griewank_{2}$    & 3 & 0.73 &        0 &       0 &       0 &       0 &        0 &       0\\
+                  & 5 & 0.54 &        0 &  0.0535 &  0.0733 &       0 &   0.0017 &  0.0381\\
+                  & 8 & 0.37 &   0.3050 &  0.7302 &  0.2722 &       0 &   0.2799 &  0.2271\\
+$Griewank_{6}$    & 3 & 0.74 &        0 &  0.0021 &  0.0047 &  0.0001 &   0.0092 &  0.0092\\
+                  & 5 & 0.76 &        0 &  0.0508 &  0.1136 &  0.0015 &   0.0097 &  0.0153\\
+                  & 8 & 0.76 &   0.0012 &  0.5053 &  0.4602 &       0 &   0.1077 &  0.2403\\
+\midrule  
+$Michalewicz_{2}$ & 3 & 0.77 &  -2.4879 & -2.1276 &  0.2437 & -2.6716 &  -2.5468 &  0.1053\\
+                  & 5 & 0.73 &  -3.5164 & -3.1290 &  0.2418 & -3.2890 &  -2.9612 &  0.2461\\
+                  & 8 & 0.64 &  -3.3672 & -2.9478 &  0.3017 & -4.2150 &  -3.1352 &  0.7827\\
+$Michalewicz_{6}$ & 3 & 0.76 &  -2.5187 & -2.0680 &  0.2520 & -2.6071 &  -2.3142 &  0.2411\\
+                  & 5 & 0.83 &  -3.1459 & -2.6714 &  0.4223 & -3.2785 &  -2.9104 &  0.2823\\
+                  & 8 & 0.86 &  -3.6415 & -2.9136 &  0.5820 & -3.2006 &  -3.1363 &  0.0909\\
 %
 \bottomrule
 \end{tabular}
