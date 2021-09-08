@@ -822,13 +822,26 @@ Finally, $MO^2TOS$ partitions the ranked population into equal-sized groups, whe
 \section{Numerical Experiments}\label{sec:exp}
 The experiments were carried out on \angus{insert details of machine and OS here}. All code was implemented and executed in MATLAB\angus{version number}, with kriging and co-kriging models constructed using the ooDACE toolbox~\cite{oodace}.
 
-The \AlgName{} algorithm was compared against a baseline co-kriging algorithm. Both algorithms were run 30 times on each problem instance, recording the best objective value, the mean and standard deviation of the resulting solutions produced by each run.
+The \AlgName{} algorithm was compared against a baseline co-kriging algorithm. Both algorithms were run 30 times on each problem instance for the equivalent of 2000 low-fidelity evaluations, recording the best objective value, the mean and standard deviation of the resulting solutions produced by each run.
 
 
 \subsection{Datasets}
 The experiments were run on a collection of bound-constrained, single-objective, multi-fidelity test functions that can be divided into two different datasets. The first set is a selection of problem instances taken from Lv~et~al.~\cite{lv2021multi}. Problems $f10$ to $f17$ were chosen from this dataset as they contain between three and eight decision variables, determined as a representative range of easy to difficult problems. The problem instances here are provided with explicit definitions for both the high- and low-fidelity functions.
 
-The second set of problem instances is generated using two problems taken from the Virtual Library of Simulation Experiments~\cite{get-citation}. Each problem was instantiated with versions for three,five and eight decision variables. This matches the range of the first dataset, and also allows the performance of the algorithms to be judged across different sized problems in a more controlled environment. These test problems are not naturally multi-fidelity optimisation problems, so low-fidelity evaluations must be made by applying the methods described in~\cite{wang2017generic}. Two different error functions were tested for each instance, modelling two types of fidelity error: resolution and stochastic. An appropriate fidelity level $\phi$ for each problem was chosen by computing the square of the Pearson correlation coefficient $r^2$ for different fidelity values and selecting a value for $\phi$ such that $r^2$ was between 0.65 and 0.85, to be commensurate with the first dataset.
+The second set of problem instances is generated using the Griewank and Michalewicz test problems (Figures~\ref{fig:grie} and~\ref{fig:michal}), taken from the Virtual Library of Simulation Experiments~\cite{get-citation}. Each problem was instantiated with versions for three, five and eight decision variables. This matches the range of the first dataset, and also allows the performance of the algorithms to be judged across different sized problems in a more controlled environment. These test problems are not naturally multi-fidelity optimisation problems, so low-fidelity evaluations must be made by applying the methods described in~\cite{wang2017generic}. Two different error functions were tested for each instance, modelling two types of fidelity error: resolution and stochastic. An appropriate fidelity level $\phi$ for each problem was chosen by computing the square of the Pearson correlation coefficient $r^2$ for different fidelity values and selecting a value for $\phi$ such that $r^2$ was between 0.65 and 0.85, to be commensurate with the first dataset.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width = 0.40\textwidth]{img/griewank.png} 
+  \caption{The Griewank test function in 2D.\angus{will do a better version}} 
+    \label{fig:grie}
+\end{figure}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width = 0.40\textwidth]{img/michal.png} 
+  \caption{The Michalewicz test function in 2D.\angus{will do a better version}} 
+    \label{fig:michal}
+\end{figure}
 
 \angus{put actual test functions in appendix?}
 
@@ -872,15 +885,13 @@ The kriging models used are from the ooDACE toolbox~\cite{oodace}, with the defa
 \section{Results and Discussion}\label{sec:results}
 \begin{table*}[h!]
 \centering
-\caption{Results from first full run \angus{still more tests running} on problems $f10$-$f17$ comparing the base-line co-Kriging algorithm to our local OCBA one. Given are the best objective obtained, the mean best objective over the full set of runs ($\mu$) and the corresponding standard deviation ($\sigma$).}\label{tab:results}
+\caption{Results from first full run \angus{still more tests running} on problems $f10$-$f17$ comparing the base-line co-Kriging algorithm to \AlgName{}. Given are the best objective obtained, the mean best objective over the full set of runs ($\mu$) and the corresponding standard deviation ($\sigma$).}\label{tab:results}
 % \begin{adjustbox}{width=\columnwidth}
 \begin{tabular}{lrrrrrrr} \toprule
-& & \multicolumn{3}{c}{Co-Kriging} & \multicolumn{3}{c}{Local OCBA}\\
+& & \multicolumn{3}{c}{Co-Kriging} & \multicolumn{3}{c}{\AlgName{}}\\
 \cmidrule(lr){3-5} \cmidrule(lr){6-8}
 Instance & Dim. & \multicolumn{1}{c}{best}&\multicolumn{1}{c}{\(\mu\)} & \multicolumn{1}{c}{\(\sigma\)}&\multicolumn{1}{c}{best}& \multicolumn{1}{c}{\(\mu\)}&\multicolumn{1}{c}{\(\sigma\)}\\ \midrule
 %
-% $f08$ & 3 &  -1.0000 & -0.9999  &  0.0006  & -1.0000 &  -1.0000 &       0\\
-% $f09$ & 3 &  -3.8620 & -3.8303  &  0.1409  & -3.8621 &  -3.8577 &  0.0030\\
 $f10$ & 3 &        0 &  2.2960  &  3.5445  &       0 &   3.9189 &  5.3296\\
 $f11$ & 3 &   0.0001 &  0.0110  &  0.0077  &  0.0004 &   0.0098 &  0.0064\\
 $f12$ & 4 &  -9.5783 & -5.8853  &  1.5123  & -8.1107 &  -3.8007 &  1.3426\\
@@ -894,6 +905,36 @@ $f17$ & 8 & -2.5859  &  42.0074 &  153.4414& -3.0161 & -2.8355 & 0.0967\\
 \end{tabular}
 % \end{adjustbox}
 \end{table*}
+
+\begin{table*}[h!]
+\centering
+\caption{Results from first run \angus{still more tests running} on Griewank and Michalewicz test problems using Wang error functions 2 and 6 (indicated by subscript), comparing the base-line co-Kriging algorithm to \AlgName{}. Given are the best objective obtained, the mean best objective over the full set of runs ($\mu$) and the corresponding standard deviation ($\sigma$).}\label{tab:results}
+% \begin{adjustbox}{width=\columnwidth}
+\begin{tabular}{lrrrrrrr} \toprule
+& & \multicolumn{3}{c}{Co-Kriging} & \multicolumn{3}{c}{\AlgName{}}\\
+\cmidrule(lr){3-5} \cmidrule(lr){6-8}
+Instance & Dim. & \multicolumn{1}{c}{best}&\multicolumn{1}{c}{\(\mu\)} & \multicolumn{1}{c}{\(\sigma\)}&\multicolumn{1}{c}{best}& \multicolumn{1}{c}{\(\mu\)}&\multicolumn{1}{c}{\(\sigma\)}\\ \midrule
+%
+$Griewank_{2}$    & 3 &        0 &       0 &       0 &       0 &        0 &       0\\
+                  & 5 &        0 &  0.0535 &  0.0733 &       0 &   0.0017 &  0.0381\\
+                  & 8 &   0.3050 &  0.7302 &  0.2722 &       0 &   0.2799 &  0.2271\\
+$Griewank_{6}$    & 3 &        0 &  0.0021 &  0.0047 &  0.0001 &   0.0092 &  0.0092\\
+                  & 5 &        0 &  0.0508 &  0.1136 &  0.0015 &   0.0097 &  0.0153\\
+                  & 8 &   0.0012 &  0.5053 &  0.4602 &       0 &   0.1077 &  0.2403\\
+\midrule
+$Michalewicz_{2}$ & 3 &  -2.4879 & -2.1276 &  0.2437 & -2.6716 &  -2.5468 &  0.1053\\
+                  & 5 &  -3.5164 & -3.1290 &  0.2418 & -3.2890 &  -2.9612 &  0.2461\\
+                  & 8 &  -3.3672 & -2.9478 &  0.3017 & -4.2150 &  -3.1352 &  0.7827\\
+$Michalewicz_{6}$ & 3 &  -2.5187 & -2.0680 &  0.2520 & -2.6071 &  -2.3142 &  0.2411\\
+                  & 5 &  -3.1459 & -2.6714 &  0.4223 & -3.2785 &  -2.9104 &  0.2823\\
+                  & 8 &  -3.6415 & -2.9136 &  0.5820 & -3.2006 &  -3.1363 &  0.0909\\
+%
+\bottomrule
+\end{tabular}
+% \end{adjustbox}
+\end{table*}
+
+
 \begin{itemize}
 \item present results and analysis
 \item convergence plots

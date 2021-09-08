@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1631004163 "main.aux" "main.bbl" "main" 1631004163
+["bibtex main"] 1631106057 "main.aux" "main.bbl" "main" 1631106167
   "/usr/share/texlive/texmf-dist/bibtex/bst/IEEEtran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1631004163 8515 e97e183cdef2584a06cfb581693268e4 "pdflatex"
+  "main.aux" 1631106167 10122 7787c400c909a18bc18a5c234bf3d89d "pdflatex"
   "refs.bib" 1630512367 9461 a311cf5db1a39b93600c45fe60333b0a ""
   (generated)
-  "main.bbl"
   "main.blg"
-["pdflatex"] 1631004163 "main.tex" "main.pdf" "main" 1631004163
+  "main.bbl"
+["pdflatex"] 1631106166 "main.tex" "main.pdf" "main" 1631106167
   "/etc/texmf/web2c/texmf.cnf" 1599592942 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -293,14 +293,16 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1599592974 4770781 1ed1abab22da9c3e2cc82e4db562318b ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1599592994 8257038 39c2268e8868ba3210190ef6a1a84fa4 ""
+  "img/griewank.png" 1631105834 24831 7a33def977499f025d871e51414faab5 ""
   "img/logistic.eps" 1624257983 17521 b160144720353e6802d882419fe3171e ""
-  "main.aux" 1631004163 8515 e97e183cdef2584a06cfb581693268e4 "pdflatex"
-  "main.bbl" 1631004163 6546 6b8154a9dae0823146da8c6a1b8a869c "bibtex main"
-  "main.out" 1631004163 1245 92583be8848c37d549c1b6b04a81fc80 "pdflatex"
-  "main.tex" 1631004162 81417 a1d039fa4098e2cf88e0b8e416f03731 ""
+  "img/michal.png" 1631105775 19597 35dc2d96ab55128439317b358ded0480 ""
+  "main.aux" 1631106167 10122 7787c400c909a18bc18a5c234bf3d89d "pdflatex"
+  "main.bbl" 1631106057 6546 6b8154a9dae0823146da8c6a1b8a869c "bibtex main"
+  "main.out" 1631106167 1246 c9fc375ac68f2c7ed038a7728fd6aecf "pdflatex"
+  "main.tex" 1631106166 83717 8c7062ede48535e1623e2fc4b345dbb9 ""
   "tevc_style.sty" 1630471239 1987 724cf0b55d51cf4ce57ad4f7f9852050 ""
   (generated)
-  "main.aux"
-  "main.out"
   "main.log"
   "main.pdf"
+  "main.aux"
+  "main.out"
