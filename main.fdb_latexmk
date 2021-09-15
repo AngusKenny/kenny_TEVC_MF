@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1631107071 "main.aux" "main.bbl" "main" 1631107072
+["bibtex main"] 1631718848 "main.aux" "main.bbl" "main" 1631719334
   "/usr/share/texlive/texmf-dist/bibtex/bst/IEEEtran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1631107071 10518 acb624c57cc06afb92c612b678befaea "pdflatex"
+  "main.aux" 1631719334 14823 579669b9c1bbcdc606ca885542be8881 "pdflatex"
   "refs.bib" 1630512367 9461 a311cf5db1a39b93600c45fe60333b0a ""
   (generated)
   "main.blg"
   "main.bbl"
-["pdflatex"] 1631107071 "main.tex" "main.pdf" "main" 1631107072
+["pdflatex"] 1631719333 "main.tex" "main.pdf" "main" 1631719334
   "/etc/texmf/web2c/texmf.cnf" 1599592942 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -293,16 +293,22 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1599592974 4770781 1ed1abab22da9c3e2cc82e4db562318b ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1599592994 8257038 39c2268e8868ba3210190ef6a1a84fa4 ""
+  "img/GW_d3_e6_conv_mean.eps" 1631717020 18832 687123f13897dfa268264d0621fd50bf ""
+  "img/GW_d5_e6_conv_mean.eps" 1631717067 18416 69d232777323560d7f56c26fddb343e9 ""
+  "img/GW_d8_e6_conv_mean.eps" 1631715761 17687 ecee1593a907a15c0688b0c8e649ee61 ""
+  "img/LV_f11_MF_conv_mean.eps" 1631716144 18444 b5d3012970d11132f2b3db9c78e3af59 ""
+  "img/LV_f15_MF_conv_mean.eps" 1631716279 18554 47867e733989e1bd900942e90d91cf94 ""
+  "img/LV_f17_MF_conv_mean.eps" 1631716300 18578 6a6e6a72f3a6736284f1c50d782feeb7 ""
   "img/griewank.png" 1631105834 24831 7a33def977499f025d871e51414faab5 ""
   "img/logistic.eps" 1624257983 17521 b160144720353e6802d882419fe3171e ""
   "img/michal.png" 1631105775 19597 35dc2d96ab55128439317b358ded0480 ""
-  "main.aux" 1631107071 10518 acb624c57cc06afb92c612b678befaea "pdflatex"
-  "main.bbl" 1631107071 6546 6b8154a9dae0823146da8c6a1b8a869c "bibtex main"
-  "main.out" 1631107071 1246 c9fc375ac68f2c7ed038a7728fd6aecf "pdflatex"
-  "main.tex" 1631107070 84076 0dd6a25b828f62fe722572f6df20fcf5 ""
-  "tevc_style.sty" 1630471239 1987 724cf0b55d51cf4ce57ad4f7f9852050 ""
+  "main.aux" 1631719334 14823 579669b9c1bbcdc606ca885542be8881 "pdflatex"
+  "main.bbl" 1631718848 6546 6b8154a9dae0823146da8c6a1b8a869c "bibtex main"
+  "main.out" 1631719334 1309 761603b59714996ac1446593a451d950 "pdflatex"
+  "main.tex" 1631719333 91643 f111bdc95983da9931bf538933ed2771 ""
+  "tevc_style.sty" 1631705095 2143 9d22fd202bc892585916241dd2942a7f ""
   (generated)
-  "main.aux"
-  "main.out"
   "main.pdf"
+  "main.aux"
   "main.log"
+  "main.out"

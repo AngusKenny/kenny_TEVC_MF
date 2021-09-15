@@ -1,0 +1,5 @@
+good plots to use:
+
+Griewank_d8_e2 #8
+Griewank_d8_e6 #29,23,21,16
+Michalewicz_d5_e2 #20,17

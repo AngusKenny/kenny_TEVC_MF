@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.9)  8 SEP 2021 23:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.9)  16 SEP 2021 01:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1462,7 +1462,7 @@ Package epstopdf Info: Source file: <img/logistic.eps>
 -to.pdf img/logistic.eps>
 (epstopdf)             \includegraphics on input line 764.
 Package epstopdf Info: Output file is already uptodate.
-<img/logistic-eps-converted-to.pdf, id=232, 404.51125pt x 304.13625pt>
+<img/logistic-eps-converted-to.pdf, id=236, 404.51125pt x 304.13625pt>
 File: img/logistic-eps-converted-to.pdf Graphic file (type pdf)
 <use img/logistic-eps-converted-to.pdf>
 Package pdftex.def Info: img/logistic-eps-converted-to.pdf  used on input line 
@@ -1476,6 +1476,9 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 Overfull \hbox (10.0pt too wide) detected at line 800
 [][] 
  []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
@@ -1493,20 +1496,20 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 LaTeX Warning: Citation `get-citation' on page 7 undefined on input line 831.
 
-<img/griewank.png, id=292, 360.34625pt x 260.975pt>
+<img/griewank.png, id=299, 360.34625pt x 260.975pt>
 File: img/griewank.png Graphic file (type png)
 <use img/griewank.png>
-Package pdftex.def Info: img/griewank.png  used on input line 835.
+Package pdftex.def Info: img/griewank.png  used on input line 837.
 (pdftex.def)             Requested size: 200.19054pt x 144.98221pt.
-<img/michal.png, id=293, 562.1pt x 421.575pt>
+<img/michal.png, id=300, 562.1pt x 421.575pt>
 File: img/michal.png Graphic file (type png)
 <use img/michal.png>
-Package pdftex.def Info: img/michal.png  used on input line 841.
+Package pdftex.def Info: img/michal.png  used on input line 843.
 (pdftex.def)             Requested size: 200.19054pt x 150.1394pt.
 
-Underfull \vbox (badness 1990) has occurred while \output is active []
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
- [7 <./img/griewank.png> <./img/michal.png (PNG copy)>]
+
 Overfull \hbox (10.0pt too wide) detected at line 874
 [][] 
  []
@@ -1515,19 +1518,150 @@ Overfull \hbox (10.0pt too wide) detected at line 874
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
+Underfull \hbox (badness 2600) in paragraph at lines 879--880
+\OT1/ptm/m/n/10 which var-i-ous search and mod-el-ing meth-ods can be
+ []
+
+[7 <./img/griewank.png>]
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-(./main.bbl [8]) [9
+Package epstopdf Info: Source file: <img/LV_f11_MF_conv_mean.eps>
+(epstopdf)                    date: 2021-09-16 00:29:04
+(epstopdf)                    size: 18444 bytes
+(epstopdf)             Output file: <img/LV_f11_MF_conv_mean-eps-converted-to.p
+df>
+(epstopdf)                    date: 2021-09-16 00:30:16
+(epstopdf)                    size: 10399 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/LV_f11_MF_conv_mean-ep
+s-converted-to.pdf img/LV_f11_MF_conv_mean.eps>
+(epstopdf)             \includegraphics on input line 918.
+Package epstopdf Info: Output file is already uptodate.
+<img/LV_f11_MF_conv_mean-eps-converted-to.pdf, id=321, 610.28pt x 456.70625pt>
+File: img/LV_f11_MF_conv_mean-eps-converted-to.pdf Graphic file (type pdf)
+<use img/LV_f11_MF_conv_mean-eps-converted-to.pdf>
+Package pdftex.def Info: img/LV_f11_MF_conv_mean-eps-converted-to.pdf  used on 
+input line 918.
+(pdftex.def)             Requested size: 200.19054pt x 149.81454pt.
+Package epstopdf Info: Source file: <img/LV_f15_MF_conv_mean.eps>
+(epstopdf)                    date: 2021-09-16 00:31:19
+(epstopdf)                    size: 18554 bytes
+(epstopdf)             Output file: <img/LV_f15_MF_conv_mean-eps-converted-to.p
+df>
+(epstopdf)                    date: 2021-09-16 00:32:15
+(epstopdf)                    size: 10921 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/LV_f15_MF_conv_mean-ep
+s-converted-to.pdf img/LV_f15_MF_conv_mean.eps>
+(epstopdf)             \includegraphics on input line 925.
+Package epstopdf Info: Output file is already uptodate.
+<img/LV_f15_MF_conv_mean-eps-converted-to.pdf, id=322, 610.28pt x 456.70625pt>
+File: img/LV_f15_MF_conv_mean-eps-converted-to.pdf Graphic file (type pdf)
+<use img/LV_f15_MF_conv_mean-eps-converted-to.pdf>
+Package pdftex.def Info: img/LV_f15_MF_conv_mean-eps-converted-to.pdf  used on 
+input line 925.
+(pdftex.def)             Requested size: 200.19054pt x 149.81454pt.
+Package epstopdf Info: Source file: <img/LV_f17_MF_conv_mean.eps>
+(epstopdf)                    date: 2021-09-16 00:31:40
+(epstopdf)                    size: 18578 bytes
+(epstopdf)             Output file: <img/LV_f17_MF_conv_mean-eps-converted-to.p
+df>
+(epstopdf)                    date: 2021-09-16 00:32:15
+(epstopdf)                    size: 10686 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/LV_f17_MF_conv_mean-ep
+s-converted-to.pdf img/LV_f17_MF_conv_mean.eps>
+(epstopdf)             \includegraphics on input line 932.
+Package epstopdf Info: Output file is already uptodate.
+<img/LV_f17_MF_conv_mean-eps-converted-to.pdf, id=323, 610.28pt x 456.70625pt>
+File: img/LV_f17_MF_conv_mean-eps-converted-to.pdf Graphic file (type pdf)
+<use img/LV_f17_MF_conv_mean-eps-converted-to.pdf>
+Package pdftex.def Info: img/LV_f17_MF_conv_mean-eps-converted-to.pdf  used on 
+input line 932.
+(pdftex.def)             Requested size: 200.19054pt x 149.81454pt.
 
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1178.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1178.
- (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1178.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1178.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8 <./img/michal.png (PNG copy)> <./img/LV_f11_MF_conv_mean-eps-converted-to.pd
+f> <./img/LV_f15_MF_conv_mean-eps-converted-to.pdf> <./img/LV_f17_MF_conv_mean-
+eps-converted-to.pdf>]
+Underfull \hbox (badness 2334) in paragraph at lines 968--969
+[]\OT1/ptm/m/n/10 as with first dataset, at medium sized prob-lems
+ []
+
+Package epstopdf Info: Source file: <img/GW_d3_e6_conv_mean.eps>
+(epstopdf)                    date: 2021-09-16 00:43:40
+(epstopdf)                    size: 18832 bytes
+(epstopdf)             Output file: <img/GW_d3_e6_conv_mean-eps-converted-to.pd
+f>
+(epstopdf)                    date: 2021-09-16 00:46:19
+(epstopdf)                    size: 10903 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/GW_d3_e6_conv_mean-eps
+-converted-to.pdf img/GW_d3_e6_conv_mean.eps>
+(epstopdf)             \includegraphics on input line 974.
+Package epstopdf Info: Output file is already uptodate.
+<img/GW_d3_e6_conv_mean-eps-converted-to.pdf, id=372, 610.28pt x 456.70625pt>
+File: img/GW_d3_e6_conv_mean-eps-converted-to.pdf Graphic file (type pdf)
+<use img/GW_d3_e6_conv_mean-eps-converted-to.pdf>
+Package pdftex.def Info: img/GW_d3_e6_conv_mean-eps-converted-to.pdf  used on i
+nput line 974.
+(pdftex.def)             Requested size: 200.19054pt x 149.81454pt.
+Package epstopdf Info: Source file: <img/GW_d5_e6_conv_mean.eps>
+(epstopdf)                    date: 2021-09-16 00:44:27
+(epstopdf)                    size: 18416 bytes
+(epstopdf)             Output file: <img/GW_d5_e6_conv_mean-eps-converted-to.pd
+f>
+(epstopdf)                    date: 2021-09-16 00:46:19
+(epstopdf)                    size: 11018 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/GW_d5_e6_conv_mean-eps
+-converted-to.pdf img/GW_d5_e6_conv_mean.eps>
+(epstopdf)             \includegraphics on input line 981.
+Package epstopdf Info: Output file is already uptodate.
+<img/GW_d5_e6_conv_mean-eps-converted-to.pdf, id=373, 610.28pt x 456.70625pt>
+File: img/GW_d5_e6_conv_mean-eps-converted-to.pdf Graphic file (type pdf)
+<use img/GW_d5_e6_conv_mean-eps-converted-to.pdf>
+Package pdftex.def Info: img/GW_d5_e6_conv_mean-eps-converted-to.pdf  used on i
+nput line 981.
+(pdftex.def)             Requested size: 200.19054pt x 149.81454pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+Package epstopdf Info: Source file: <img/GW_d8_e6_conv_mean.eps>
+(epstopdf)                    date: 2021-09-16 00:22:41
+(epstopdf)                    size: 17687 bytes
+(epstopdf)             Output file: <img/GW_d8_e6_conv_mean-eps-converted-to.pd
+f>
+(epstopdf)                    date: 2021-09-16 00:26:02
+(epstopdf)                    size: 11006 bytes
+(epstopdf)             Command: <repstopdf --outfile=img/GW_d8_e6_conv_mean-eps
+-converted-to.pdf img/GW_d8_e6_conv_mean.eps>
+(epstopdf)             \includegraphics on input line 988.
+Package epstopdf Info: Output file is already uptodate.
+<img/GW_d8_e6_conv_mean-eps-converted-to.pdf, id=374, 610.28pt x 456.70625pt>
+File: img/GW_d8_e6_conv_mean-eps-converted-to.pdf Graphic file (type pdf)
+<use img/GW_d8_e6_conv_mean-eps-converted-to.pdf>
+Package pdftex.def Info: img/GW_d8_e6_conv_mean-eps-converted-to.pdf  used on i
+nput line 988.
+(pdftex.def)             Requested size: 200.19054pt x 149.81454pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[9 <./img/GW_d3_e6_conv_mean-eps-converted-to.pdf> <./img/GW_d5_e6_conv_mean-ep
+s-converted-to.pdf>]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+(./main.bbl) [10 <./img/GW_d8_e6_conv_mean-eps-converted-to.pdf>] [11] [12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1303.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1303.
+
+(./main.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1303.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1303.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: C9FC375AC68F2C7ED038A7728FD6AECF;1246.
+(rerunfilecheck)             Checksum: 761603B59714996AC1446593A451D950;1309.
 
 
 LaTeX Warning: There were undefined references.
@@ -1537,13 +1671,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 27428 strings out of 481239
- 529132 string characters out of 5920378
- 858422 words of memory out of 5000000
- 41938 multiletter control sequences out of 15000+600000
+ 27491 strings out of 481239
+ 531078 string characters out of 5920378
+ 859851 words of memory out of 5000000
+ 41981 multiletter control sequences out of 15000+600000
  587865 words of font info for 149 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 61i,13n,77p,1673b,825s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 61i,17n,77p,1675b,825s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy9.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf
@@ -1571,10 +1705,10 @@ re/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/
 utmri8a.pfb>
-Output written on main.pdf (9 pages, 368218 bytes).
+Output written on main.pdf (12 pages, 428019 bytes).
 PDF statistics:
- 453 PDF objects out of 1000 (max. 8388607)
- 405 compressed objects within 5 object streams
- 137 named destinations out of 1000 (max. 500000)
- 180 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 556 PDF objects out of 1000 (max. 8388607)
+ 486 compressed objects within 5 object streams
+ 151 named destinations out of 1000 (max. 500000)
+ 218 words of extra memory for PDF output out of 10000 (max. 10000000)
 
