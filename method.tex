@@ -1,0 +1,153 @@
+\section{\AlgName{} Algorithm}\label{sec:method}
+The multi-fidelity optimisation algorithm proposed in this paper is an iterative two-stage process, which maintains two separate surrogate models that share information between them. The first surrogate is a kriging model of the low-fidelity data. This model is searched to find the best potential candidates, within a restricted region, to evaluate with low-fidelity. The information from this search is used to update the first model and a co-kriging model that combines both low- and high-fidelity data to approximate the high-fidelity objective function. This second model is globally searched to determine a suitable candidate for high-fidelity evaluation, and these data is used to update the co-kriging model and to determine the neighbourhood for the next search of the low-fidelity surrogate. Algorithm~\ref{alg:main-alg} gives a description of this process, and the functions within are defined in the following subsections.
+
+\begin{algorithm}[h!]
+\caption{\AlgName{} procedure}
+\label{alg:main-alg}
+\algsetup{linenosize=\footnotesize}
+{\footnotesize 
+\begin{algorithmic}[1]
+\REQUIRE{$P$, problem data; $N_{L_{max}}$, max size of low-fidelity population; $N_{e_{max}}$, maximum number of evaluations; $\rho$, parameter set for LocalOCBA.}
+\ENSURE{Best solution found $\V{x}^\beta$.}
+\STATE{$X_v \ot LHS(P),\ \forall v \in \{L,H\}$} \COMMENT{Generate initial populations}
+\STATE{$A_v,N_e \ot f_v(X_v,0),\ \forall v \in \{L,H\}$} \COMMENT{Evaluate initial populations}
+\STATE{$\V{x}^\beta \ot \emptyset$} \COMMENT{Initialize $\V{x}^\beta$} 
+\WHILE{$N_e < N_{e_{max}}$}
+  \STATE{$M_L \ot Krige(A_L)$} \COMMENT{Update low-fidelity kriging model}
+  \STATE{$M_C \ot CoKrige(A_L,A_H)$} \COMMENT{Update co-kriging model}
+  \STATE{$\V{x} \ot GlobalSearch(M_C)$} \COMMENT{Globally search co-kriging model}
+  \STATE{$\V{\alpha},N_e \ot f_H(\V{x},N_e)$} \COMMENT{Evaluate and update total cost}
+  \STATE{$A_H \ot A_H \cup \{\V{\alpha}\}$} \COMMENT{Add $\V{\alpha}$ to high-fidelity archive}
+  \STATE{$\V{x}^\beta \ot \min(f_H(\V{x}^\beta),f_H(\V{x}))$} \COMMENT{Update best solution}
+  \STATE{$\epsilon \ot Sigmoid(N_e,N_{e_{max}})$} \COMMENT{Determine size of neighbourhood}
+  \STATE{$A_L,N_e \ot LocalOCBA(\rho,M_L,A_L,\V{x}^\beta,\epsilon)$} \COMMENT{Locally search low-fidelity model}
+  \IF{$|A_L| > N_{L_{max}}$}
+    \STATE{$A_L \ot Winnow(A_L,N_{L_{max}})$} \COMMENT{Control population size}
+  \ENDIF
+\ENDWHILE
+\end{algorithmic}
+}
+\end{algorithm}
+
+\subsection{Initialisation, evaluation and surrogate models}
+The function $LHS(P)$ returns an initial population sampled from a latin hypercube with size $6D$ for high-fidelity and $18D$ for low-fidelity, where $D$ is the number of decision variables defined in the problem data $P$. The bounds of the hypercube are also defined in $P$. Latin hypercube sampling is used in order to start with as broad a picture of the search space as possible. Solutions are evaluated using the function $f_v(X,N_e)$, at some fidelity $v\in \{L,H\}$, which returns a set of ``archive'' pairs comprising the solution and its objective value. It also updates the total cost incurred, $N_e$. 
+
+Two surrogate models are used, $Krige(A_L)$ takes the low-fidelity data and returns a kriging model approximating it, and $CoKrige(A_L,A_H)$ takes both the low- and high-fidelity archive data and returns a co-kriging model that approximates the fitness landscape of the high-fidelity data. The function $GlobalSearch(M_C)$ takes the co-kriging model as input and returns the best solution that can be found using some global search method. This output solution is evaluated in high-fidelity, the information from which is used to update the co-kriging model, and also to determine the restricted neighbourhood used to locally search the low-fidelity kriging model.
+
+\subsection{Restricted neighbourhood}\label{subsec:restrict}
+The correlation between the low- and high-fidelity data can vary wildly between problems, meaning identifying a promising region in the low-fidelity kriging model does not necessarily mean identifying a promising region in the high-fidelity co-kriging model. Therefore, instead of searching the low-fidelity model globally, it makes sense to search for promising candidates within a restricted neighbourhood, defined using information from the high-fidelity model. As the goal of performing low-fidelity evaluations in co-kriging models is to gain information about the shape of the fitness landscape, more than it is to find the ``best'' low-fidelity solution, restricting the neighbourhood in this way allows the algorithm to focus on the region of interest --- without getting ``distracted'' by global optima that might not be useful in the over-all search.
+
+In order to restrict the region of interest, a so-called \emph{guided~DE} process is employed. In differential evolution (DE), assuming complete recombination occurs, a candidate child solution $x_c$ is produced from three parent solutions $\V{x}^1$, $\V{x}^2$ and $\V{x}^3$ with the following formula:
+\begin{equation}
+\V{x}^c = \V{x}^1 + F(\V{x}^2 - \V{x}^3)\,,
+\end{equation}
+with $F$ being a constant called the mutation factor. This is simply scaled vector addition, therefore this produced child $\V{x}^c$ can be ``nudged'' further towards a reference point (in this case $x_\beta$) by a similar process:
+\begin{equation}\label{eq:nudge}
+\V{x}^{c'} = \V{x}^c + \V{g}(\V{x}^\beta - \V{x}^c)\,,
+\end{equation}
+where $\V{G}$ is the so-called \emph{guide factor}. This is illustrated in Figure~\ref{fig:guide-DE}.
+
+\begin{figure}[h!]
+\centering
+\adjustbox{max width=0.5\textwidth}{%
+\begin{tikzpicture}
+
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (x1) at (0,0) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (x3) at (1,1) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (x2) at (0,4) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc1) at (-0.75,2.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm,color=cyan] (xb) at (-4.75,4.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc1p) at (-3.25,3.5) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc2) at (-5.75,0.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc2p) at (-5,3.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc3) at (-5.75,5.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc3p) at (-5,4.5) {};
+
+\node [xshift = -4mm] (x1t) at (x1) {$\V{x}^1$};
+\node [xshift = -4mm] (x2t) at (x2) {$\V{x}^2$};
+\node [xshift = -4mm] (x3t) at (x3) {$\V{x}^3$};
+\node [xshift = -4mm] (xc1t) at (xc1) {$\V{x}^{c_1}$};
+\node [xshift = -4mm] (xc2t) at (xc2) {$\V{x}^{c_2}$};
+\node [xshift = -4mm] (xc3t) at (xc3) {$\V{x}^{c_3}$};
+\node [xshift = -2mm,yshift = -2mm,color=cyan] (xbt) at (xb) {$x_{b_H}$};
+\node [xshift = -4mm] (xc1pt) at (xc1p) {$\V{x}^{c_1'}$};
+\node [xshift = -4mm] (xc2pt) at (xc2p) {$\V{x}^{c_2'}$};
+\node [xshift = -4mm] (xc3pt) at (xc3p) {$\V{x}^{c_3'}$};
+
+\draw [-latex,line width=2,color=Green,dashed] (x3) -- node[sloped,above,scale=0.7] {$(\V{x}^2-\V{x}^3)$} (x2);
+\draw [-latex,line width=2,color=Blue] (x1) -- node[sloped,above,scale=0.7] {$\V{x}^1+F(\V{x}^2-\V{x}^3)$} (xc1);
+\draw [-latex,line width=2,color=Red] (xc1) -- node[sloped,above,scale=0.7] {$\V{x}^{c_1}+G(\V{x}^{b_H}-\V{x}^{c_1})$} (xc1p);
+\draw [-latex,line width=2,color=Red] (xc2) -- node[sloped,above,scale=0.7] {$\V{x}^{c_2}+G(\V{x}^{b_H}-\V{x}^{c_2})$} (xc2p);
+\draw [-latex,line width=2,color=Red] (xc3) -- node[xshift=11mm,above,scale=0.7] {$\V{x}^{c_3}+G(\V{x}^{b_H}-\V{x}^{c_3})$} (xc3p);
+
+\end{tikzpicture}
+}
+\caption{The DE recombination process can be ``guided'' towards the best high-fidelity solution found so far.}\label{fig:guide-DE}
+\end{figure}
+
+In this figure, it can be seen that $\V{x}^{c_1}$ is produced using $\V{x}^1$, $\V{x}^2$ and $\V{x}^3$, and then translated using Equation~\ref{eq:nudge} to produce $\V{x}^{c_1'}$. Child solutions $\V{x}^{c_2}$ and $\V{x}^{c_3}$ are produced using two other sets of solutions that are not pictured, and then translated using the same equation. If this process is continued, the result is a ``cloud'' of candidate solutions in the vicinity of $\V{x}^\beta$, the centre of the region of interest.
+
+The guide factor determines how far the resulting solution is translated in the direction of $\V{x}^\beta$. At the beginning of the search, $\V{x}^\beta$ is determined by optimising a very coarse model built with sparse information, and cannot be trusted to be indicative of a promising region of the search space; as the search continues, the model becomes more accurate and the information it produces more trustworthy. Therefore, the algorithm should be explorative in the beginning of the search, but exploitative towards the end. One function which exhibits these properties is the logistic sigmoid curve
+\begin{equation}
+\epsilon = \dfrac{L}{1+e^{-k(x-x_0)}}\,,
+\end{equation}
+where $x_0$ is the $x$ value of the sigmoid's midpoint, $L$ is the curve's maximum and $k$ is the steepness parameter, which controls how fast the function ``ramps up''. The function $Sigmoid(N_e,N_{e_{max}})$ uses the total cost and maximum cost to compute this $\epsilon$ value. Figure~\ref{fig:logistic} gives a plot of the logistic sigmoid curve with $L=0.99$, $k=10$ and $x_0 = 0.2$. 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width = 0.40\textwidth]{img/logistic.eps} 
+  \caption{The logistic sigmoid curve flattens at around 80\%.} 
+    \label{fig:logistic}
+\end{figure}
+Using this value, $\V{g}$ can be computed as:
+\begin{equation}
+\V{g} = \epsilon + (1-\epsilon)\V{r}\,,
+\end{equation}
+where $\V{r} \in [0,1]^D$ is a random vector with $D$ components, making $\V{g} \in [\epsilon,1]^D$ also a random vector. This ensures the cloud of candidate solutions around $\V{x}^\beta$ is sparse at the beginning of the search, allowing for better global exploration, while focusing the search more tightly on promising regions towards the end --- crucially, without adding any extra parameters. 
+
+\subsection{LocalOCBA}\label{subsec:local}
+Once the candidate solutions have been been generated in the vicinity of $\V{x}^\beta$, they must be selected from. As already stated, the goal of evaluating solutions in low-fidelity is not to optimize the low-fidelity objective function, but to provide as much information for the model as possible. The optimal computing budget allocation (OCBA) algorithm selects from a set of solutions with the goal of reducing uncertainty within simulation models (by allocating computing resources). This principle can be applied here, with some modifications, as described in Algorithm~\ref{alg:local-ocba}.
+
+\begin{algorithm}[h!] 
+\caption{$LocalOCBA$ procedure}
+\label{alg:local-ocba}
+\algsetup{linenosize=\footnotesize}
+{\footnotesize
+\begin{algorithmic}[1]
+\REQUIRE{$\rho=\{\Delta_1$, total to be sampled; $\Delta_2$, samples per statistics update$\}$; $M$, low-fidelity model; $A_L$, low-fidelity archive; $\V{x}^\beta$, best high-fidelity solution ; $\epsilon$, sigmoid value; $N_e$, total cost incurred.}
+\ENSURE{$A_L$, updated low-fidelity archive; $N_e$, updated total cost.}
+\STATE{$X \ot GuidedDE(A_L,\V{x}^\beta,\epsilon)$} \COMMENT{Generate child population}
+\STATE{$A_X \ot f_{M}(X)$} \COMMENT{Approximate each child by model $M$}
+\STATE{$G,k \ot Partition(A_X)$} \COMMENT{Partition solutions}
+\STATE{$S_i \ot \emptyset,\ \forall i \in [k]$} \COMMENT{Empty groups for selected solutions}
+\WHILE{$\displaystyle\sum_{i \in [k]} |S_i| < \Delta_1$}\label{while-loop}
+  \STATE{$\hat{\mu}_i,\hat{\sigma}_i \ot$ sample statistics for $S_i$, $\forall i \in [k]$ (if $|S_i| < 2$, use $G_i$)}
+  \STATE{$R \ot GetRatios(\V{\hat{\mu}},\V{\hat{\sigma}})$} \COMMENT{compute allocation ratios}
+  \STATE{$D \ot Allocate(R,S,G) : \displaystyle\sum_{i \in [k]}|D_i| = \Delta_2$} \COMMENT{Allocate $\Delta_2$ solutions according to ratios $R$}
+  \STATE{$D_i,N_e \ot f_L(D_i,N_e),\ \forall i \in [k]$} \COMMENT{Evaluate allocated solutions}
+  \STATE{$S_i \ot S_i \cup D_i,\ \forall i \in [k]$} \COMMENT{Add to selected solutions}
+  \STATE{$G_i \ot G_i \setminus D_i,\ \forall i \in [k]$} \COMMENT{Selection without replacement}
+\ENDWHILE
+\STATE{$A_L \ot A_L \cup \displaystyle\bigcup_{i \in [k]} S_i$} \COMMENT{Combine all selected solutions}
+\end{algorithmic}
+}
+\end{algorithm}
+
+Here, the $GuidedDE(A_L,\V{x}^\beta,\epsilon)$ process is used to generate a set of candidate solutions, which are approximated using $f_M(X)$. This function takes a set of solutions and returns a set of pairs comprising the solution and its approximation on some model $M$. The solutions are ranked and partitioned using a clustering algorithm, based on their approximated value. The purpose of ranking the solutions first is to increase the probability that solutions within a clustered group will tend to have a similar performance to each other, regardless of their proximity in the decision space. This helps to ensure a diversity of solutions will be selected, while still preferencing the more promising candidates. The function $Partition(X)$ returns a set of solution groups $G$ and the number of groups $k$.
+
+OCBA principles are used to select --- without replacement --- from these groups to populate a set of empty groups $S$. First, sample statistics are computed for all groups of selected solutions in $S$. If there are fewer than two solutions in a group, then its corresponding group in $G$ is used. The function $GetRatios(\V{\hat{\mu}},\V{\hat{\sigma}})$ uses these statistics to compute allocation ratios in accordance for each group with standard OCBA practice. These ratios are used by $Allocate(R,S,G)$ to allocate $\Delta_2$ solutions to be evaluated as low-fidelity and added to the selected solutions $S$.
+
+Once $\Delta_1$ solutions have been selected, they are added to the low-fidelity archive, and the updated archive is returned.
+
+\subsection{Population size control}
+Due to the fact that many more low-fidelity solutions are added to the archive between each high-fidelity evaluation, the size of the low-fidelity archive can become too big for some kriging and co-kriging algorithms, or too concentrated if the search is focused on the same area for too long. Therefore, a maximum population size $N_{L_{max}}$ should be set such that once it reaches that threshold, the population should be maintained at that level. Choosing a steady-state method such as ranking the solutions by their value and selecting the top $N_{L_{max}}$ will cause the population to converge and lose diversity over time. As the purpose of maintaining the low-fidelity population is to provide the co-kriging model with information about the shape of the fitness landscape, this loss of diversity can be very detrimental. 
+
+The function $Winnow(A_L,N_{L_{max}})$ takes an archive and a maximum size and returns a winnowed archive with exactly $N_{L_{max}}$ solutions. It does this by partitioning the solutions --- in the decision space --- into $N_{L_{max}}$ different groups using a clustering algorithm, such as $k$-means clustering. Most of these clusters will contain only one solution which is added to the winnowed archive; for those that have more than one solution, only the solution with the best value is selected. This ensures that the archive never has more than $N_{L_{max}}$ solutions, but diversity is maintained throughout the population.
+
+\subsection{Similarities and differences to $MO^2TOS$}
+There exist some similarities between \AlgName{} and the $MO^2TOS$ framework. For example, both use a two-step process of ordering a population of solutions and then selecting from them using ideas from OCBA. Despite the similarities, there are several key aspects which differentiate the two algorithms from each other. 
+
+The biggest difference is that \AlgName{} is an iterative process, whereas $MO^2TOS$ is a two-step algorithm which is only run through one time. As $MO^2TOS$ only performs a single iteration, it cannot use any prior knowledge to determine where it should concentrate its resources when evaluating the initial low-fidelity population. Therefore, it must evaluate uniformly across the whole search space, and subsequently expend computational budget in areas which are not beneficial to the search. In contrast, \AlgName{} uses information from previous iterations, to identify promising areas of the search space that it can exploit.
+
+Another difference is that $MO^2TOS$ operates on the high- and low-fidelity objective functions directly, across the entire search space. Solutions are selected using information from low-fidelity evaluations, to be evaluated in high-fidelity. \AlgName{} uses its ranking and selection phases in order to select from a neighbourhood of solutions that have been identified in a promising region of the search space. These selections are informed by a kriging model of the low-fidelity function, and selected for low-fidelity evaluation. The high-fidelity evaluations are determined by a separate search that is perfomed on the co-kriging model, updated by the selected low-fidelity evaluations. Because of this, it is not necessary to perform the initial $n_0$ evaluations before computing the sample statistics, as the goal is not to optimize the low-fidelity objective function, just select from a set of ranked candidates.
+
+Finally, $MO^2TOS$ partitions the ranked population into equal-sized groups, whereas \AlgName{} uses a clustering algorithm to determine the number and size of partitions. This ensures that the average distance between groups in objective space is maximized.
