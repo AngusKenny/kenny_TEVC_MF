@@ -41,6 +41,11 @@ J.~Branke, M.~Asafuddoula, K.~S. Bhattacharjee, and T.~Ray, ``Efficient use of
   partially converged simulations in evolutionary optimization,'' \emph{IEEE
   Transactions on Evolutionary Computation}, vol.~21, no.~1, pp. 52--64, 2016.
 
+\bibitem{toal2015some}
+D.~J. Toal, ``Some considerations regarding the use of multi-fidelity kriging
+  in the construction of surrogate models,'' \emph{Structural and
+  Multidisciplinary Optimization}, vol.~51, no.~6, pp. 1223--1245, 2015.
+
 \bibitem{forrester2007multi}
 A.~I. Forrester, A.~S{\'o}bester, and A.~J. Keane, ``Multi-fidelity
   optimization via surrogate modelling,'' \emph{Proceedings of the royal
@@ -56,6 +61,11 @@ M.~C. Kennedy and A.~O'Hagan, ``Predicting the output from a complex computer
 J.~Laurenceau and P.~Sagaut, ``Building efficient response surfaces of
   aerodynamic functions with kriging and cokriging,'' \emph{AIAA journal},
   vol.~46, no.~2, pp. 498--507, 2008.
+
+\bibitem{huang2013research}
+L.~Huang, Z.~Gao, and D.~Zhang, ``Research on multi-fidelity aerodynamic
+  optimization methods,'' \emph{Chinese Journal of Aeronautics}, vol.~26,
+  no.~2, pp. 279--286, 2013.
 
 \bibitem{perdikaris2015multi}
 P.~Perdikaris, D.~Venturi, J.~O. Royset, and G.~E. Karniadakis,
@@ -117,6 +127,16 @@ D.~Lim, Y.-S. Ong, Y.~Jin, and B.~Sendhoff, ``Evolutionary optimization with
   Intelligent Computing}.\hskip 1em plus 0.5em minus 0.4em\relax Springer,
   2008, pp. 235--242.
 
+\bibitem{bryson2018multifidelity}
+D.~E. Bryson and M.~P. Rumpfkeil, ``Multifidelity quasi-newton method for
+  design optimization,'' \emph{AIAA Journal}, vol.~56, no.~10, pp. 4074--4086,
+  2018.
+
+\bibitem{ng2014multifidelity}
+L.~W. Ng and K.~E. Willcox, ``Multifidelity approaches for optimization under
+  uncertainty,'' \emph{International Journal for numerical methods in
+  Engineering}, vol. 100, no.~10, pp. 746--772, 2014.
+
 \bibitem{deb2012optimization}
 K.~Deb, \emph{Optimization for engineering design: Algorithms and
   examples}.\hskip 1em plus 0.5em minus 0.4em\relax PHI Learning Pvt. Ltd.,
@@ -143,5 +163,14 @@ J.~Xu, S.~Zhang, E.~Huang, C.-H. Chen, L.~H. Lee, and N.~Celik, ``An ordinal
 I.~Couckuyt, T.~Dhaene, and P.~Demeester, ``oodace toolbox: A flexible
   object-oriented kriging implementation,'' \emph{Journal of Machine Learning
   Research}, vol.~15, pp. 3183--3186, 2014.
+
+\bibitem{griewank1981generalized}
+A.~O. Griewank, ``Generalized descent for global optimization,'' \emph{Journal
+  of optimization theory and applications}, vol.~34, no.~1, pp. 11--39, 1981.
+
+\bibitem{michalewicz2013genetic}
+Z.~Michalewicz, \emph{Genetic algorithms+ data structures= evolution
+  programs}.\hskip 1em plus 0.5em minus 0.4em\relax Springer Science \&
+  Business Media, 2013.
 
 \end{thebibliography}
