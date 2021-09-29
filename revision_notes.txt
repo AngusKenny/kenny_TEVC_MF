@@ -1,0 +1,45 @@
+motos - implement and test
+
+replication - OCBA
+
+parameters - LF/HF ratio,delta,6D/18D
+
+reporting - best worst mean median sigma
+
+add statistical significance test
+
+dont use word data
+
+
+MO2TOS:
+=======
+- not good for continuous as candidates must be decided upon a priori
+- doesnt maintain a model
+
+k=10 - different to us
+n_0 = 3
+HF sols = 1% of LF => H=(20/1.01)~19.801~20 => H=4 (HF), L = 2000-20=1980
+
+no info on how many HF sols to use so leave enough room for around n_0*k solutions to be chosen
+
+
+partitioning of solutions into groups that have reduced group variance and increased group distances.
+
+All these earlier methods basically create a surrogate model using an interpolation method
+(kriging or RBF) to correct the bias of the low-fidelity model and perform the optimization using
+the “corrected” low-fidelity model. While they have been shown to work reasonably well on a
+number of engineering design problems, the performance of these methods depends critically on
+the quality and applicability of the interpolation method. It is well known that interpolation
+methods such as kriging and RBF would require a large number of design points to perform well
+when the underlying response surface is highly nonlinear and multi-modal, and/or the dimension
+of the solution space is high. In many complex system design problems, there are a mix of discrete
+and categorical decision variables. This would present additional challenges to these interpolation
+methods.
+
+In comparison, MO 2 TOS is a very general and flexible framework and has the following im-
+portant advantages: 1) MO 2 TOS handles a mix of discrete and categorical decision variables in a
+high-dimensional solution space; 2) MO 2 TOS is a general framework and is not restricted to any
+specific interpolation technique such as kriging; and 3) MO 2 TOS has the potential to provide both
+efficiency and robustness through the new OT and OS methodologies, and can effectively perform
+optimization even when low-fidelity models may not be good.
+

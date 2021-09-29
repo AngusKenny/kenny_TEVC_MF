@@ -137,6 +137,11 @@ L.~W. Ng and K.~E. Willcox, ``Multifidelity approaches for optimization under
   uncertainty,'' \emph{International Journal for numerical methods in
   Engineering}, vol. 100, no.~10, pp. 746--772, 2014.
 
+\bibitem{storn1997differential}
+R.~Storn and K.~Price, ``Differential evolution--a simple and efficient
+  heuristic for global optimization over continuous spaces,'' \emph{Journal of
+  global optimization}, vol.~11, no.~4, pp. 341--359, 1997.
+
 \bibitem{deb2012optimization}
 K.~Deb, \emph{Optimization for engineering design: Algorithms and
   examples}.\hskip 1em plus 0.5em minus 0.4em\relax PHI Learning Pvt. Ltd.,

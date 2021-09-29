@@ -1,7 +1,7 @@
 \section{Numerical Experiments}\label{sec:exp}
 The experiments were carried out on \angus{insert details of machine and OS here}. All code was implemented and executed in MATLAB\angus{version number}, with kriging and co-kriging models constructed using the ooDACE toolbox~\cite{oodace}.
 
-The \AlgName{} algorithm was compared against a baseline co-kriging algorithm. Both algorithms were run 30 times on each problem instance for the equivalent of 2000 low-fidelity evaluations, recording the best objective value, the mean and standard deviation of the resulting solutions produced by each run.
+The \AlgName{} algorithm was compared against a baseline co-kriging algorithm and an implementation of the $MO^2TOS$~\cite{xu2016mo2tos} method proposed by Xu et al. All algorithms were run 30 times on each problem instance for the equivalent of 2000 low-fidelity evaluations, recording the best objective value, the mean and standard deviation of the resulting solutions produced by each run.
 
 
 \subsection{Datasets}
@@ -24,8 +24,22 @@ See Tables~\ref{tab:funcs} and~\ref{tab:errfuncs} in Appendix~\ref{app:testfuncs
     \label{fig:michal}
 \end{figure}
 
+\subsection{\AlgName{} parameters}
+The \AlgName{} algorithm can be viewed as a general framework into which various search and modeling methods can be ``plugged''. Therefore, its components can be divided into two categories: \AlgName{} specific components, which are intrinsic to its operation and whose parameters are also intrinsic; and, generic method components, such as global search techniques and modelling methods which can be substituted for other similar techniques, which come with their own parameters. The \AlgName{} specific parameters are discussed in general in Section~\ref{sec:method}; this section will detail the specific values for these  parameters and for the generic search method used.
+
+To reduce the number of arbitrary parameters, initial population sizes are defined as a function of problem size. The high-fidelity population has a size of $6D$, as this is the smallest number of high-fidelity solutions that can be used to generate a co-kriging model for all of the instances, with the low-fidelity population being $18D$, which was chosen using sensitivity analysis to find the smallest value which still produces good solutions across the whole set of instances.
+
+The maximum size that the low-fidelity archive can reach before it must be truncated is 400, this was chosen because values much higher than this significantly slow the procedure down, for minimal-to-no improvment. 
+
+In the $LocalOCBA$ procedure, the total number of solutions to be sampled, $\Delta_1$, is 25 and the number of samples per statistics update, $\Delta_2$, is 5. These were chosen to provide a good balance between speed and efficiency. The clustering method used to partition the solutions is $k$-means clustering, with the value for $k$ being chosen using the so-called \emph{elbow method}.
+
+Differential evolution (DE)~\cite{storn1997differential} was used to globally search the updated co-kriging model. This DE was run over 30 generations with a crossover rate of 0.9, a mutation factor of 0.5 and a population size of 100.
+
+The kriging models used are from the ooDACE toolbox~\cite{oodace}, with the default paramters.
+
 \subsection{Baseline co-kriging algorithm}
 Co-kriging is a popular approach to solving many multi-fidelity problems. The outer-loop of the \AlgName{} algorithm functions by iteratively updating a co-kriging model using data from a modified version of the OCBA procedure. In order to demonstrate the effectiveness of this new technique, the performance of \AlgName{} is compared against the baseline simple co-kriging algorithm given in Algorithm~\ref{alg:co-kriging}.
+
 
 \begin{algorithm}[h!] 
 \caption{Baseline co-kriging procedure}
@@ -54,9 +68,37 @@ Co-kriging is a popular approach to solving many multi-fidelity problems. The ou
 
 The functions here have the same definitions as in Algorithm~\ref{alg:main-alg}. This procedure iteratively updates a co-kriging model by randomly sampling the low-fidelity data using a latin hypercube sampling (LHS) technique; however, the global search method remains the same.
 
-\subsection{Parameters}
-\AlgName{} can be viewed as a general framework into which various search and modeling methods can be ``plugged''. Therefore, its components can be divided into two categories: \AlgName{} specific components, which are intrinsic to its operation and whose parameters are also intrinsic; and, generic method components, such as global search techniques and modelling methods which can be substituted for other similar techniques, which come with their own parameters. The \AlgName{} specific parameters are discussed in Section~\ref{sec:method}; this section will detail the parameters for the generic search method used.
+\subsection{$MO^2TOS$ algorithm}
 
-Differential evolution (DE) was used to globally search the updated co-kriging model. This DE was run over 30 generations with a crossover rate of 0.9, a mutation factor of 0.5 and a population size of 100.
+The second method used for comparison with \AlgName{} is the $MO^2TOS$ algorithm described in Section~\ref{sec:back}. No source code for this algorithm was available online, so an implementation based on~\cite{xu2016mo2tos} was made, the pseudocode for which is given in Algorithm~\ref{alg:mo2tos}.
 
-The kriging models used are from the ooDACE toolbox~\cite{oodace}, with the default paramters.
+\begin{algorithm}[h!] 
+\caption{$MO^2TOS$ procedure}
+\label{alg:mo2tos}
+\algsetup{linenosize=\footnotesize}
+{\footnotesize
+\begin{algorithmic}[1]
+\REQUIRE{$P$, problem data; $N_{e_{max}}$, max LF equivalent evals; $n_0$, initial HF evals; $\rho$, HF eval proportion; $k$, number of partitions; $\Delta$, HF evals per statistics update.}
+\ENSURE{Best solution found $\V{x}^\beta$.}
+\STATE{$X_L \ot LHS(P,N_{e_{max}},\rho)$} \COMMENT{Generate initial population}
+\STATE{$A_L,N_e \ot f_L(X_L,0)$} \COMMENT{Evaluate initial LF population}
+\STATE{$G \ot Partition(A_L,k)$} \COMMENT{Partition solutions into $k$ groups}
+\STATE{$D_i \ot randSelect(G_i,n_0),\ \forall i \in [k]$} \COMMENT{Select initial HF candidates}
+\STATE{$S_i,N_e \ot f_L(D_i,N_e),\ \forall i \in [k]$} \COMMENT{Evaluate selected solutions}
+\STATE{$G_i \ot G_i \setminus D_i,\ \forall i \in [k]$} \COMMENT{Selection without replacement}
+\WHILE{$N_e < N_{e_{max}}$}
+  \STATE{$\hat{\mu}_i,\hat{\sigma}_i \ot$ sample statistics for $S_i$, $\forall i \in [k]$}
+  \STATE{$R \ot GetRatios(\V{\hat{\mu}},\V{\hat{\sigma}})$} \COMMENT{compute allocation ratios}
+  \STATE{$D \ot Allocate(R,S,G) : \displaystyle\sum_{i \in [k]}|D_i| = \Delta$} \COMMENT{Allocate solutions}
+  \STATE{$D_i,N_e \ot f_L(D_i,N_e),\ \forall i \in [k]$} \COMMENT{Evaluate allocated solutions}
+  \STATE{$S_i \ot S_i \cup D_i,\ \forall i \in [k]$} \COMMENT{Add to selected solutions}
+  \STATE{$G_i \ot G_i \setminus D_i,\ \forall i \in [k]$} \COMMENT{Selection without replacement}
+\ENDWHILE
+\STATE{$\V{x}^\beta \ot \min\left(\displaystyle\bigcup_{i \in [k]} S_i\right)$} \COMMENT{Find best selected solution}
+\end{algorithmic}
+}
+\end{algorithm}
+
+Here, most of the subroutines are defined the same as those described in Sections~\ref{sec:back} and~\ref{sec:method}, except for a couple. The total computing budget, $N_{e_{max}}$, must be divided between the initial low-fidelity evaluations and the subsequent high-fidelity ones, with the proportion of the total computing budget allocated to the high-fidelity evaluations given by the parameter $\rho$. In~\cite{xu2016mo2tos}, Xu et al. do not provide any guidelines for setting this parameter, however sensitivity analysis experiments showed that a value of around 0.25 for $\rho$ provided the best results for the given problem instances and computing budget. 
+
+The function $LHS(P,N,\rho)$ takes the problem instance, total budget and $\rho$ as input and returns an initial population of solutions sampled using latin hypercube sampling (LHS) with size $\frac{N}{1+\rho}$. This population is evaluated in low-fidelity and partitioned using $Partition(A,k)$ which takes an archive of solutions and a number of groups, ranks the solutions by objective value and returns $k$ equal-size groups based on their ranks. Xu et al. used $k=10$ for their experiments. The remainder of the procedure is similar to Algorithm~\ref{alg:local-ocba}, with $\Delta = 5$ corresponding to the value of $\Delta_2$ in that algorithm.
