@@ -536,6 +536,9 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"data",
+			"samples",
+			"data",
 			"brank",
 			"holland",
 			"genetic",

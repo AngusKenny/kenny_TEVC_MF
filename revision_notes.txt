@@ -16,6 +16,8 @@ MO2TOS:
 - not good for continuous as candidates must be decided upon a priori
 - doesnt maintain a model
 
+- makes it useful for choosing within a finite set of candidate solutions, but not  
+
 k=10 - different to us
 n_0 = 3
 HF sols = 1% of LF => H=(20/1.01)~19.801~20 => H=4 (HF), L = 2000-20=1980

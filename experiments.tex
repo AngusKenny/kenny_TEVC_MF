@@ -1,7 +1,7 @@
 \section{Numerical Experiments}\label{sec:exp}
 The experiments were carried out on \angus{insert details of machine and OS here}. All code was implemented and executed in MATLAB\angus{version number}, with kriging and co-kriging models constructed using the ooDACE toolbox~\cite{oodace}.
 
-The \AlgName{} algorithm was compared against a baseline co-kriging algorithm and an implementation of the $MO^2TOS$~\cite{xu2016mo2tos} method proposed by Xu et al. All algorithms were run 30 times on each problem instance for the equivalent of 2000 low-fidelity evaluations, recording the best objective value, the mean and standard deviation of the resulting solutions produced by each run.
+The \AlgName{} algorithm was compared against a baseline co-kriging algorithm and an implementation of the \motos{}~\cite{xu2016mo2tos} method proposed by Xu et al. All algorithms were run 30 times on each problem instance for the equivalent of 2000 low-fidelity evaluations, recording the best objective value, the mean and standard deviation of the resulting solutions produced by each run.
 
 
 \subsection{Datasets}
@@ -68,12 +68,12 @@ Co-kriging is a popular approach to solving many multi-fidelity problems. The ou
 
 The functions here have the same definitions as in Algorithm~\ref{alg:main-alg}. This procedure iteratively updates a co-kriging model by randomly sampling the low-fidelity data using a latin hypercube sampling (LHS) technique; however, the global search method remains the same.
 
-\subsection{$MO^2TOS$ algorithm}
+\subsection{\motos{} algorithm}
 
-The second method used for comparison with \AlgName{} is the $MO^2TOS$ algorithm described in Section~\ref{sec:back}. No source code for this algorithm was available online, so an implementation based on~\cite{xu2016mo2tos} was made, the pseudocode for which is given in Algorithm~\ref{alg:mo2tos}.
+The second method used for comparison with \AlgName{} is the \motos{} algorithm described in Section~\ref{sec:back}. No source code for this algorithm was available online, so an implementation in MATLAB based on the description in~\cite{xu2016mo2tos} was made, the pseudocode for which is given in Algorithm~\ref{alg:mo2tos}.
 
 \begin{algorithm}[h!] 
-\caption{$MO^2TOS$ procedure}
+\caption{\motos{} procedure}
 \label{alg:mo2tos}
 \algsetup{linenosize=\footnotesize}
 {\footnotesize
@@ -102,3 +102,4 @@ The second method used for comparison with \AlgName{} is the $MO^2TOS$ algorithm
 Here, most of the subroutines are defined the same as those described in Sections~\ref{sec:back} and~\ref{sec:method}, except for a couple. The total computing budget, $N_{e_{max}}$, must be divided between the initial low-fidelity evaluations and the subsequent high-fidelity ones, with the proportion of the total computing budget allocated to the high-fidelity evaluations given by the parameter $\rho$. In~\cite{xu2016mo2tos}, Xu et al. do not provide any guidelines for setting this parameter, however sensitivity analysis experiments showed that a value of around 0.25 for $\rho$ provided the best results for the given problem instances and computing budget. 
 
 The function $LHS(P,N,\rho)$ takes the problem instance, total budget and $\rho$ as input and returns an initial population of solutions sampled using latin hypercube sampling (LHS) with size $\frac{N}{1+\rho}$. This population is evaluated in low-fidelity and partitioned using $Partition(A,k)$ which takes an archive of solutions and a number of groups, ranks the solutions by objective value and returns $k$ equal-size groups based on their ranks. Xu et al. used $k=10$ for their experiments. The remainder of the procedure is similar to Algorithm~\ref{alg:local-ocba}, with $\Delta = 5$ corresponding to the value of $\Delta_2$ in that algorithm.
+
