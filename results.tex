@@ -1,6 +1,8 @@
 \section{Results and Discussion}\label{sec:results}
 The experiments in this section compare the performance of \AlgName{} against a base-line co-kriging algorithm and an implemention of the \motos{} framework, as described in Section~\ref{sec:exp}. Dataset $A$ is taken from~\cite{lv2021multi} and demonstrates the performance of \AlgName{} on a diversity of problems with different sizes; while dataset $B$ investigates the effect of problem size and error type. The results from each set of experiments are presented in a table with plots comparing the convergence of \AlgName{} and the base-line co-kriging algorithm on a representative sample of the problem instances. \motos{} is not included in the convergence plots as decisions are made \emph{a priori} and it is not an iterative process.
 
+A summary of the results, their implications and statistical significance is also provided at the end of this section.
+
 \subsection*{Dataset A}
 
 Table~\ref{tab:results-a} gives the results from 30 runs of \AlgName{}, the base-line co-kriging algorithm and \motos{} on problems $f10$ to $f17$ from~\cite{lv2021multi}, comprising dataset $A$.
@@ -58,7 +60,7 @@ The purpose of dataset $B$ was to observe the effect of problem size on the perf
 Instance & $D$ & $r^2$ &\multicolumn{1}{c}{best}&\multicolumn{1}{c}{\(\mu\)} & \multicolumn{1}{c}{\(\sigma\)}&\multicolumn{1}{c}{best}& \multicolumn{1}{c}{\(\mu\)}&\multicolumn{1}{c}{\(\sigma\)}&\multicolumn{1}{c}{best}& \multicolumn{1}{c}{\(\mu\)}&\multicolumn{1}{c}{\(\sigma\)}\\ \midrule
 %
 $Griewank_{2}$    & 3 & 0.73 & \best{0} &  \best{0.0018} &  0.0083 &    0.0019 &    0.0735 &    0.0440 & \best{0} &   0.0072 &  0.0137\\
-                  & 5 & 0.54 & \best{0} &  0.0535 &  0.0733        &    0.1428 &    0.3886 &    0.1245 & \best{0} &   \best{0.0485} &  0.1055\\%
+                  & 5 & 0.54 & \best{0} &  0.0535 &  0.0723        &    0.1428 &    0.3886 &    0.1245 & \best{0} &   \best{0.0485} &  0.1055\\%
                   & 8 & 0.37 & \best{0} &  0.6538 &  0.3363        &    0.5606 &    0.8036 &    0.1100 & \best{0} &   \best{0.1864} &  0.2531\\
 $Griewank_{6}$    & 3 & 0.74 & \best{0} &  \best{0.0056} &  0.0114 &    0.0076 &    0.0564 &    0.0290 & \best{0} &   0.0104 &  0.0130\\
                   & 5 & 0.76 & \best{0} &  0.0730 &  0.1145        &    0.1139 &    0.3792 &    0.1328 & \best{0} &   \best{0.0361} &  0.0778\\
@@ -66,10 +68,10 @@ $Griewank_{6}$    & 3 & 0.74 & \best{0} &  \best{0.0056} &  0.0114 &    0.0076 &
 \midrule  
 $Michalewicz_{2}$ & 3 & 0.77 &  -2.7239 & -2.3582 &  0.2587        &   -2.4612 &   -1.8939 &    0.2366 & \best{-2.7360} &  \best{-2.5305} &  0.1557\\
                   & 5 & 0.73 &  -3.5164 & -2.9470 &  0.2921        &   -3.2841 &   -2.4554 &    0.3928 & \best{-3.5653} &  \best{-2.9953} &  0.3219\\%
-                  & 8 & 0.64 &  -4.1813 & -3.0214 &  0.5671        &   -4.2150 &   -3.0818 &    0.7827 & \best{-4.5542} &  \best{-3.3046} &  0.4142\\
-$Michalewicz_{6}$ & 3 & 0.76 &  -2.7194 & -2.2412 &  0.2978        &   -2.4657 &   -1.8847 &    0.2927 & \best{-2.7409} &  \best{-2.3142} &  0.2411\\
-                  & 5 & 0.83 &  \best{-3.6198} & -2.7140 & 0.3948  &   -3.2980 &   -2.5380 &    0.3328 & -3.5511 &  \best{-2.9104} &  0.2823\\
-                  & 8 & 0.86 &  -3.9978 & -3.1032 &  0.4929        &   -3.9627 &   -3.1363 &    0.3851 & \best{-4.2922} &  \best{-3.1672} &  0.0909\\
+                  & 8 & 0.64 &  -4.1813 & -3.0214 &  0.4958        &   -4.2150 &   -3.0818 &    0.4406 & \best{-4.5542} &  \best{-3.3046} &  0.5004\\
+$Michalewicz_{6}$ & 3 & 0.76 &  -2.7194 & -2.2412 &  0.2978        &   -2.4657 &   -1.8847 &    0.2927 & \best{-2.7409} &  \best{-2.4080} &  0.2711\\
+                  & 5 & 0.83 &  \best{-3.6198} & -2.6695 & 0.3986  &   -3.2980 &   -2.5380 &    0.3328 & -3.5511 &  \best{-2.9944} &  0.3490\\
+                  & 8 & 0.86 &  -3.9978 & -3.1032 &  0.4929        &   -3.9627 &   -3.1363 &    0.3772 & \best{-4.2922} &  \best{-3.1672} &  0.4865\\
 %
 \bottomrule
 \end{tabular}
@@ -93,6 +95,27 @@ Again, the table shows that \AlgName{} outperforms \motos{} in all instances and
 \end{figure*}
 
 \subsection*{Summary}
+
+\begin{table}[h!]
+\centering
+\caption{Pairwise comparision of \AlgName{}, \motos{} and the base-line co-kriging algorithm using the MWW test.}\label{tab:mww-test}
+% \begin{adjustbox}{width=\columnwidth}
+\begin{tabular}{lrrrrrr} \toprule
+& \multicolumn{3}{c}{Dataset $A$} & \multicolumn{3}{c}{Dataset $B$}\\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7} 
+Algorithm & \multicolumn{1}{c}{Win}&\multicolumn{1}{c}{Draw} & \multicolumn{1}{c}{Loss}& \multicolumn{1}{c}{Win}&\multicolumn{1}{c}{Draw} & \multicolumn{1}{c}{Loss}\\ \midrule
+%
+\AlgName{} & \best{13} & 2 & 1 & \best{17} & 5 & 2 \\
+Co-kriging & 9 & 2 & 5 & 10 & 8 & 6 \\
+\motos{} & 0 & 0 & 16 & 0 & 5 & 19 \\   
+%
+\bottomrule
+\end{tabular}
+% \end{adjustbox}
+\end{table}
+
+Table~\ref{tab:mww-test} provides the results of a pairwise comparison of all three algorithms on both datasets, using the Mann-Whitney-Wilcoxon (MWW) statistical significance test~\cite{mann1947test}. This table clearly shows that \AlgName{} produces significantly better solutions than both \motos{} and the base-line co-kriging algorithm when considered across all problem instances and trials.
+
 The results from both datasets suggest a similar pattern. For problems with few decision variables, there is very little difference between \AlgName{} and the base-line co-kriging algorithm, and as the size of the problem increases, the convergence rate and performance of \AlgName{} improves over the simple co-kriging algorithm with the greatest improvements being observed on the largest problem instances.
 
 Although both algorithms contain the co-kriging technique as their principal constituent, the base-line algorithm uses a random sampling technique which gives it a disadvantage in problems with more decision variables, as it must cover an exponentially larger space with the same computational budget. By using the $LocalOCBA$ procedure to focus the sampling on areas of the search space that have been identified as promising, \AlgName{} can use its budget more efficently to exploit these regions, which is evidenced by the faster convergence rates at larger problem sizes.
