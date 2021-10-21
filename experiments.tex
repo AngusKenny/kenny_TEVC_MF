@@ -8,22 +8,22 @@ To establish statistical significance of the results, a pairwise comparison was 
 \subsection{Datasets}
 The experiments were run on a collection of bound-constrained, single-objective, multi-fidelity test functions that can be divided into two different datasets. The first set (dataset $A$) is a selection of problem instances taken from Lv~et~al.~\cite{lv2021multi}. Problems $f10$ to $f17$ were chosen from this dataset as they contain between three and eight decision variables, determined as a representative range of easy to difficult problems. The explicit definitions for both the high- and low-fidelity functions are provided in the Appendix.
 
-The second set of problem instances (dataset $B$) is generated using the well-known Griewank~\cite{griewank1981generalized} and Michalewicz~\cite{michalewicz2013genetic} test problems (Figures~\ref{fig:grie} and~\ref{fig:michal})\hemant{To be consistent, we can include the problem definitions instead of figures for these problems as well. Figures 5 and 6 can therefore be removed}. Each problem was instantiated with versions for three, five and eight decision variables. This matches the range of the first dataset, and also allows the performance of the algorithms to be judged across different sized problems in a more controlled environment. These test problems are not naturally multi-fidelity optimisation problems, so low-fidelity evaluations are constructed by applying the methods described in~\cite{wang2017generic}. Two different error functions were tested for each instance, modelling two types of fidelity error: resolution and stochastic. An appropriate fidelity level $\phi$ for each problem was chosen by computing the square of the Pearson correlation coefficient $r^2$ for different fidelity values and selecting a value for $\phi$ such that $r^2$ was between 0.65 and 0.85, to be commensurate with the first dataset.
+The second set of problem instances (dataset $B$) is generated using the well-known Griewank~\cite{griewank1981generalized} and Michalewicz~\cite{michalewicz2013genetic} test problems. Each problem was instantiated with versions for three, five and eight decision variables. This matches the range of the first dataset, and also allows the performance of the algorithms to be judged across different sized problems in a more controlled environment. These test problems are not naturally multi-fidelity optimisation problems, so low-fidelity evaluations are constructed by applying the methods described in~\cite{wang2017generic}. Two different error functions were tested for each instance, modelling two types of fidelity error: resolution and stochastic. An appropriate fidelity level $\phi$ for each problem was chosen by computing the square of the Pearson correlation coefficient $r^2$ for different fidelity values and selecting a value for $\phi$ such that $r^2$ was between 0.65 and 0.85, to be commensurate with the first dataset.
 
 See Tables~\ref{tab:funcs} and~\ref{tab:errfuncs} in Appendix~\ref{app:testfuncs} for test function and error function equations, respectively.
 
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width = 0.40\textwidth]{img/griewank.png} 
-  \caption{The Griewank test function in 2D.\angus{will do a better version}} 
-    \label{fig:grie}
-\end{figure}
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width = 0.40\textwidth]{img/michal.png} 
-  \caption{The Michalewicz test function in 2D.\angus{will do a better version}} 
-    \label{fig:michal}
-\end{figure}
+% \begin{figure}[h!]
+%   \centering
+%   \includegraphics[width = 0.40\textwidth]{img/griewank.png} 
+%   \caption{The Griewank test function in 2D.\angus{will do a better version}} 
+%     \label{fig:grie}
+% \end{figure}
+% \begin{figure}[h!]
+%   \centering
+%   \includegraphics[width = 0.40\textwidth]{img/michal.png} 
+%   \caption{The Michalewicz test function in 2D.\angus{will do a better version}} 
+%     \label{fig:michal}
+% \end{figure}
 
 \subsection{\AlgName{} parameters}
 The \AlgName{} algorithm can be viewed as a modular framework within which various search and modeling methods can be implemented. Therefore, its components can be divided into two categories: \AlgName{} specific components, which are intrinsic to its operation and whose parameters are also intrinsic; and, generic method components, such as global search techniques and modelling methods which can be substituted for other similar techniques, which come with their own parameters. The \AlgName{} specific parameters are discussed in general in Section~\ref{sec:method}; this section will detail the specific values for these  parameters and for the generic search method used.
@@ -32,9 +32,9 @@ To reduce the number of arbitrary parameters, initial population sizes are defin
 
 The maximum size that the low-fidelity archive can reach before it must be truncated is 400, this was chosen because values much higher than this significantly slow the procedure down while yielding minimal-to-no improvment. 
 
-In the $LocalOCBA$ procedure, the total number of solutions to be sampled, $\Delta_1$, is 25 and the number of samples per statistics update, $\Delta_2$, is 5. These were chosen to provide a good balance between speed and efficiency. The clustering method used to partition the solutions is $k$-means clustering, with the value for $k$ being chosen using the so-called \emph{elbow method}\hemant{Any references for this method?}.
+In the $LocalOCBA$ procedure, the total number of solutions to be sampled, $\Delta_1$, is 25 and the number of samples per statistics update, $\Delta_2$, is 5. These were chosen to provide a good balance between speed and efficiency. The clustering method used to partition the solutions is $k$-means clustering, with the value for $k$ being chosen using the so-called \emph{elbow method}~\cite{leonard1990finding}.
 
-Differential evolution (DE)~\cite{storn1997differential} was used to globally search the updated co-kriging model. This DE was run over 30 generations with a crossover rate of 0.9, a mutation factor of 0.5 and a population size of 100. \hemant{Mention the type of operators used (they have identifiers such as rand/bin etc.}
+Differential evolution (DE)~\cite{storn1997differential} was used to globally search the updated co-kriging model. The ``classical'' DE (DE/rand/1/bin) was run over 30 generations with a crossover rate of 0.9, a mutation factor of 0.5 and a population size of 100.
 
 The kriging models used are from the ooDACE toolbox~\cite{oodace}, with the default paramters.
 

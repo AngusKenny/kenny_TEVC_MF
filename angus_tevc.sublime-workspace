@@ -391,6 +391,7 @@
 	},
 	"file_history":
 	[
+		"/home/gus/Documents/UNSW_work/my_papers/TEVC-Merge-Search-Paper/TEVC_version/merge_TEVC_2021.tex",
 		"/home/gus/Documents/UNSW_work/git_access_token.txt",
 		"/home/gus/googhole/rmit_drive/PhD/thesis/general.bib",
 		"/home/gus/Documents/UNSW_work/my_papers/angus_TEVC/angus_tevc.sublime-project",
@@ -415,7 +416,6 @@
 		"/home/gus/Documents/UNSW_work/papers/notes/first_UNSW_paper/kenny_paper.tex",
 		"/home/gus/Documents/UNSW_work/my_papers/TEVC-Merge-Search-Paper/merge_style.sty",
 		"/home/gus/Documents/UNSW_work/papers/notes/first_results(2021_06_21)/june_22_notes.tex",
-		"/home/gus/Documents/UNSW_work/my_papers/TEVC-Merge-Search-Paper/TEVC_version/merge_TEVC_2021.tex",
 		"/home/gus/Documents/UNSW_work/my_papers/first_UNSW_paper/kenny_paper.tex",
 		"/home/gus/Documents/UNSW_work/papers/notes/2021_07_22-wang_error_functions/july_22_notes.tex",
 		"/media/gus/backup/icon/hana_seed.txt",
@@ -536,6 +536,8 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"isa",
+			"ise",
 			"$OC",
 			"$MO^2TOS$",
 			"data",
@@ -564,6 +566,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"iza",
 			"\\motos{}",
 			"\\motos",
 			"ize",
