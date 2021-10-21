@@ -5,7 +5,7 @@ A summary of the results, their implications and statistical significance is als
 
 \subsection*{Dataset A}
 
-Table~\ref{tab:results-a} gives the results from 30 runs of \AlgName{}, the base-line co-kriging algorithm and \motos{} on problems $f10$ to $f17$ from~\cite{lv2021multi}, comprising dataset $A$.
+Table~\ref{tab:results-a} gives the results from 30 runs of \AlgName{}, the base-line co-kriging algorithm and \motos{} on the dataset $A$. In this table, it can be seen that \AlgName{} performs better than \motos{} for all instances. It also performs as well as or better than the base-line co-kriging algorithm with a few exceptions. For the tests on instances $f11$, $f14$ and $f16$ the base-line co-kriging algorithm was able to find at least one solution that was better than the best solution produced by \AlgName{}, and for the instances $f10$ and $f14$ it produced better solutions on average. In all of these instances, the differences between the algorithms are small, with both performing very similarly; whereas \AlgName{} outperforms the co-kriging by some margin in a lot of the other instances.
 
 \begin{table*}[h!]
 \centering
@@ -30,9 +30,7 @@ $f17$ & 8 & 0.79 & -2.5859  &  42.0074 &  153.4414              &  87.9290 &  29
 % \end{adjustbox}
 \end{table*}
 
-In this table, it can be seen that \AlgName{} performs better than \motos{} and as well as, or better than, the base-line co-kriging algorithm, with a few exceptions. For the tests on instances $f11$, $f14$ and $f16$ the base-line co-kriging algorithm was able to find at least one solution that was better than the best solution produced by \AlgName{}, and for the instances $f10$ and $f14$ it produced better solutions on average. In all of these instances, the differences between the algorithms are small, with both performing very similarly; whereas \AlgName{} outperforms the co-kriging by some margin in a lot of the other instances.
-
-This is supported by the convergence plots in Figure~\ref{fig:set-a-conv}. Here, it is clear that when the size of the problem is small, the performance of the two algorithms is very similar, with similar convergence rates; but as the size increases, the both the average performance, and convergence rate, of \AlgName{} over co-kriging improves significantly --- with the most marked improvement being for problem $f17$.
+This is supported by the convergence plots in Figure~\ref{fig:set-a-conv}. Here, it is clear that when the size of the problem is small, the performance of the two algorithms is very similar, with similar convergence rates; but as the size increases, the both the average performance, and convergence rate, of \AlgName{} over co-kriging improves significantly --- with the most marked improvement being for problem $f17$. 
 
 \begin{figure*}[t]
   \centering
@@ -48,7 +46,7 @@ This is supported by the convergence plots in Figure~\ref{fig:set-a-conv}. Here,
 
 \subsection*{Dataset B}
 
-The purpose of dataset $B$ was to observe the effect of problem size on the performance of \AlgName{}, and to do so using two different error functions to ensure the results obtained are consistent, and not dependent on the simulation error model used.
+The purpose of dataset $B$ was to observe the effect of problem size on the performance of \AlgName{}, and to do so using two different error functions to ensure the results obtained are consistent and not over-fitted to a particular type of simulation error model. The results in Table~\ref{tab:results-b} compare the performance of \AlgName{}, \motos{} and the baseline co-kriging algorithm over 30 independent runs on the dataset $B$. The dataset comprises two problem instances from the literature, with varying numbers of decision variables using error functions $e_2$ and $e_6$ as described in~\cite{wang2017generic}.
 
 \begin{table*}[h!]
 \centering
@@ -78,7 +76,7 @@ $Michalewicz_{6}$ & 3 & 0.76 &  -2.7194 & -2.2412 &  0.2978        &   -2.4657 &
 % \end{adjustbox}
 \end{table*}
 
-The results in Table~\ref{tab:results-b} compare the performance of \AlgName{}, \motos{} and the baseline co-kriging algorithm and are taken over 30 runs on two problem instances from the literature, with varying numbers of decision variables using error functions $e_2$ and $e_6$ as described in~\cite{wang2017generic}.
+
 
 Again, the table shows that \AlgName{} outperforms \motos{} in all instances and the co-kriging baseline algorithm, with a few exceptions. For the Michaelwicz problem using error function $e_6$ and has been instantiated with five decision variables, the co-kriging base-line algorithm managed to find the best over-all solution, however \AlgName{} still performed better on average. The only time when the co-kriging base-line outperformed \AlgName{} on average was the two smallest instantiations of the Griewank problem. The convergence plots in Figures~\ref{fig:gw23-conv} and~\ref{fig:gw63-conv} show that the difference between the performance of both algorithms for these instances is reasonably negligible. The remaining plots in Figure~\ref{fig:set-b-conv} agree with the results on dataset $A$.
 
@@ -94,7 +92,7 @@ Again, the table shows that \AlgName{} outperforms \motos{} in all instances and
     \label{fig:set-b-conv}
 \end{figure*}
 
-\subsection*{Summary}
+\subsection*{Discussion}
 \begin{table}[h!]
 \centering
 \caption{Pairwise comparision of \AlgName{}, \motos{} and the base-line co-kriging algorithm using the MWW test.}\label{tab:mww-test}
@@ -117,8 +115,8 @@ Table~\ref{tab:mww-test} provides the results of a pairwise comparison of all th
 
 The results from both datasets suggest a similar pattern. For problems with few decision variables, there is very little difference between \AlgName{} and the base-line co-kriging algorithm, and as the size of the problem increases, the convergence rate and performance of \AlgName{} improves over the simple co-kriging algorithm with the greatest improvements being observed on the largest problem instances.
 
-Although both algorithms contain the co-kriging technique as their principal constituent, the base-line algorithm uses a random sampling technique which gives it a disadvantage in problems with more decision variables, as it must cover an exponentially larger space with the same computational budget. By using the $LocalOCBA$ procedure to focus the sampling on areas of the search space that have been identified as promising, \AlgName{} can use its budget more efficently to exploit these regions, which is evidenced by the faster convergence rates at larger problem sizes.
+Although both algorithms contain the co-kriging technique as their principal constituent, the base-line algorithm uses a random sampling technique which gives it a disadvantage in problems with more decision variables, as it must cover an exponentially larger space with the same computational budget. By using the $LocalOCBA$ procedure to focus the sampling on areas of the search space that have been identified as promising, \AlgName{} can use its budget more efficently to exploit these regions, which is evidenced by the faster convergence rates at larger problem sizes. \hemant{Can this be visualized somehow on a couple of individual instance? Explicitly it demonstrating it using some snapshot(s) will strengthen the this argument. Perhaps the explored solutions relative to the optimum in a 2D projected space (look up Sammon mapping, e.g.). The concentration of solutions in different areas can give some indicative illustration of how the search went and whether they focussed on the "right" areas. The plot will likely look very different for a low- vs high-dimensional problem, explaining the performance difference.}
 
-The \motos{} algorithm performed worse than both \AlgName{} and the base-line co-kriging algorithm for all problem instances. This is predominantly due to the limitations discussed in Section~\ref{sec:back} and demonstrated in Figure~\ref{fig:motos-example}. Because \motos{} can only select candidates for high-fidelity evaluation from the initial set of low-fidelity solutions, it requires a reasonably high density of coverage from the beginning. In~\cite{xu2016mo2tos}, Xu et al. use up to 10,000 initial low-fidelity candidates for some problems which is well in excess of the total computational budget of 2,000 low-fidelity-equivalent evaluations allowed in the experiments conducted here. As \motos{} must decide the finite set of solutions it can choose from \emph{a priori}, it is simply random chance as to whether that initial set contains promising candidates or not. This is particularly evident in the results from the larger instances in dataset $A$, where the limited budget for initial samples must be spread over a very high-dimensional space.
+The \motos{} algorithm performed worse than both \AlgName{} and the base-line co-kriging algorithm for all problem instances. This is predominantly due to the limitations discussed in Section~\ref{sec:back} and demonstrated in Figure~\ref{fig:motos-example}. Because \motos{} can only select candidates for high-fidelity evaluation from the initial set of low-fidelity solutions, it requires a reasonably high density of coverage from the initial sampling. In~\cite{xu2016mo2tos}, up to 10,000 initial low-fidelity candidates were used for some problems which is well in-excess of the total computational budget of 2,000 low-fidelity-equivalent evaluations allowed in the experiments conducted here. As \motos{} must decide the finite set of solutions it can choose from \emph{a priori}, it heavily relies on chance as to whether that initial set contains promising candidates or not. This is particularly evident in the results from the larger instances in dataset $A$, where the limited budget for initial samples must be spread over a very high-dimensional space.
 
 Finally, although the numerical results and convergence plots do indicate that there is not a significant difference between the performance of \AlgName{} and the base-line co-kriging algorithm on the smaller instances; it is worth noting that for three out of four of these instances, the co-kriging baseline did perform slightly better on average. One possible explanation for this is that the $LocalOCBA$ procedure makes \AlgName{} more greedy, and therefore more likely to become trapped in local optima --- especially for multimodal instances like the Griewank problem (as demonstrated in Figure~\ref{fig:grie}). In these smaller instances, the random sampling of the base-line co-kriging algorithm is not as much of a disadvantage and it is more likely to come across good areas of the search space by chance.
