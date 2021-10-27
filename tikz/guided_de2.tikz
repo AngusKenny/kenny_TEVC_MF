@@ -1,0 +1,46 @@
+\begin{tikzpicture}
+
+\draw[black,dashed,fill=cyan!50,opacity=0.5] (-4.75,4.25) rectangle (-2.35,3.05);
+\draw[black,dashed,fill=cyan!50,opacity=0.5] (-4.75,4.25) rectangle (-5.95,1.45);
+\draw[black,dashed,fill=cyan!50,opacity=0.5] (-4.75,4.25) rectangle (-5.35,4.85);
+
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (x1) at (0,0) {};
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (x3) at (1,1) {};
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (x2) at (0,4) {};
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (xc1) at (-0.75,2.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm,color=blue] (xb) at (-4.75,4.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (xc1p) at (-2.35,3.05) {};
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (xc1pp) at (-4.35,3.45) {};
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (xc2) at (-6.75,0.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (xc2p) at (-5.95,1.45) {};
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (xc2pp) at (-5.75,4.0) {};
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (xc3) at (-5.75,5.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (xc3p) at (-5.35,4.85) {};
+\node [fill, circle,inner sep=0pt,minimum size=1mm] (xc3pp) at (-4.85,4.55) {};
+
+\node [xshift = -4mm] (x1t) at (x1) {$\V{x}^1$};
+\node [xshift = -4mm] (x2t) at (x2) {$\V{x}^2$};
+\node [xshift = -4mm] (x3t) at (x3) {$\V{x}^3$};
+\node [xshift = -3mm,yshift=-1mm] (xc1t) at (xc1) {$\V{x}^{c_1}$};
+\node [xshift = -4mm] (xc2t) at (xc2) {$\V{x}^{c_2}$};
+\node [xshift = -4mm] (xc3t) at (xc3) {$\V{x}^{c_3}$};
+\node [xshift = 3.5mm,yshift = 2mm,color=blue] (xbt) at (xb) {$\V{x}^\beta$};
+\node [xshift = -1mm,yshift=-2.5mm] (xc1pt) at (xc1p) {$\V{x}^{c_1'}$};
+\node [xshift = -1mm,yshift=2mm] (xc1ppt) at (xc1pp) {$\V{x}^{c_1''}$};
+\node [xshift = 3mm,yshift=-2mm] (xc2pt) at (xc2p) {$\V{x}^{c_2'}$};
+\node [xshift = -2mm,yshift=2mm] (xc2ppt) at (xc2pp) {$\V{x}^{c_2''}$};
+\node [xshift = -4mm] (xc3pt) at (xc3p) {$\V{x}^{c_3'}$};
+\node [xshift = -3mm,yshift=-1.3mm] (xc3ppt) at (xc3pp) {$\V{x}^{c_3''}$};
+
+
+\draw [-latex,line width=1.5,color=Green,dashed] (x3) -- node[sloped,above,scale=0.6] {$(\V{x}^2-\V{x}^3)$} (x2);
+\draw [-latex,line width=1.5,color=Blue] (x1) -- node[sloped,above,scale=0.6] {$\V{x}^1+F(\V{x}^2-\V{x}^3)$} (xc1);
+\draw [-latex,line width=1.5,color=Red] (xc1) -- node[sloped,above,scale=0.6] {$\V{x}^{c_1}+\varepsilon(\V{x}^{\beta}-\V{x}^{c_1})$} (xc1p);
+\draw [-latex,line width=1.5,color=Red] (xc1p) -- node[sloped,above,scale=0.6] {$\V{x}^{c_1'}+\V{r}\cdot(\V{x}^{\beta}-\V{x}^{c_1'})$} (xc1pp);
+\draw [-latex,line width=1.5,color=Red] (xc2) -- node[xshift=9mm,below,scale=0.6] {$\V{x}^{c_2}+\varepsilon(\V{x}^{\beta}-\V{x}^{c_2})$} (xc2p);
+\draw [-latex,line width=1.5,color=Red] (xc2p) -- node[sloped,below,scale=0.6] {$\V{x}^{c_2'}+\V{r}\cdot(\V{x}^{\beta}-\V{x}^{c_2'})$} (xc2pp);
+\draw [-latex,dashed,line width=1.5,color=Red] (xc2) -- node[sloped,above,scale=0.6] {$\V{x}^{c_2}+\V{g}\cdot(\V{x}^{\beta}-\V{x}^{c_2})$} (xc2pp);
+\draw [-latex,line width=1.5,color=Red] (xc3) -- node[xshift=10mm,above,scale=0.6] {$\V{x}^{c_3}+\varepsilon(\V{x}^{\beta}-\V{x}^{c_3})$} (xc3p);
+\draw [-latex,line width=1.5,color=Red] (xc3p) -- node[xshift=10mm,above,scale=0.6] {$\V{x}^{c_3'}+\V{r}\cdot(\V{x}^{\beta}-\V{x}^{c_3'})$} (xc3pp);
+
+\end{tikzpicture}

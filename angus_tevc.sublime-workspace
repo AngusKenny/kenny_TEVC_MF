@@ -391,6 +391,8 @@
 	},
 	"file_history":
 	[
+		"/home/gus/Videos/the fable/The.Fable.2019.JAPANESE.720p.BluRay.x264.AAC-Mkvking.com.srt",
+		"/home/gus/Videos/the fable/The-Fable-2019.srt",
 		"/home/gus/Documents/UNSW_work/my_papers/TEVC-Merge-Search-Paper/TEVC_version/merge_TEVC_2021.tex",
 		"/home/gus/Documents/UNSW_work/git_access_token.txt",
 		"/home/gus/googhole/rmit_drive/PhD/thesis/general.bib",
@@ -516,9 +518,7 @@
 		"/home/gus/googhole/rmit_drive/tutoring/computing theory/2020/Assessments/Assignment 2 marking/feedback/output_txt/3695116.txt",
 		"/home/gus/googhole/rmit_drive/tutoring/computing theory/2020/Assessments/Assignment 2 marking/feedback/output_txt/test_group/3627805.txt",
 		"/home/gus/googhole/rmit_drive/tutoring/computing theory/2020/Assessments/Assignment 2 marking/feedback/output_txt/test_group/3627881.txt",
-		"/home/gus/googhole/rmit_drive/tutoring/computing theory/2020/Assessments/Assignment 2 marking/feedback/output_txt/test_group/3540930.txt",
-		"/home/gus/googhole/rmit_drive/tutoring/computing theory/2020/Assessments/Assignment 2 marking/test_csv/output_txt/3784450.txt",
-		"/home/gus/googhole/rmit_drive/tutoring/computing theory/2020_mystuff/jflap-checker/jflap-ass-validator-master/README.md"
+		"/home/gus/googhole/rmit_drive/tutoring/computing theory/2020/Assessments/Assignment 2 marking/feedback/output_txt/test_group/3540930.txt"
 	],
 	"find":
 	{
@@ -536,6 +536,9 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"N_e",
+			"N_{e_{max}}",
+			"N_{L_{max}}",
 			"isa",
 			"ise",
 			"$OC",
@@ -566,6 +569,9 @@
 		"regex": false,
 		"replace_history":
 		[
+			"t",
+			"T",
+			"N_L",
 			"iza",
 			"\\motos{}",
 			"\\motos",

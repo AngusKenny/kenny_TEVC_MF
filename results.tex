@@ -32,15 +32,30 @@ $f17$ & 8 & 0.79 & -2.5859  &  42.0074 &  153.4414              &  87.9290 &  29
 
 This is supported by the convergence plots in Figure~\ref{fig:set-a-conv}. Here, it is clear that when the size of the problem is small, the performance of the two algorithms is very similar, with similar convergence rates; but as the size increases, both the average performance, and convergence rate, of \AlgName{} over co-kriging improves significantly --- with the most marked improvement being for problem $f17$. 
 
+% \begin{figure*}[t]
+%   \centering
+%   \subfloat[$f11\ (D=3)$\label{fig:f11-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f11_MF_conv_mean.eps}}
+%   \subfloat[$f13\ (D=4)$\label{fig:f13-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f13_MF_conv_mean.eps}}
+%   \subfloat[$f14\ (D=5)$\label{fig:f14-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f14_MF_conv_mean.eps}}\\
+%   \subfloat[$f15\ (D=6)$\label{fig:f15-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f15_MF_conv_mean.eps}}
+%   \subfloat[$f16\ (D=8)$\label{fig:f16-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f16_MF_conv_mean.eps}}
+%   \subfloat[$f17\ (D=8)$\label{fig:f17-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f17_MF_conv_mean.eps}}
+%   \caption{Mean convergence plots for problem instances $f11$, $f13$, $f14$, $f15$, $f16$ and $f17$ of dataset $A$, over 30 runs. \angus{will do pgfplots version}} 
+%     \label{fig:set-a-conv}
+% \end{figure*}
 \begin{figure*}[t]
   \centering
-  \subfloat[$f11\ (D=3)$\label{fig:f11-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f11_MF_conv_mean.eps}}
-  \subfloat[$f13\ (D=4)$\label{fig:f13-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f13_MF_conv_mean.eps}}
-  \subfloat[$f14\ (D=5)$\label{fig:f14-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f14_MF_conv_mean.eps}}\\
-  \subfloat[$f15\ (D=6)$\label{fig:f15-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f15_MF_conv_mean.eps}}
-  \subfloat[$f16\ (D=8)$\label{fig:f16-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f16_MF_conv_mean.eps}}
-  \subfloat[$f17\ (D=8)$\label{fig:f17-conv}]{\includegraphics[width = 0.33\textwidth]{img/LV_f17_MF_conv_mean.eps}}
-  \caption{Mean convergence plots for problem instances $f11$, $f13$, $f14$, $f15$, $f16$ and $f17$ of dataset $A$, over 30 runs. \angus{will do pgfplots version}} 
+  \subfloat{\includegraphics{plots/obj_label.tikz}}%
+  \addtocounter{subfigure}{-1}%
+  \subfloat[$f11\ (D=3)$\label{fig:f11-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f11_plot.tikz}}
+  \subfloat[$f13\ (D=4)$\label{fig:f13-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f13_plot.tikz}}
+  \subfloat[$f14\ (D=5)$\label{fig:f14-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f14_plot.tikz}}\\
+  \subfloat{\includegraphics{plots/obj_label.tikz}}%
+  \addtocounter{subfigure}{-1}%
+  \subfloat[$f15\ (D=6)$\label{fig:f15-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f15_plot.tikz}}
+  \subfloat[$f16\ (D=8)$\label{fig:f16-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f16_plot.tikz}}
+  \subfloat[$f17\ (D=8)$\label{fig:f17-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f17_plot.tikz}}
+  \caption{Mean convergence plots for problem instances $f11$, $f13$, $f14$, $f15$, $f16$ and $f17$ of dataset $A$, over 30 runs.} 
     \label{fig:set-a-conv}
 \end{figure*}
 
@@ -77,15 +92,30 @@ $Michalewicz_{6}$ & 3 & 0.76 &  -2.7194 & -2.2412 &  0.2978        &   -2.4657 &
 
 Again, the table shows that \AlgName{} outperforms \motos{} in all instances and the co-kriging baseline algorithm, with a few exceptions. For the Michaelwicz problem using error function $e_6$ and with the problem instantiated with five decision variables, the co-kriging base-line algorithm managed to find the best over-all solution. However \AlgName{} still performed better on average. The only time when the co-kriging base-line outperformed \AlgName{} on average was on the two smallest instantiations of the Griewank problem. The convergence plots in Figures~\ref{fig:gw23-conv} and~\ref{fig:gw63-conv} show that the difference between the performance of both algorithms for these instances is reasonably negligible. The remaining plots in Figure~\ref{fig:set-b-conv} agree with the results presented above for test suite $A$.
 
+% \begin{figure*}[h!]
+%   \centering
+%   \subfloat[$Griewank_2\ (D=3)$\label{fig:gw23-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d3_e2_conv_mean.eps}}
+%   \subfloat[$Griewank_2\ (D=5)$\label{fig:gw25-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d5_e2_conv_mean.eps}}
+%   \subfloat[$Griewank_2\ (D=8)$\label{fig:gw28-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d8_e2_conv_mean.eps}}\\
+%   \subfloat[$Griewank_6\ (D=3)$\label{fig:gw63-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d3_e6_conv_mean.eps}}
+%   \subfloat[$Griewank_6\ (D=5)$\label{fig:gw65-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d5_e6_conv_mean.eps}}
+%   \subfloat[$Griewank_6\ (D=8)$\label{fig:gw68-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d8_e6_conv_mean.eps}}
+%   \caption{Mean convergence plots for $Griewank$ problem instance of dataset $B$, over 30 runs. \angus{will do pgfplots version}} 
+%     \label{fig:set-b-conv}
+% \end{figure*}
 \begin{figure*}[h!]
   \centering
-  \subfloat[$Griewank_2\ (D=3)$\label{fig:gw23-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d3_e2_conv_mean.eps}}
-  \subfloat[$Griewank_2\ (D=5)$\label{fig:gw25-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d5_e2_conv_mean.eps}}
-  \subfloat[$Griewank_2\ (D=8)$\label{fig:gw28-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d8_e2_conv_mean.eps}}\\
-  \subfloat[$Griewank_6\ (D=3)$\label{fig:gw63-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d3_e6_conv_mean.eps}}
-  \subfloat[$Griewank_6\ (D=5)$\label{fig:gw65-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d5_e6_conv_mean.eps}}
-  \subfloat[$Griewank_6\ (D=8)$\label{fig:gw68-conv}]{\includegraphics[width = 0.33\textwidth]{img/GW_d8_e6_conv_mean.eps}}
-  \caption{Mean convergence plots for $Griewank$ problem instance of dataset $B$, over 30 runs. \angus{will do pgfplots version}} 
+  \subfloat{\includegraphics{plots/obj_label.tikz}}%
+  \addtocounter{subfigure}{-1}%
+  \subfloat[$Griewank_2\ (D=3)$\label{fig:gw23-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d3_e2_plot.tikz}}
+  \subfloat[$Griewank_2\ (D=5)$\label{fig:gw25-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d5_e2_plot.tikz}}
+  \subfloat[$Griewank_2\ (D=8)$\label{fig:gw28-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d8_e2_plot.tikz}}\\
+  \subfloat{\includegraphics{plots/obj_label.tikz}}%
+  \addtocounter{subfigure}{-1}%
+  \subfloat[$Griewank_6\ (D=3)$\label{fig:gw63-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d3_e6_plot.tikz}}
+  \subfloat[$Griewank_6\ (D=5)$\label{fig:gw65-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d5_e6_plot.tikz}}
+  \subfloat[$Griewank_6\ (D=8)$\label{fig:gw68-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d8_e6_plot.tikz}}
+  \caption{Mean convergence plots for $Griewank$ problem instance of dataset $B$, over 30 runs.} 
     \label{fig:set-b-conv}
 \end{figure*}
 

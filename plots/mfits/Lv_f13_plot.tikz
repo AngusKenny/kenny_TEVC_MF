@@ -1,0 +1,8 @@
+\begin{tikzpicture}
+\pgfplotsset{every tick label/.append style={font=\footnotesize}}
+\begin{axis}[xmax=2000,xmin=192,ymax=3500,ymin=0,xlabel=Unit cost consumed,scaled y ticks=base 10:-3,ytick={0,1500,3000}]
+\addplot [color=Red,solid,mark=none] table [col sep=comma] {plots/mfits/LV_f13_MF_cokrig.dat};
+\addplot [color=blue,mark=none] table [col sep=comma] {plots/mfits/LV_f13_MF_mfits.dat};
+% Plot code
+\end{axis}
+\end{tikzpicture}

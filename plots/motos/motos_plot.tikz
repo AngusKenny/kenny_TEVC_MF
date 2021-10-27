@@ -1,0 +1,11 @@
+\begin{tikzpicture}
+\begin{axis}[xmax=100,xmin=0,ymax=0,ymin=-1.6,xlabel=$x$,ylabel=Objective value]
+\addplot [color=Green,solid,mark=none] table [col sep=comma] {plots/motos/motos_lf_func.dat};
+\addplot [color=blue,mark=none] table [col sep=comma] {plots/motos/motos_hf_func.dat};
+\addplot [only marks,mark options={scale=0.6},color=Green] table [col sep=comma] {plots/motos/motos_lf_samples.dat};
+\addplot [only marks,mark options={scale=0.6},color=blue] table [col sep=comma] {plots/motos/motos_hf_samples.dat};
+\addplot [only marks,color=cyan,mark options={scale=1.1}] table [col sep=comma] {plots/motos/motos_hf_best.dat};
+\addplot [only marks,color=Red,mark options={scale=1.5},mark=diamond*] table [col sep=comma] {plots/motos/motos_opt.dat};
+% Plot code
+\end{axis}
+\end{tikzpicture}

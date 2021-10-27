@@ -19,8 +19,8 @@ The multi-fidelity optimization algorithm proposed in this paper relies on an it
   \STATE{$\V{\alpha},t \ot f_H(\V{x},t)$} \COMMENT{Evaluate and update total cost}
   \STATE{$A_H \ot A_H \cup \{\V{\alpha}\}$} \COMMENT{Add $\V{\alpha}$ to high-fidelity archive}
   \STATE{$\V{x}^\beta \ot \min(f_H(\V{x}^\beta),f_H(\V{x}))$} \COMMENT{Update best solution}
-  \STATE{$\epsilon \ot Sigmoid(t,T)$} \COMMENT{Determine size of neighbourhood}
-  \STATE{$A_L,t \ot LocalOCBA(\rho,M_L,A_L,\V{x}^\beta,\epsilon)$} \COMMENT{Locally search low-fidelity model}
+  \STATE{$\varepsilon \ot Sigmoid(t,T)$} \COMMENT{Determine size of neighbourhood}
+  \STATE{$A_L,t \ot LocalOCBA(\rho,M_L,A_L,\V{x}^\beta,\varepsilon)$} \COMMENT{Locally search low-fidelity model}
   \IF{$|A_L| > N_L$}
     \STATE{$A_L \ot Winnow(A_L,N_L)$} \COMMENT{Control population size}
   \ENDIF
@@ -41,68 +41,65 @@ The correlation between the low- and high-fidelity samples can vary significantl
 \begin{equation}
 \V{x}^c = \V{x}^1 + F(\V{x}^2 - \V{x}^3)\,,
 \end{equation}
-where $F$ is a constant called the mutation factor. This can also be thought of as scaled vector addition, therefore it is possible to direct the resulting child $\V{x}^c$ towards a reference point~(say $\V{x}^\beta$) by adjusting the mutation in the following way:
-\begin{equation}\label{eq:nudge}
-\V{x}^{c'} = \V{x}^c + \V{g}\cdot(\V{x}^\beta - \V{x}^c)\,,
-\end{equation}
-where $\V{g}$ is the so-called \emph{guide factor}. This is illustrated in Figure~\ref{fig:guide-DE}. \hemant{The factor $G$ should be a scalar, therefore I've removed its bold font.}\angus{see below}
+where $F$ is a constant called the mutation factor. This can also be thought of as scaled vector addition, therefore it is possible to direct the resulting child $\V{x}^c$ towards a reference point~(say $\V{x}^\beta$) by translating $\V{x}^c$ further.
+
+% adjusting the mutation in the following way:
+% \begin{equation}\label{eq:nudge}
+% \V{x}^{c'} = \V{x}^c + \V{g}\cdot(\V{x}^\beta - \V{x}^c)\,,
+% \end{equation}
+% where $\V{g}$ is the so-called \emph{guide factor}. This is illustrated in Figure~\ref{fig:guide-DE}. %\hemant{The factor $G$ should be a scalar, therefore I've removed its bold font.}\angus{see below}
 
 \begin{figure}[h!]
 \centering
 \adjustbox{max width=0.5\textwidth}{%
-\begin{tikzpicture}
-
-\node [fill, circle,inner sep=0pt,minimum size=2mm] (x1) at (0,0) {};
-\node [fill, circle,inner sep=0pt,minimum size=2mm] (x3) at (1,1) {};
-\node [fill, circle,inner sep=0pt,minimum size=2mm] (x2) at (0,4) {};
-\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc1) at (-0.75,2.25) {};
-\node [fill, circle,inner sep=0pt,minimum size=2mm,color=cyan] (xb) at (-4.75,4.25) {};
-\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc1p) at (-3.25,3.5) {};
-\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc2) at (-5.75,0.25) {};
-\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc2p) at (-5,3.25) {};
-\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc3) at (-5.75,5.25) {};
-\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc3p) at (-5,4.5) {};
-
-\node [xshift = -4mm] (x1t) at (x1) {$\V{x}^1$};
-\node [xshift = -4mm] (x2t) at (x2) {$\V{x}^2$};
-\node [xshift = -4mm] (x3t) at (x3) {$\V{x}^3$};
-\node [xshift = -4mm] (xc1t) at (xc1) {$\V{x}^{c_1}$};
-\node [xshift = -4mm] (xc2t) at (xc2) {$\V{x}^{c_2}$};
-\node [xshift = -4mm] (xc3t) at (xc3) {$\V{x}^{c_3}$};
-\node [xshift = -2mm,yshift = -2mm,color=cyan] (xbt) at (xb) {$x_{b_H}$};
-\node [xshift = -4mm] (xc1pt) at (xc1p) {$\V{x}^{c_1'}$};
-\node [xshift = -4mm] (xc2pt) at (xc2p) {$\V{x}^{c_2'}$};
-\node [xshift = -4mm] (xc3pt) at (xc3p) {$\V{x}^{c_3'}$};
-
-\draw [-latex,line width=2,color=Green,dashed] (x3) -- node[sloped,above,scale=0.7] {$(\V{x}^2-\V{x}^3)$} (x2);
-\draw [-latex,line width=2,color=Blue] (x1) -- node[sloped,above,scale=0.7] {$\V{x}^1+F(\V{x}^2-\V{x}^3)$} (xc1);
-\draw [-latex,line width=2,color=Red] (xc1) -- node[sloped,above,scale=0.7] {$\V{x}^{c_1}+G(\V{x}^{b_H}-\V{x}^{c_1})$} (xc1p);
-\draw [-latex,line width=2,color=Red] (xc2) -- node[sloped,above,scale=0.7] {$\V{x}^{c_2}+G(\V{x}^{b_H}-\V{x}^{c_2})$} (xc2p);
-\draw [-latex,line width=2,color=Red] (xc3) -- node[xshift=11mm,above,scale=0.7] {$\V{x}^{c_3}+G(\V{x}^{b_H}-\V{x}^{c_3})$} (xc3p);
-
-\end{tikzpicture}
+\includegraphics{tikz/guided_de2.tikz}
 }
 \caption{The DE recombination process can be ``guided'' towards the best high-fidelity solution found so far.}\label{fig:guide-DE}
 \end{figure}
 
-In this figure, it can be seen that $\V{x}^{c_1}$ is produced using $\V{x}^1$, $\V{x}^2$ and $\V{x}^3$, and then translated using Equation~\ref{eq:nudge} to produce $\V{x}^{c_1'}$. Child solutions $\V{x}^{c_2}$ and $\V{x}^{c_3}$ are produced using two other sets of solutions that are not pictured, and then translated using the same equation. If this process is continued, the result is a cloud of candidate solutions in the vicinity of $\V{x}^\beta$, the centre of the region of interest.
+Figure~\ref{fig:guide-DE} illustrates this process. In this figure, it can be seen that $\V{x}^{c_1}$ is produced using $\V{x}^1$, $\V{x}^2$ and $\V{x}^3$, and then undergoes two translations to produce $\V{x}^{c_1'}$ and finally $\V{x}^{c_1''}$, the resultant child solution. Solutions $\V{x}^{c_2}$ and $\V{x}^{c_3}$ are produced using two other sets of solutions that are not pictured, and then translated using the same processes. 
 
-The guide factor is a vector, each component of which determines how far the resulting solution is attracted to $\V{x}^\beta$ in a given direction. At the beginning of the search, $\V{x}^\beta$ is determined by optimising a very coarse model built with sparse information, and cannot be trusted to be indicative of a promising region of the search space. As the search continues, the model becomes more accurate and the information it produces more trustworthy. Therefore, the algorithm should be explorative in the beginning of the search, but exploitative towards the end. One function which exhibits these properties is the logistic sigmoid curve:
-\begin{equation}
-\epsilon = \dfrac{L}{1+e^{-k(x-x_0)}}\,,
+At the beginning of the search, $\V{x}^\beta$ is determined using a very coarse model built with sparse information, and cannot be trusted to indicate a promising region of the search space. As the search continues, the model becomes more accurate and the information it produces more trustworthy. Therefore, the algorithm should be explorative in the beginning of the search, but exploitative towards the end. 
+
+Takahama and Sakai~\cite{takahama2010efficient} proposed the $\varepsilon$-constrained adaptive differential evolution ($\varepsilon$ADE) method for efficient constraint handling when solving constrained optimization problems, and it is this method which is the inspiration for the guided DE process in Figure~\ref{fig:guide-DE}. Simply put, $\varepsilon$ADE uses an adaptive variable $\varepsilon$ to control how much constraint violation is allowed at any given time during the search. Early on in the search, $\varepsilon$ is high, allowing more constraint violation and promoting exploration; as the search continues, $\varepsilon$ tends toward zero, biasing the search towards exploiting regions it has already identified as promising.
+
+In the guided DE process illustrated in Figure~\ref{fig:guide-DE}, a similar principle is adopted. Each solution $\V{x}^{c_1}$, $\V{x}^{c_2}$ and $\V{x}^{c_3}$ is ``nudged'' toward $\V{x}^\beta$ by some factor $\varepsilon$, which is in the range $[0,1)$, starting at 0 at the beginning of the search and tending towards 1 (but never actually reaching it) towards the end. This gives the first translation equation:
+\begin{equation}\label{eq:nudge1}
+\V{x}^{c'} = \V{x}^c + \varepsilon(\V{x}^\beta - \V{x}^c)\,.
 \end{equation}
-where $x_0$ is the $x$ value of the sigmoid's midpoint, $L$ is the curve's maximum and $k$ is the steepness parameter, which controls how fast the function rises. The function $Sigmoid(t,T)$ uses the total cost and maximum cost to compute this $\epsilon$ value. Figure~\ref{fig:logistic} gives a plot of the logistic sigmoid curve with $L=0.99$, $k=10$ and $x_0 = 0.2$. 
+If this was the only translation applied, then all possible solutions produced by the guided DE process would lie on a line with endpoints at $\V{x}^{c}$ and $\V{x}^\beta$. This neglects a lot of the search space and is too greedy, especially in higher dimensional problems. To address this, a second translation is applied:
+\begin{equation}\label{eq:nudge2}
+\V{x}^{c''} = \V{x}^{c'} + \V{r} \cdot (\V{x}^\beta - \V{x}^{c'})\,,
+\end{equation}
+where, $\V{r}\in [0,1]^D$ is a random vector with $D$ components. By making $\V{r}$ a vector and not a scalar, the set of solutions that can be produced is no longer restricted to a line; instead, any solution within the $D$-dimensional hyperrectangle with with diagonal vertices at $\V{x}^\beta$ and $\V{x}^{c'}$ (indicated by the shaded rectangles in Figure~\ref{fig:guide-DE}) can be produced.
+
+In combining these two translation operations, the guided DE makes an initial ``bee-line'' for $\V{x}^\beta$ by some factor $\varepsilon$, determined by how much of the search has completed, effectively pruning a lot of the search space, before randomly searching the vicinity of $\V{x}^\beta$ of to produce the resultant child solution $\V{x}^{c''}$. Substituting Equation~\ref{eq:nudge1} into Equation~\ref{eq:nudge2} gives
+\begin{align}\label{eq:nudge3}
+\V{x}^{c''} &= \V{x}^{c} + (\varepsilon + (1-\varepsilon)\V{r}) \cdot (\V{x}^\beta - \V{x}^{c})\,,\nonumber\\
+& = \V{x}^{c} + \V{g} \cdot (\V{x}^\beta - \V{x}^{c})\,,
+\end{align}
+with $\V{g} \in [\varepsilon,1)^D$ being a random vector with $D$ components, known as the \emph{guide factor}. Equation~\ref{eq:nudge3} is illustrated by the dashed red line in Figure~\ref{fig:guide-DE}.
+
+If this process is continued for all solutions in the population, the result is a cloud of candidate solutions in the vicinity of $\V{x}^\beta$, the centre of the region of interest.
+ 
+As mentioned, the value of $\varepsilon$ should be small at the beginning of the search, and tending towards 1 and flattening by around 80\% --- consistent with the principles of $\varepsilon$ADE. One function which exhibits these properties is the logistic sigmoid curve:
+\begin{equation}\label{eq:logistic}
+\varepsilon = \dfrac{L}{1+e^{-k(x-x_0)}}\,,
+\end{equation}
+where $x_0$ is the $x$ value of the sigmoid's midpoint, $L$ is the curve's maximum and $k$ is the steepness parameter, which controls how fast the function rises. The function $Sigmoid(t,T)$ uses the total cost and maximum cost to compute this $\varepsilon$ value. Figure~\ref{fig:logistic} gives a plot of the logistic sigmoid curve with $L=0.99$, $k=10$ and $x_0 = 0.2$. 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width = 0.40\textwidth]{img/logistic.eps} 
+  % \includegraphics[width = 0.40\textwidth]{img/logistic.eps}
+  \includegraphics[width = 0.8\columnwidth]{plots/logistic_plot.tikz}  
   \caption{The logistic sigmoid curve flattens at around 80\%.} 
     \label{fig:logistic}
 \end{figure}
-Using this value, $\V{g}$ can be computed as:
-\begin{equation}
-\V{g} = \epsilon + (1-\epsilon)\V{r}\,,
-\end{equation}
-where $\V{r} \in [0,1]^D$ is a random vector with $D$ components, making $\V{g} \in [\epsilon,1]^D$ also a random vector. \hemant{Equation~13 appears misleading to me; it could just be a notation issue. Basically, the vectors in the $\V{x}$ space get mixed up with the mention of vectors $\V{g}$ and $\V{r}$. It might be easier to present $g$~(should be $G$ I think) and $r$ simply as a scalars, and say that you use the equation for generating each solution $r$ sampled from a uniform random distribution.}\angus{you're right that there was some notation mix-up between $\V{G}$ and $\V{g}$, so i fixed that. However, $\V{g}$ is not a scalar, it is a vector where each element of the vector influences how much the new solution is attracted to the best solution so far, in a given direciton. I have updated the text above to clarify that. I initially made it a scalar, but it seemed to work better allowing each direction to scale differently. I think having the only possible solutions lying on the $\V{x}^\beta - \V{x}$ line was too greedy, especially later in the search. Allowing $\V{g}$ to be a vector means the new solution can be anywhere in a quadrant region with a diagonal from $\V{x}^\beta$ to $\epsilon(\V{x}^\beta - \V{x})$.. Looking at the diagram, i realise that it does look like $\V{g}$ is a scalar, as the translations are all explicitly in the $\V{x}^\beta - \V{x}$ direction, so i will think about how to represent it better --- maybe shaded regions for the possible values might work..} This ensures the cloud of candidate solutions around $\V{x}^\beta$ is sparse at the beginning of the search, allowing for better global exploration, while focusing the search more tightly on promising regions towards the end. Crucially, the parameters needed to control the sigmoid curve are intuitive to set and do not require tuning to achieve the desired behavior.
+% Using this value, $\V{g}$ can be computed as:
+% \begin{equation}
+% \V{g} = \varepsilon + (1-\varepsilon)\V{r}\,,
+% \end{equation}
+% where $\V{r} \in [0,1]^D$ is a random vector with $D$ components, making $\V{g} \in [\varepsilon,1]^D$ also a random vector. %\hemant{Equation~13 appears misleading to me; it could just be a notation issue. Basically, the vectors in the $\V{x}$ space get mixed up with the mention of vectors $\V{g}$ and $\V{r}$. It might be easier to present $g$~(should be $G$ I think) and $r$ simply as a scalars, and say that you use the equation for generating each solution $r$ sampled from a uniform random distribution.}\angus{you're right that there was some notation mix-up between $\V{G}$ and $\V{g}$, so i fixed that. However, $\V{g}$ is not a scalar, it is a vector where each element of the vector influences how much the new solution is attracted to the best solution so far, in a given direciton. I have updated the text above to clarify that. I initially made it a scalar, but it seemed to work better allowing each direction to scale differently. I think having the only possible solutions lying on the $\V{x}^\beta - \V{x}$ line was too greedy, especially later in the search. Allowing $\V{g}$ to be a vector means the new solution can be anywhere in a quadrant region with a diagonal from $\V{x}^\beta$ to $\varepsilon(\V{x}^\beta - \V{x})$.. Looking at the diagram, i realise that it does look like $\V{g}$ is a scalar, as the translations are all explicitly in the $\V{x}^\beta - \V{x}$ direction, so i will think about how to represent it better --- maybe shaded regions for the possible values might work..} 
+Computing $\varepsilon$ for Equation~\ref{eq:nudge3} using Equation~\ref{eq:logistic} ensures the cloud of candidate solutions around $\V{x}^\beta$ is sparse at the beginning of the search, allowing for better global exploration, while focusing the search more tightly on promising regions towards the end. Crucially, the parameters needed to control the sigmoid curve are intuitive to set and do not require tuning to achieve the desired behavior.
 
 \subsection{LocalOCBA}\label{subsec:local}
 Once the candidate solutions have been been generated in the vicinity of $\V{x}^\beta$, some of them need to be selected for evaluation at low-fidelity. As already stated, the goal of evaluating solutions in low-fidelity is not to optimize the low-fidelity objective function, but to provide as much information for the model as possible. The optimal computing budget allocation (OCBA) algorithm selects from a set of solutions with the goal of reducing uncertainty within simulation models by adaptively allocating computing resources. This principle can be applied here, with some modifications, as outlined in Algorithm~\ref{alg:local-ocba}.
@@ -113,9 +110,9 @@ Once the candidate solutions have been been generated in the vicinity of $\V{x}^
 \algsetup{linenosize=\footnotesize}
 {\footnotesize
 \begin{algorithmic}[1]
-\REQUIRE{$\rho=\{\Delta_1$, total to be sampled; $\Delta_2$, samples per statistics update$\}$; $M$, low-fidelity model; $A_L$, low-fidelity archive; $\V{x}^\beta$, best high-fidelity solution ; $\epsilon$, sigmoid value; $t$, total cost incurred.}
+\REQUIRE{$\rho=\{\Delta_1$, total to be sampled; $\Delta_2$, samples per statistics update$\}$; $M$, low-fidelity model; $A_L$, low-fidelity archive; $\V{x}^\beta$, best high-fidelity solution ; $\varepsilon$, sigmoid value; $t$, total cost incurred.}
 \ENSURE{$A_L$, updated low-fidelity archive; $t$, updated total cost.}
-\STATE{$X \ot GuidedDE(A_L,\V{x}^\beta,\epsilon)$} \COMMENT{Generate child population}
+\STATE{$X \ot GuidedDE(A_L,\V{x}^\beta,\varepsilon)$} \COMMENT{Generate child population}
 \STATE{$A_X \ot f_{M}(X)$} \COMMENT{Approximate each child by model $M$}
 \STATE{$G,q \ot Partition(A_X)$} \COMMENT{Partition solutions}
 \STATE{$S_i \ot \emptyset,\ \forall i \in [q]$} \COMMENT{Empty groups for selected solutions}
@@ -132,7 +129,7 @@ Once the candidate solutions have been been generated in the vicinity of $\V{x}^
 }
 \end{algorithm}
 
-Here, the $GuidedDE(A_L,\V{x}^\beta,\epsilon)$ process is used to generate a set of candidate solutions, which are approximated using $f_M(X)$. This function takes a set of solutions and returns a set of pairs comprising the solution and its approximation on the (surrogate) model $M$. The solutions are ranked and partitioned using a $k$-means clustering algorithm, based on their approximated value. The purpose of ranking the solutions first is to increase the probability that solutions within a clustered group will tend to have a similar performance to each other, regardless of their proximity in the decision space. This helps to ensure diversity of selected solutions, while still preferring the more promising candidates. The function $Partition(X)$ returns a set of solution groups $G$ and the number of groups $q$.
+Here, the $GuidedDE(A_L,\V{x}^\beta,\varepsilon)$ process is used to generate a set of candidate solutions, which are approximated using $f_M(X)$. This function takes a set of solutions and returns a set of pairs comprising the solution and its approximation on the (surrogate) model $M$. The solutions are ranked and partitioned using a $k$-means clustering algorithm, based on their approximated value. The purpose of ranking the solutions first is to increase the probability that solutions within a clustered group will tend to have a similar performance to each other, regardless of their proximity in the decision space. This helps to ensure diversity of selected solutions, while still preferring the more promising candidates. The function $Partition(X)$ returns a set of solution groups $G$ and the number of groups $q$.
 
 OCBA principles are used to select --- and remove --- from these groups to populate a set of empty groups $S$. First, sample statistics are computed for all groups of selected solutions in $S$. If there are fewer than two solutions in a group, then its corresponding group in $G$ is used. The function $GetRatios(\V{\hat{\mu}},\V{\hat{\sigma}})$ uses these statistics to compute allocation ratios in accordance for each group with standard OCBA practice. These ratios are used by $Allocate(R,S,G)$ to allocate $\Delta_2$ solutions to be evaluated as low-fidelity and added to the selected solutions $S$.
 
@@ -156,17 +153,33 @@ Finally, \motos{} partitions the ranked population into a fixed number of equal-
 
 \subsection{Proof of concept}
 To visualise the operation of the proposed method and demonstrate its advantages, \AlgName{} is applied to the motivating example given in Section~\ref{sec:back} with a limited computational budget (200 low-fidelity-equivalent evaluations) to highlight the shortcomings of the \motos{} algorithm (Figure~\ref{fig:ex-mfits}).
+% \begin{figure*}[t]
+%   \centering
+%   \subfloat[105 unit cost, $x^\beta = -1.4202$\label{fig:ex-mfits105}]{\includegraphics[width = 0.25\textwidth]{img/ex_mfits_01.eps}} 
+%   \subfloat[134 unit cost, $x^\beta = -1.4221$\label{fig:ex-mfits134}]{\includegraphics[width = 0.25\textwidth]{img/ex_mfits_04.eps}} 
+%   \subfloat[167 unit cost, $x^\beta = -1.4221$\label{fig:ex-mfits167}]{\includegraphics[width = 0.25\textwidth]{img/ex_mfits_06.eps}}
+%   \subfloat[200 unit cost, $x^\beta = -1.4281$\label{fig:ex-mfits200}]{\includegraphics[width = 0.25\textwidth]{img/ex_mfits_07.eps}}
+%   \caption{Snapshot of \AlgName{} applied to Equations~\ref{eq:hf-ex} and~\ref{eq:lf-ex}, with corresponding budget consumed and best solution, $x^\beta$.} 
+%     \label{fig:ex-mfits}
+% \end{figure*}
 \begin{figure*}[t]
   \centering
-  \subfloat[105 unit cost, $x^\beta = -1.4202$\label{fig:ex-mfits105}]{\includegraphics[width = 0.25\textwidth]{img/ex_mfits_01.eps}} 
-  \subfloat[134 unit cost, $x^\beta = -1.4221$\label{fig:ex-mfits134}]{\includegraphics[width = 0.25\textwidth]{img/ex_mfits_04.eps}} 
-  \subfloat[167 unit cost, $x^\beta = -1.4221$\label{fig:ex-mfits167}]{\includegraphics[width = 0.25\textwidth]{img/ex_mfits_06.eps}}
-  \subfloat[200 unit cost, $x^\beta = -1.4281$\label{fig:ex-mfits200}]{\includegraphics[width = 0.25\textwidth]{img/ex_mfits_07.eps}}
+  \subfloat{\includegraphics{plots/obj_label.tikz}}%
+  \addtocounter{subfigure}{-1}%
+  \subfloat[105 unit cost, $x^\beta = -1.4202$\label{fig:ex-mfits105}]{\includegraphics[width = 0.32\textwidth]{plots/motos/mfits_plot_1.tikz}} 
+  \subfloat[119 unit cost, $x^\beta = -1.4221$\label{fig:ex-mfits119}]{\includegraphics[width = 0.32\textwidth]{plots/motos/mfits_plot_2.tikz}} 
+  \subfloat[134 unit cost, $x^\beta = -1.4221$\label{fig:ex-mfits134}]{\includegraphics[width = 0.32\textwidth]{plots/motos/mfits_plot_3.tikz}}\\
+  \subfloat{\includegraphics{plots/obj_label.tikz}}%
+  \addtocounter{subfigure}{-1}%
+  \subfloat[148 unit cost, $x^\beta = -1.4221$\label{fig:ex-mfits148}]{\includegraphics[width = 0.32\textwidth]{plots/motos/mfits_plot_4.tikz}}
+  \subfloat[167 unit cost, $x^\beta = -1.4221$\label{fig:ex-mfits167}]{\includegraphics[width = 0.32\textwidth]{plots/motos/mfits_plot_5.tikz}}
+  \subfloat[200 unit cost, $x^\beta = -1.4281$\label{fig:ex-mfits200}]{\includegraphics[width = 0.32\textwidth]{plots/motos/mfits_plot_6.tikz}}
   \caption{Snapshot of \AlgName{} applied to Equations~\ref{eq:hf-ex} and~\ref{eq:lf-ex}, with corresponding budget consumed and best solution, $x^\beta$.} 
     \label{fig:ex-mfits}
 \end{figure*}
-\ray{same comment as earlier for these plots too}In this figure, the green and blue lines are the low- and high-fidelity response surfaces, respectively; the red line is the co-kriging approximation of the high-fidelity function, green and blue points represent the low- and high-fidelity archives, respectively; the cyan point is the next solution chosen for high-fidelity evaluation; and the red point is the optimal solution, $\V{x}^*$. Each sub-figure gives a snapshot of the operation of \AlgName{} on this example, for a given unit cost.
 
-Initially (Figure~\ref{fig:ex-mfits105}), the co-kriging approximation is poor, as there are very few samples to inform it and the global search on this model selects a candidate for high-fidelity evaluation which is in the valley adjacent to the one which contains $\V{x}^*$. The search remains in this valley, until the co-kriging model has gathered enough information about the landscape to escape the local optima (Figure~\ref{fig:ex-mfits134}), where the global search selects a solution that is closer to optimal. In evaluating this new solution, the model is updated again such that it selects a candidate in the valley to the left of the optimal solution (Figure~\ref{fig:ex-mfits167}), which has a worse objective than the current best when evaluated. Finally, there is one more update (Figure~\ref{fig:ex-mfits200}) which results in the final high-fidelity evaluation of -1.4281, which is near optimal. Xu et al. report the ``optimum'' as -1.4277, a result of their descretization of the search space, meaning \motos{} was not able to find the optimum due to precision issues.
+In this figure, the green and blue lines are the low- and high-fidelity response surfaces, respectively; the red line is the co-kriging approximation of the high-fidelity function, green and blue points represent the low- and high-fidelity archives, respectively; the larger cyan point is the next solution chosen for high-fidelity evaluation; and the red diamond is the optimal solution, $\V{x}^*$. Each sub-figure gives a snapshot of the operation of \AlgName{} on this example, for a given unit cost.
+
+Initially (Figure~\ref{fig:ex-mfits105}), the co-kriging approximation is poor, as there are very few samples to inform it and the global search on this model selects a candidate for high-fidelity evaluation which is in the valley adjacent to the one which contains $\V{x}^*$. The search remains in this valley, until the co-kriging model has gathered enough information about the landscape to escape the local optima (Figure~\ref{fig:ex-mfits134}), where the global search selects a solution that is closer to optimal. The search concentrates in this area until the model is updated again such that it selects a candidate in the valley to the left of the optimal solution (Figure~\ref{fig:ex-mfits167}), which has a worse objective than the current best when evaluated. Finally, there is one more update (Figure~\ref{fig:ex-mfits200}) which results in the final high-fidelity evaluation of -1.4281, which is near optimal. Xu et al. report the ``optimum'' as -1.4277, a result of their descretization of the search space, meaning \motos{} was not able to find the optimum due to precision issues.
 
 Something also to note about Figure~\ref{fig:ex-mfits200} is the concentration of the low-fidelity samples on the left, an evidence that the guided DE process is using the computational budget efficiently, focusing only in the areas of the search it has identified as promising. The No Free Lunch Theorem~\cite{wolpert1997no} says there must be a trade-off for this concentration --- and lack --- of attention in certain regions, meaning that the co-kriging approximation is much poorer on the right-hand side of the plot than the left. However, this does not affect the search negatively as the quality of solutions in this region is poor as well.

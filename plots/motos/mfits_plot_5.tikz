@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+\pgfplotsset{every tick label/.append style={font=\footnotesize}}
+% \begin{axis}[xmax=100,xmin=0,ymax=0,ymin=-2]
+% \begin{axis}[xmax=100,xmin=0,ymax=0,ymin=-2,xlabel=$x$,ylabel=Objective value]
+\begin{axis}[xmax=100,xmin=0,ymax=0,ymin=-2,xlabel=$x$]
+\addplot [color=Green,solid,mark=none] table [col sep=comma] {plots/motos/motos_lf_func.dat};
+\addplot [color=blue,mark=none] table [col sep=comma] {plots/motos/motos_hf_func.dat};
+\addplot [color=red,mark=none,semithick] table [col sep=comma] {plots/motos/mfits_approx_6.dat};%1,4,6,7
+\addplot [only marks,mark options={scale=0.6},color=Green] table [col sep=comma] {plots/motos/mfits_lf_samples_6.dat};
+\addplot [only marks,mark options={scale=0.6},color=blue] table [col sep=comma] {plots/motos/mfits_hf_samples_6.dat};
+\addplot [only marks,color=Red,mark options={scale=1.5},mark=diamond*] table [col sep=comma] {plots/motos/motos_opt.dat};
+\addplot [only marks,color=cyan,mark options={scale=1.1}] table [col sep=comma] {plots/motos/mfits_hf_next_6.dat};
+% Plot code
+\end{axis}
+\end{tikzpicture}

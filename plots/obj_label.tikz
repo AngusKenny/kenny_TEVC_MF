@@ -1,0 +1,4 @@
+\begin{tikzpicture}
+\node[rotate=90]{Objective value};
+\node at (0,-3) {};
+\end{tikzpicture}

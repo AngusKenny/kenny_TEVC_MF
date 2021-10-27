@@ -114,10 +114,16 @@ f_H(\V{x}) &= -\frac{\sin^6(0.09\pi x)}{2^{2((x-10)/80)^2}}-0.1\cos(0.5\pi x)\no
 f_L(\V{x}) &= -\frac{\sin^6(0.09\pi x)}{2^{2((x-10)/80)^2}}\,. \label{eq:lf-ex}
 \end{align}
 
+% \begin{figure}[h!]
+%   \centering
+%   \includegraphics[width = 0.40\textwidth]{img/ex_motos.eps} 
+%   \caption{None of the initial low-fidelity samples is $\V{x}^*$, therefore the optimal solution cannot be obtained by \motos{}.} 
+%     \label{fig:motos-example}
+% \end{figure}
 \begin{figure}[h!]
   \centering
-  \includegraphics[width = 0.40\textwidth]{img/ex_motos.eps} 
+  \includegraphics{plots/motos/motos_plot.tikz} 
   \caption{None of the initial low-fidelity samples is $\V{x}^*$, therefore the optimal solution cannot be obtained by \motos{}.} 
     \label{fig:motos-example}
 \end{figure}
-\ray{please increase axis label and legend label sizes. The top title is illegible, not too sure if you need it}In this figure, the green and the blue lines are the low- and high-fidelity response surfaces, respectively; green points are the initial low-fidelity samples; blue points are the low-fidelity samples chosen for high-fidelity evaluation; the cyan point is the best solution found; and the red point is the optimal solution, $\V{x}^*$\hemant{To the extent possible, make these points easily distinguishable. E.g. a different symbol in addition to color}\angus{will do}. It can be seen from this example that regardless of how many the initial low-fidelity samples are evaluated in high-fidelity, there is no way for \motos{} to identify the optimal solution $\V{x}^*$. The implication of this example is that \motos{} is an effective technique for choosing between a finite set of candidate solutions, but it is not as well suited to searching continuous design spaces. This shortcoming can be potentially overcome by increasing the density of the initial candidates. However, this is not trivial in terms of computational cost, and maintaining a constant density of coverage. As the number of decision variables increases exponentially, more initial samples will be required to maintain a given density; which will quickly become untenable.
+In this figure, the green and the blue lines are the low- and high-fidelity response surfaces, respectively; green points are the initial low-fidelity samples; blue points are the low-fidelity samples chosen for high-fidelity evaluation; the larger cyan point is the best solution found; and the red diamond is the optimal solution, $\V{x}^*$. It can be seen from this example that regardless of how many the initial low-fidelity samples are evaluated in high-fidelity, there is no way for \motos{} to identify the optimal solution $\V{x}^*$. The implication of this example is that \motos{} is an effective technique for choosing between a finite set of candidate solutions, but it is not as well suited to searching continuous design spaces. This shortcoming can be potentially overcome by increasing the density of the initial candidates. However, this is not trivial in terms of computational cost, and maintaining a constant density of coverage. As the number of decision variables increases exponentially, more initial samples will be required to maintain a given density; which will quickly become untenable.

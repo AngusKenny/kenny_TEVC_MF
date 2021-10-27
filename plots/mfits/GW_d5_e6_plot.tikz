@@ -1,0 +1,8 @@
+\begin{tikzpicture}
+\pgfplotsset{every tick label/.append style={font=\footnotesize}}
+\begin{axis}[xmax=2000,xmin=240,ymax=0.7,ymin=0,xlabel=Unit cost consumed]
+\addplot [color=Red,solid,mark=none] table [col sep=comma] {plots/mfits/Griewank_d5_e6_cokrig.dat};
+\addplot [color=blue,mark=none] table [col sep=comma] {plots/mfits/Griewank_d5_e6_mfits.dat};
+% Plot code
+\end{axis}
+\end{tikzpicture}

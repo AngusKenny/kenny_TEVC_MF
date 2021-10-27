@@ -1,0 +1,31 @@
+\begin{tikzpicture}
+
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (x1) at (0,0) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (x3) at (1,1) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (x2) at (0,4) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc1) at (-0.75,2.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm,color=cyan] (xb) at (-4.75,4.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc1p) at (-3.25,3.5) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc2) at (-5.75,0.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc2p) at (-5,3.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc3) at (-5.75,5.25) {};
+\node [fill, circle,inner sep=0pt,minimum size=2mm] (xc3p) at (-5,4.5) {};
+
+\node [xshift = -4mm] (x1t) at (x1) {$\V{x}^1$};
+\node [xshift = -4mm] (x2t) at (x2) {$\V{x}^2$};
+\node [xshift = -4mm] (x3t) at (x3) {$\V{x}^3$};
+\node [xshift = -4mm] (xc1t) at (xc1) {$\V{x}^{c_1}$};
+\node [xshift = -4mm] (xc2t) at (xc2) {$\V{x}^{c_2}$};
+\node [xshift = -4mm] (xc3t) at (xc3) {$\V{x}^{c_3}$};
+\node [xshift = -2mm,yshift = -2mm,color=cyan] (xbt) at (xb) {$x_{b_H}$};
+\node [xshift = -4mm] (xc1pt) at (xc1p) {$\V{x}^{c_1'}$};
+\node [xshift = -4mm] (xc2pt) at (xc2p) {$\V{x}^{c_2'}$};
+\node [xshift = -4mm] (xc3pt) at (xc3p) {$\V{x}^{c_3'}$};
+
+\draw [-latex,line width=2,color=Green,dashed] (x3) -- node[sloped,above,scale=0.7] {$(\V{x}^2-\V{x}^3)$} (x2);
+\draw [-latex,line width=2,color=Blue] (x1) -- node[sloped,above,scale=0.7] {$\V{x}^1+F(\V{x}^2-\V{x}^3)$} (xc1);
+\draw [-latex,line width=2,color=Red] (xc1) -- node[sloped,above,scale=0.7] {$\V{x}^{c_1}+G(\V{x}^{b_H}-\V{x}^{c_1})$} (xc1p);
+\draw [-latex,line width=2,color=Red] (xc2) -- node[sloped,above,scale=0.7] {$\V{x}^{c_2}+G(\V{x}^{b_H}-\V{x}^{c_2})$} (xc2p);
+\draw [-latex,line width=2,color=Red] (xc3) -- node[xshift=11mm,above,scale=0.7] {$\V{x}^{c_3}+G(\V{x}^{b_H}-\V{x}^{c_3})$} (xc3p);
+
+\end{tikzpicture}
