@@ -5,41 +5,28 @@ The \AlgName{} algorithm was compared against a baseline co-kriging algorithm an
 
 To establish statistical significance of the results, a pairwise comparison was made using the Mann-Whitney-Wilcoxon (MWW) test~\cite{mann1947test}, with the number of ``wins'', ``losses'' and ``draws'' recorded for each algorithm. For each pairwise comparison, let $\delta^p_{ab} = \mu^p_a - \mu^p_b$, with $\mu^p_i$ being the mean objective value for algorithm $i$ on problem instance $p$ over all trials. If the $p$-value for MWW is less than 0.05 and $|\delta^p_{ab}| > 10^{-5}$, algorithm $a$ is said to have ``won'' when $\delta^p_{ab} < 0$, ``lost'' when $\delta^p_{ab} > 0$ and ``drawn'' if both initial conditions are not met.
 
-\subsection{Datasets}
-The experiments were run on a collection of bound-constrained, single-objective, multi-fidelity test functions that can be divided into two different datasets. The first set (dataset $A$) is a selection of problem instances taken from Lv~et~al.~\cite{lv2021multi}. Problems $f10$ to $f17$ were chosen from this dataset as they contain between three and eight decision variables, determined as a representative range of easy to difficult problems. The explicit definitions for both the high- and low-fidelity functions are provided in the Appendix.
+\subsection{Test problems}
+The experiments were run on a collection of bound-constrained, single-objective, multi-fidelity test functions that can be divided into two different test suites. The first suite (suite $A$) is a selection of problem instances taken from Lv~et~al.~\cite{lv2021multi}. Problems $f10$ to $f17$ were chosen from this suite as they contain between three and eight decision variables, determined as a representative range of easy to difficult problems. The explicit definitions for both the high- and low-fidelity functions are provided in the Appendix.
 
-The second set of problem instances (dataset $B$) is generated using the well-known Griewank~\cite{griewank1981generalized} and Michalewicz~\cite{michalewicz2013genetic} test problems. Each problem was instantiated with versions for three, five and eight decision variables. This matches the range of the first dataset, and also allows the performance of the algorithms to be judged across different sized problems in a more controlled environment. These test problems are not naturally multi-fidelity optimisation problems, so low-fidelity evaluations are constructed by applying the methods described in~\cite{wang2017generic}. Two different error functions were tested for each instance, modelling two types of fidelity error: resolution and stochastic. An appropriate fidelity level $\phi$ for each problem was chosen by computing the square of the Pearson correlation coefficient $r^2$ for different fidelity values and selecting a value for $\phi$ such that $r^2$ was between 0.65 and 0.85, to be commensurate with the first dataset.
+The second set of problem instances (suite $B$) is generated using the well-known test functions of Griewank~\cite{griewank1981generalized} and Michalewicz~\cite{michalewicz2013genetic}. Each problem was instantiated with versions for three, five and eight decision variables. This matches the range of the first test suite, and also allows the performance of the algorithms to be judged across different sized problems in a more controlled environment. Since these test problems are not naturally multi-fidelity optimisation problems, low-fidelity funtions are constructed by applying the methods described in~\cite{wang2017generic}. Two different error functions were tested for each instance, modelling two types of fidelity error: resolution and stochastic. An appropriate fidelity level $\phi$ for each problem was chosen by computing the square of the Pearson correlation coefficient $r^2$ for different fidelity values and selecting a value for $\phi$ such that $r^2$ was between 0.65 and 0.85, to be commensurate with the first test suite.
 
-See Tables~\ref{tab:funcs} and~\ref{tab:errfuncs} in Appendix~\ref{app:testfuncs} for test function and error function equations, respectively.
-
-% \begin{figure}[h!]
-%   \centering
-%   \includegraphics[width = 0.40\textwidth]{img/griewank.png} 
-%   \caption{The Griewank test function in 2D.\angus{will do a better version}} 
-%     \label{fig:grie}
-% \end{figure}
-% \begin{figure}[h!]
-%   \centering
-%   \includegraphics[width = 0.40\textwidth]{img/michal.png} 
-%   \caption{The Michalewicz test function in 2D.\angus{will do a better version}} 
-%     \label{fig:michal}
-% \end{figure}
+See Tables~\ref{tab:funcs} and~\ref{tab:errfuncs} in Appendix~\ref{app:testfuncs} for test functions and error function equations, respectively.
 
 \subsection{\AlgName{} parameters}
-The \AlgName{} algorithm can be viewed as a modular framework within which various search and modeling methods can be implemented. Therefore, its components can be divided into two categories: \AlgName{} specific components, which are intrinsic to its operation and whose parameters are also intrinsic; and, generic method components, such as global search techniques and modelling methods which can be substituted for other similar techniques, which come with their own parameters. The \AlgName{} specific parameters are discussed in general in Section~\ref{sec:method}; this section will detail the specific values for these  parameters and for the generic search method used.
+The \AlgName{} algorithm conforms to a modular framework where various search and modeling methods can be implemented. Its components can be divided into two categories: \AlgName{} specific components, which are intrinsic to its operation and whose parameters are also intrinsic; and, generic components, such as global search techniques and modelling methods which can be substituted by other similar techniques, which come with their own set of parameters. The \AlgName{} specific parameters are discussed in general in Section~\ref{sec:method}.
 
-To reduce the number of arbitrary parameters, initial population sizes are defined as a function of problem size. The high-fidelity population has a size of $6D$, as this is the smallest number of high-fidelity solutions that can be used to generate a co-kriging model for all of the instances, with the low-fidelity population being $18D$, which was chosen using sensitivity analysis to find the smallest value which still produces good solutions across the whole set of instances.
+To reduce the number of arbitrary parameters, initial population sizes are defined as a function of the problem size. The high-fidelity population has a size of $6D$, as this is the smallest number of high-fidelity solutions that can be used to generate a co-kriging model for all the instances, with the low-fidelity population being $18D$, which was chosen using sensitivity analysis to find the smallest value which still produces good solutions across the set of instances.
 
-The maximum size that the low-fidelity archive can reach before it must be truncated is 400, this was chosen because values much higher than this significantly slow the procedure down while yielding minimal-to-no improvment. 
+The maximum size that the low-fidelity archive can reach before it must be truncated is set to 400. This was chosen because values much higher than this significantly slowed the procedure down while yielding minimal-to-no improvement. 
 
-In the $LocalOCBA$ procedure, the total number of solutions to be sampled, $\Delta_1$, is 25 and the number of samples per statistics update, $\Delta_2$, is 5. These were chosen to provide a good balance between speed and efficiency. The clustering method used to partition the solutions is $k$-means clustering, with the value for $k$ being chosen using the so-called \emph{elbow method}~\cite{leonard1990finding}.
+In the $LocalOCBA$ procedure, the total number of solutions to be sampled, $\Delta_1$, is set to 25 and the number of samples per statistics update, $\Delta_2$, is set to 5. These were chosen to provide a good balance between speed and efficiency. The clustering method used to partition the solutions is $k$-means clustering, with the value for $k$ being chosen using the so-called \emph{elbow method}~\cite{leonard1990finding}.
 
 Differential evolution (DE)~\cite{storn1997differential} was used to globally search the updated co-kriging model. The ``classical'' DE (DE/rand/1/bin) was run over 30 generations with a crossover rate of 0.9, a mutation factor of 0.5 and a population size of 100.
 
-The kriging models used are from the ooDACE toolbox~\cite{oodace}, with the default paramters.
+The kriging models used are from the ooDACE toolbox~\cite{oodace}, with the default parameters.
 
 \subsection{Baseline co-kriging algorithm}
-Co-kriging is a popular approach to solving many multi-fidelity problems. The outer-loop of the \AlgName{} algorithm functions by iteratively updating a co-kriging model using data from a modified version of the OCBA procedure. In order to demonstrate the effectiveness of this new technique, the performance of \AlgName{} is compared against the baseline simple co-kriging algorithm given in Algorithm~\ref{alg:co-kriging}.
+Co-kriging is a popular approach used in solving multi-fidelity optimization problems. The outer-loop of the \AlgName{} algorithm functions by iteratively updating a co-kriging model using data from a modified version of the OCBA procedure. In order to demonstrate the effectiveness of this new technique, the performance of \AlgName{} is compared against the baseline simple co-kriging algorithm given in Algorithm~\ref{alg:co-kriging}.
 
 
 \begin{algorithm}[h!] 
@@ -67,11 +54,11 @@ Co-kriging is a popular approach to solving many multi-fidelity problems. The ou
 }
 \end{algorithm}
 
-The functions here have the same definitions as in Algorithm~\ref{alg:main-alg}. This procedure iteratively updates a co-kriging model by randomly sampling the low-fidelity data using a latin hypercube sampling (LHS) technique; however, the global search method remains the same.
+The functions here have the same definitions as in Algorithm~\ref{alg:main-alg}. This procedure iteratively updates a co-kriging model by randomly sampling the low-fidelity data using a latin hypercube sampling (LHS) technique; however, the global search method is the same.
 
 \subsection{\motos{} algorithm}
 
-The second method used for comparison with \AlgName{} is the \motos{} algorithm described in Section~\ref{sec:back}. The source code for this algorithm could not be retrieved online, so an implementation in MATLAB based on the description in~\cite{xu2016mo2tos} was made, the pseudocode for which is given in Algorithm~\ref{alg:mo2tos}.
+The second method used for comparison with \AlgName{} is the \motos{} algorithm described in Section~\ref{sec:back}. The source code for this algorithm could not be retrieved online, so an implementation in MATLAB based on the description in~\cite{xu2016mo2tos} was made, the pseudocode for which is presented in Algorithm~\ref{alg:mo2tos}.
 
 \begin{algorithm}[h!] 
 \caption{\motos{} procedure}
@@ -100,6 +87,6 @@ The second method used for comparison with \AlgName{} is the \motos{} algorithm 
 }
 \end{algorithm}
 
-Here, most of the subroutines are the same as those previously discussed in Sections~\ref{sec:back} and~\ref{sec:method}. The total computing budget, $N_{e_{max}}$, must be divided between the initial low-fidelity evaluations and the subsequent high-fidelity ones, with the proportion of the total computing budget allocated to the high-fidelity evaluations given by the parameter $\rho$. In~\cite{xu2016mo2tos}, no guidelines were provided for setting this parameter; however sensitivity analysis experiments showed that a value of around 0.25 for $\rho$ provided the best results for the given problem instances and computing budget. 
+Here, most of the subroutines are the same as those previously discussed in Sections~\ref{sec:back} and~\ref{sec:method}. The total computing budget, $N_{e_{max}}$, must be divided between the initial low-fidelity evaluations and the subsequent high-fidelity ones, with the proportion of the total computing budget allocated to the high-fidelity evaluations given by the parameter $\rho$. In~\cite{xu2016mo2tos}, no guidelines were provided for setting this parameter; however sensitivity analysis experiments showed that a value of around 0.25 for $\rho$ provided the best results for the given problem instances and the computing budget. 
 
 The function $LHS(P,N,\rho)$ takes the problem instance, total budget and $\rho$ as input and returns an initial population of solutions sampled using LHS with size $\frac{N}{1+\rho}$. This population is evaluated in low-fidelity and partitioned using $Partition(A,k)$. It takes an archive of solutions and a specified number of groups $k$ as inputs, ranks the solutions by objective value and returns $k$ equal-size groups based on their ranks. In \cite{xu2016mo2tos}, $k=10$ was used for the experiments. The remainder of the procedure is similar to Algorithm~\ref{alg:local-ocba}, with $\Delta = 5$ corresponding to the value of $\Delta_2$ in that algorithm.
