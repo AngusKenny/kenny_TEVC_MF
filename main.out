@@ -1,0 +1,23 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Background and Related Work}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Problem type}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Kriging and co-kriging}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Optimal computing budget allocation}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{MO2TOS}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{A motivating example}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{MFITS Algorithm}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{Initialization, evaluation and surrogate models}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Restricted neighbourhood}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.3}{LocalOCBA}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.4}{Archive size control}{section.3}% 12
+\BOOKMARK [2][-]{subsection.3.5}{Similarities and differences to MO2TOS}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.6}{Proof of concept}{section.3}% 14
+\BOOKMARK [1][-]{section.4}{Numerical Experiments}{}% 15
+\BOOKMARK [2][-]{subsection.4.1}{Test problems}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.2}{MFITS parameters}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.3}{Baseline co-kriging algorithm}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.4}{MO2TOS algorithm}{section.4}% 19
+\BOOKMARK [1][-]{section.5}{Results and Discussion}{}% 20
+\BOOKMARK [1][-]{section.6}{Conclusion and Future Work}{}% 21
+\BOOKMARK [1][-]{section*.19}{Appendix A: Function Equations}{}% 22
+\BOOKMARK [1][-]{section*.22}{References}{}% 23
