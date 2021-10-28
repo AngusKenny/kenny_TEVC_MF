@@ -1,0 +1,7 @@
+tikzbuild/main-figure10.pdf: plots/motos/motos_lf_func.dat
+tikzbuild/main-figure10.pdf: plots/motos/motos_hf_func.dat
+tikzbuild/main-figure10.pdf: plots/motos/mfits_approx_7.dat
+tikzbuild/main-figure10.pdf: plots/motos/mfits_lf_samples_7.dat
+tikzbuild/main-figure10.pdf: plots/motos/mfits_hf_samples_7.dat
+tikzbuild/main-figure10.pdf: plots/motos/motos_opt.dat
+tikzbuild/main-figure10.pdf: plots/motos/mfits_hf_next_7.dat

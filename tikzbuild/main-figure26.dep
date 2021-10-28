@@ -1,0 +1,2 @@
+tikzbuild/main-figure26.pdf: plots/mfits/Griewank_d8_e6_cokrig.dat
+tikzbuild/main-figure26.pdf: plots/mfits/Griewank_d8_e6_mfits.dat
