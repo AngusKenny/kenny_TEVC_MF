@@ -1,2 +1,0 @@
-tikzbuild/main-figure31.pdf: plots/projections/Griewank_d8_e2_cokrig_LF_2D.dat
-tikzbuild/main-figure31.pdf: plots/projections/Griewank_d8_e2_cokrig_HF_2D.dat

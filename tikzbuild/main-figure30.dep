@@ -1,2 +1,0 @@
-tikzbuild/main-figure30.pdf: plots/projections/Griewank_d8_e2_mfits_LF_2D.dat
-tikzbuild/main-figure30.pdf: plots/projections/Griewank_d8_e2_mfits_HF_2D.dat

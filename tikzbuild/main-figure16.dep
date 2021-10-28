@@ -1,2 +1,0 @@
-tikzbuild/main-figure16.pdf: plots/mfits/LV_f15_MF_cokrig.dat
-tikzbuild/main-figure16.pdf: plots/mfits/LV_f15_MF_mfits.dat

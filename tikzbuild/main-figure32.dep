@@ -1,2 +1,0 @@
-tikzbuild/main-figure32.pdf: plots/projections/Griewank_d8_e2_motos_LF_2D.dat
-tikzbuild/main-figure32.pdf: plots/projections/Griewank_d8_e2_motos_HF_2D.dat
