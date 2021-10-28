@@ -145,12 +145,12 @@ The results from both test suites suggest a similar pattern. For problems with f
 Although both algorithms contain the co-kriging technique as their principal constituent, the base-line algorithm uses a random sampling technique which gives it a disadvantage in problems with more decision variables, as it must cover an exponentially larger space with the same computational budget. By using the $LocalOCBA$ procedure to focus the sampling on areas of the search space that have been identified as promising, \AlgName{} can use its budget more efficiently to exploit these regions, which is evidenced by the faster convergence rates for larger problem sizes. %\hemant{Can this be visualized somehow on a couple of individual instances? Explicitly demonstrating it using some snapshot(s) will strengthen the this argument. Perhaps the explored solutions relative to the optimum in a 2D projected space (look up Sammon mapping, e.g.). The concentration of solutions in different areas can give some indicative illustration of how the search went and whether they focussed on the "right" areas. The plot will likely look very different for a low- vs high-dimensional problem, explaining the performance difference.}\angus{i will have a look into this and see if i can come up with something}
 \begin{figure*}[h!]
   \centering
-  \subfloat[\AlgName{} $(D=3)$\label{fig:sam-3d-mfits}]{\includegraphics[width = 0.32\textwidth]{plots/projections/GW_d3_e2_mfits_proj.tikz}}
-  \subfloat[Co-kriging $(D=3)$\label{fig:sam-3d-cokrig}]{\includegraphics[width = 0.32\textwidth]{plots/projections/GW_d3_e2_cokrig_proj.tikz}}
-  \subfloat[\motos{} $(D=3)$\label{fig:sam-3d-motos}]{\includegraphics[width = 0.32\textwidth]{plots/projections/GW_d3_e2_motos_proj.tikz}}\\
-  \subfloat[\AlgName{} $(D=8)$\label{fig:sam-8d-mfits}]{\includegraphics[width = 0.32\textwidth]{plots/projections/GW_d8_e2_mfits_proj.tikz}}
-  \subfloat[Co-kriging $(D=8)$\label{fig:sam-8d-cokrig}]{\includegraphics[width = 0.32\textwidth]{plots/projections/GW_d8_e2_cokrig_proj.tikz}}
-  \subfloat[\motos{} $(D=8)$\label{fig:sam-8d-motos}]{\includegraphics[width = 0.32\textwidth]{plots/projections/GW_d8_e2_motos_proj.tikz}}
+  \quad \subfloat[\AlgName{} $(D=3)$\label{fig:sam-3d-mfits}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d3_e2_mfits_proj.tikz}}
+  \subfloat[Co-kriging $(D=3)$\label{fig:sam-3d-cokrig}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d3_e2_cokrig_proj.tikz}}
+  \subfloat[\motos{} $(D=3)$\label{fig:sam-3d-motos}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d3_e2_motos_proj.tikz}}\\
+  \subfloat[\AlgName{} $(D=8)$\label{fig:sam-8d-mfits}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d8_e2_mfits_proj.tikz}}
+  \subfloat[Co-kriging $(D=8)$\label{fig:sam-8d-cokrig}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d8_e2_cokrig_proj.tikz}}
+  \subfloat[\motos{} $(D=8)$\label{fig:sam-8d-motos}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d8_e2_motos_proj.tikz}}
   \caption{Sammon mapping projection of samples onto the 2D plane for the Griewank function at $D=3$ and $D=8$. Low-fidelity samples are un-filled circles and high-fidelity samples are filled. Blue indicates higher quality solution and red indicates poorer quality.} 
     \label{fig:sammon}
 \end{figure*}

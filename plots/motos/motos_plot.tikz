@@ -1,5 +1,5 @@
 \begin{tikzpicture}
-\begin{axis}[xmax=100,xmin=0,ymax=0,ymin=-1.6,xlabel=$x$,ylabel=Objective value]
+\begin{axis}[xmax=100,xmin=0,ymax=0,ymin=-1.6,xlabel=$x$,ylabel=Objective value,width=10cm,height=6cm]
 \addplot [color=Green,solid,mark=none] table [col sep=comma] {plots/motos/motos_lf_func.dat};
 \addplot [color=blue,mark=none] table [col sep=comma] {plots/motos/motos_hf_func.dat};
 \addplot [only marks,mark options={scale=0.6},color=Green] table [col sep=comma] {plots/motos/motos_lf_samples.dat};

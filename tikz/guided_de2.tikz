@@ -33,14 +33,14 @@
 \node [xshift = -3mm,yshift=-1.3mm] (xc3ppt) at (xc3pp) {$\V{x}^{c_3''}$};
 
 
-\draw [-latex,line width=1.5,color=Green,dashed] (x3) -- node[sloped,above,scale=0.6] {$(\V{x}^2-\V{x}^3)$} (x2);
-\draw [-latex,line width=1.5,color=Blue] (x1) -- node[sloped,above,scale=0.6] {$\V{x}^1+F(\V{x}^2-\V{x}^3)$} (xc1);
-\draw [-latex,line width=1.5,color=Red] (xc1) -- node[sloped,above,scale=0.6] {$\V{x}^{c_1}+\varepsilon(\V{x}^{\beta}-\V{x}^{c_1})$} (xc1p);
-\draw [-latex,line width=1.5,color=Red] (xc1p) -- node[sloped,above,scale=0.6] {$\V{x}^{c_1'}+\V{r}\cdot(\V{x}^{\beta}-\V{x}^{c_1'})$} (xc1pp);
-\draw [-latex,line width=1.5,color=Red] (xc2) -- node[xshift=9mm,below,scale=0.6] {$\V{x}^{c_2}+\varepsilon(\V{x}^{\beta}-\V{x}^{c_2})$} (xc2p);
-\draw [-latex,line width=1.5,color=Red] (xc2p) -- node[sloped,below,scale=0.6] {$\V{x}^{c_2'}+\V{r}\cdot(\V{x}^{\beta}-\V{x}^{c_2'})$} (xc2pp);
-\draw [-latex,dashed,line width=1.5,color=Red] (xc2) -- node[sloped,above,scale=0.6] {$\V{x}^{c_2}+\V{g}\cdot(\V{x}^{\beta}-\V{x}^{c_2})$} (xc2pp);
-\draw [-latex,line width=1.5,color=Red] (xc3) -- node[xshift=10mm,above,scale=0.6] {$\V{x}^{c_3}+\varepsilon(\V{x}^{\beta}-\V{x}^{c_3})$} (xc3p);
-\draw [-latex,line width=1.5,color=Red] (xc3p) -- node[xshift=10mm,above,scale=0.6] {$\V{x}^{c_3'}+\V{r}\cdot(\V{x}^{\beta}-\V{x}^{c_3'})$} (xc3pp);
+\draw [-latex,line width=1.5,color=Green,dashed] (x3) -- node[sloped,above,scale=0.8] {$(\V{x}^2-\V{x}^3)$} (x2);
+\draw [-latex,line width=1.5,color=Blue] (x1) -- node[sloped,above,scale=0.8] {$\V{x}^1+F(\V{x}^2-\V{x}^3)$} (xc1);
+\draw [-latex,line width=1.5,color=Red] (xc1) -- node[xshift=-9mm,below,scale=0.8] {$\V{x}^{c_1}+\varepsilon(\V{x}^{\beta}-\V{x}^{c_1})$} (xc1p);
+\draw [-latex,line width=1.5,color=Red] (xc1p) -- node[xshift=11mm,yshift=-1mm,above,scale=0.8] {$\V{x}^{c_1'}+\V{r}\cdot(\V{x}^{\beta}-\V{x}^{c_1'})$} (xc1pp);
+\draw [-latex,line width=1.5,color=Red] (xc2) -- node[xshift=11mm,below,scale=0.8] {$\V{x}^{c_2}+\varepsilon(\V{x}^{\beta}-\V{x}^{c_2})$} (xc2p);
+\draw [-latex,line width=1.5,color=Red] (xc2p) -- node[xshift=12mm,yshift=-6mm,below,scale=0.8] {$\V{x}^{c_2'}+\V{r}\cdot(\V{x}^{\beta}-\V{x}^{c_2'})$} (xc2pp);
+\draw [-latex,dashed,line width=1.5,color=Red] (xc2) -- node[sloped,above,scale=0.8] {$\V{x}^{c_2}+\V{g}\cdot(\V{x}^{\beta}-\V{x}^{c_2})$} (xc2pp);
+\draw [-latex,line width=1.5,color=Red] (xc3) -- node[xshift=10mm,above,scale=0.8] {$\V{x}^{c_3}+\varepsilon(\V{x}^{\beta}-\V{x}^{c_3})$} (xc3p);
+\draw [-latex,line width=1.5,color=Red] (xc3p) -- node[xshift=12mm,yshift=-0.5mm,above,scale=0.8] {$\V{x}^{c_3'}+\V{r}\cdot(\V{x}^{\beta}-\V{x}^{c_3'})$} (xc3pp);
 
 \end{tikzpicture}

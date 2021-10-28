@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.9)  29 OCT 2021 02:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.9)  29 OCT 2021 02:56
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1806,7 +1806,7 @@ LaTeX Warning: Reference `sec:back' on page 8 undefined on input line 155.
 
 LaTeX Warning: Reference `fig:ex-mfits' on page 8 undefined on input line 155.
 
-(./plots/obj_label_motos.tikz
+(./plots/obj_label.tikz
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./plots/motos/mfits_plot_1.tikz
@@ -1823,7 +1823,7 @@ Overfull \hbox (1065.85335pt too wide) in paragraph at lines 167--171
  [][][][][][][][] 
  []
 
-(./plots/obj_label_motos.tikz
+(./plots/obj_label.tikz
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./plots/motos/mfits_plot_4.tikz
@@ -2239,16 +2239,16 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 38173 strings out of 481239
- 886524 string characters out of 5920378
- 1338329 words of memory out of 5000000
- 52530 multiletter control sequences out of 15000+600000
+ 38175 strings out of 481239
+ 886578 string characters out of 5920378
+ 1337329 words of memory out of 5000000
+ 52533 multiletter control sequences out of 15000+600000
  572195 words of font info for 134 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  71i,21n,100p,1839b,975s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on tikzbuild/output-figure11.pdf (1 page, 9846 bytes).
+Output written on tikzbuild/output-figure11.pdf (1 page, 9844 bytes).
 PDF statistics:
  25 PDF objects out of 1000 (max. 8388607)
  16 compressed objects within 1 object stream
