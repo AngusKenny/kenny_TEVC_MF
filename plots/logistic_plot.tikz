@@ -1,5 +1,5 @@
 \begin{tikzpicture}
-\begin{axis}[xmax=100,xmin=0,ymax=1,ymin=0,xlabel=Percent of search,ylabel=$\epsilon$ value]
+\begin{axis}[xmax=100,xmin=0,ymax=1,ymin=0,xlabel=Percent of search,ylabel=$\epsilon$ value,width=10cm,height=5cm]
 \addplot [color=blue,mark=none] table [col sep=comma] {plots/logistic.dat};
 \addplot +[mark=none,dashed,color=black] coordinates {(80, 0) (80, 1)};
 % Plot code

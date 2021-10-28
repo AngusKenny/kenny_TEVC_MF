@@ -1,0 +1,10 @@
+\begin{tikzpicture}
+\pgfplotsset{every tick label/.append style={font=\footnotesize}}
+% \begin{axis}[xmax=100,xmin=0,ymax=0,ymin=-2]
+% \begin{axis}[xmax=100,xmin=0,ymax=0,ymin=-2,xlabel=$x$,ylabel=Objective value]
+\begin{axis}[xmax=10,xmin=-6,ymax=9,ymin=-9,colormap/jet]
+\addplot [scatter,only marks,mark options={scale=0.8},mark=o] table [x index=0, y index=1, scatter src=\thisrowno{2},col sep=comma] {plots/projections/Griewank_d3_e2_motos_LF_2D.dat};
+\addplot [scatter,scatter/use mapped color={draw=black,fill=mapped color},only marks,mark options={scale=1},mark=*] table [x index=0, y index=1, scatter src=\thisrowno{2},col sep=comma] {plots/projections/Griewank_d3_e2_motos_HF_2D.dat};
+% Plot code
+\end{axis}
+\end{tikzpicture}

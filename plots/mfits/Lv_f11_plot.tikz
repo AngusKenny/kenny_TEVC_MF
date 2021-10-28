@@ -1,6 +1,6 @@
 \begin{tikzpicture}
 \pgfplotsset{every tick label/.append style={font=\footnotesize}}
-\begin{axis}[xmax=2000,xmin=144,ymax=1.2,ymin=0,xlabel=Unit cost consumed]
+\begin{axis}[xmax=2000,xmin=144,ymax=1.2,ymin=0,xlabel=Unit cost consumed,width=5cm,height=3cm]
 \addplot [color=Red,solid,mark=none] table [col sep=comma] {plots/mfits/LV_f11_MF_cokrig.dat};
 \addplot [color=blue,mark=none] table [col sep=comma] {plots/mfits/LV_f11_MF_mfits.dat};
 % Plot code
