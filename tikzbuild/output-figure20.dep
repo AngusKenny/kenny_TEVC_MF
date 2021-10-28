@@ -1,0 +1,2 @@
+tikzbuild/output-figure20.pdf: plots/mfits/Griewank_d3_e2_cokrig.dat
+tikzbuild/output-figure20.pdf: plots/mfits/Griewank_d3_e2_mfits.dat

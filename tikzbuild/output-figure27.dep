@@ -1,0 +1,2 @@
+tikzbuild/output-figure27.pdf: plots/projections/Griewank_d3_e2_mfits_LF_2D.dat
+tikzbuild/output-figure27.pdf: plots/projections/Griewank_d3_e2_mfits_HF_2D.dat

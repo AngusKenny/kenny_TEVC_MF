@@ -1,0 +1,6 @@
+tikzbuild/output-figure0.pdf: plots/motos/motos_lf_func.dat
+tikzbuild/output-figure0.pdf: plots/motos/motos_hf_func.dat
+tikzbuild/output-figure0.pdf: plots/motos/motos_lf_samples.dat
+tikzbuild/output-figure0.pdf: plots/motos/motos_hf_samples.dat
+tikzbuild/output-figure0.pdf: plots/motos/motos_hf_best.dat
+tikzbuild/output-figure0.pdf: plots/motos/motos_opt.dat
