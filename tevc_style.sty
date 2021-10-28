@@ -36,11 +36,11 @@
 
 \usepackage[hidelinks]{hyperref}
 \usepackage{pgfplots}
-\usepgfplotslibrary{external} 
-\tikzexternalize
 \usepackage{tikz}
 \usepackage{tikzscale}
-\usetikzlibrary{chains,through,arrows,automata,positioning,shapes,tikzmark}
+\usepgfplotslibrary{external} 
+\usetikzlibrary{chains,through,arrows,automata,positioning,shapes,tikzmark,external}
+\tikzexternalize[prefix=tikzbuild/]
 % \setlength{\mathindent}{1cm}
 
 \newcommand{\set}[1]{\{ #1 \}}
