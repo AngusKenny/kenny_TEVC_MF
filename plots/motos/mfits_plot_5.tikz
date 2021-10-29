@@ -8,8 +8,8 @@
 \addplot [color=red,mark=none,semithick] table [col sep=comma] {plots/motos/mfits_approx_6.dat};%1,4,6,7
 \addplot [only marks,mark options={scale=0.6},color=Green] table [col sep=comma] {plots/motos/mfits_lf_samples_6.dat};
 \addplot [only marks,mark options={scale=0.6},color=blue] table [col sep=comma] {plots/motos/mfits_hf_samples_6.dat};
-\addplot [only marks,color=Red,mark options={scale=1.5},mark=diamond*] table [col sep=comma] {plots/motos/motos_opt.dat};
-\addplot [only marks,color=cyan,mark options={scale=1.1}] table [col sep=comma] {plots/motos/mfits_hf_next_6.dat};
+\addplot [only marks,color=Red,mark options={scale=1}] table [col sep=comma] {plots/motos/mfits_hf_next_6.dat};
+\addplot [only marks,color=black,mark options={scale=1.2},mark=x,very thick] table [col sep=comma] {plots/motos/motos_opt.dat};
 % Plot code
 \end{axis}
 \end{tikzpicture}

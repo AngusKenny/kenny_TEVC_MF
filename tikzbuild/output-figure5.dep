@@ -3,5 +3,5 @@ tikzbuild/output-figure5.pdf: plots/motos/motos_hf_func.dat
 tikzbuild/output-figure5.pdf: plots/motos/mfits_approx_3.dat
 tikzbuild/output-figure5.pdf: plots/motos/mfits_lf_samples_3.dat
 tikzbuild/output-figure5.pdf: plots/motos/mfits_hf_samples_3.dat
-tikzbuild/output-figure5.pdf: plots/motos/motos_opt.dat
 tikzbuild/output-figure5.pdf: plots/motos/mfits_hf_next_3.dat
+tikzbuild/output-figure5.pdf: plots/motos/motos_opt.dat

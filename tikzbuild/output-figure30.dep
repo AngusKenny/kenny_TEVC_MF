@@ -1,2 +1,3 @@
 tikzbuild/output-figure30.pdf: plots/projections/Griewank_d8_e2_mfits_LF_2D.dat
 tikzbuild/output-figure30.pdf: plots/projections/Griewank_d8_e2_mfits_HF_2D.dat
+tikzbuild/output-figure30.pdf: plots/projections/Griewank_d8_e2_opt_2D.dat

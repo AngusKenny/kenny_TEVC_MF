@@ -1,10 +1,10 @@
 \appendices
 \section{Function Equations}\label{app:testfuncs}
-Tables~\ref{tab:funcs} and~\ref{tab:errfuncs} below give the equations for the test functions and error functions, respectively.
-\begin{table*}[h!]
+Tables~\ref{tab:funcs} and~\ref{tab:errfuncs} below give the equations for the test functions and error functions mentioned in Section~\ref{sec:exp}, respectively.
+\begin{table}[h!]
 \centering
-\caption{Test functions used for experiments in this paper. Given are the instance name, the function, the number of decision variables ($D$), the bounds ($B$) and the reference the test function is taken from.}\label{tab:funcs}
-\begin{adjustbox}{width=0.8\textwidth}
+\caption{\small{}Test functions used for experiments in this paper. Given are the instance name, the function, the number of decision variables ($D$), the bounds ($B$) and the reference the test function is taken from.}\label{tab:funcs}
+\begin{adjustbox}{width=0.75\textwidth}
 {%\scriptsize
 \begin{tabular}{llrrr} \toprule
 Instance & Function & $D$ & $B$ & Ref. \\ \midrule
@@ -48,12 +48,12 @@ $Michalewicz$ & $f_H(\V{x}) = \displaystyle\sum^D_{i = 1} \sin{\left(x_i\right)}
 \end{tabular}
 }
 \end{adjustbox}
-\end{table*}
+\end{table}
 
-\begin{table*}[h!]
+\begin{table}[h!]
 \centering
-\caption{Error functions used, as defined in Wang~et~al.~\cite{wang2017generic}. Function $e_2$ models resolution errors and $e_6$ models stochastic errors. Here, $\phi \in [0,10000]$ determines the fidelity level and $D$ is the number of decision variables.}\label{tab:errfuncs}
-\begin{adjustbox}{width=0.7\textwidth}
+\caption{\small{}Error functions used, as defined in Wang~et~al.~\cite{wang2017generic}. Function $e_2$ models resolution errors and $e_6$ models stochastic errors. Here, $\phi \in [0,10000]$ determines the fidelity level and $D$ is the number of decision variables.}\label{tab:errfuncs}
+\begin{adjustbox}{width=0.6\textwidth}
 {%\scriptsize
 \begin{tabular}{ll} \toprule
 Name & Function \\ \midrule
@@ -67,4 +67,5 @@ $e_6$         & $e_6 = \mathcal{N}\left(\mu(\V{x},\phi),\sigma(\phi)\right)$ \\[
 \end{tabular}
 }
 \end{adjustbox}
-\end{table*}
+\end{table}
+% }

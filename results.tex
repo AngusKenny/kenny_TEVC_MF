@@ -10,7 +10,7 @@ Table~\ref{tab:results-a} presents the results from 30 runs of \AlgName{}, the b
 \begin{table*}[h!]
 \centering
 \caption{Results on dataset $A$ comparing \AlgName{} to \motos{} and the base-line co-kriging algorithm. Given are the number of decision variables ($D$), the square of the Pearson correlation coefficient ($r^2$), the best objective obtained, the mean best objective over the full set of runs ($\mu$) and the corresponding standard deviation ($\sigma$).}\label{tab:results-a}
-% \begin{adjustbox}{width=\columnwidth}
+\begin{adjustbox}{width=0.9\textwidth}
 \begin{tabular}{lrrrrrrrrrrr} \toprule
 & & & \multicolumn{3}{c}{Co-kriging} & \multicolumn{3}{c}{\motos{}} & \multicolumn{3}{c}{\AlgName{}}\\
 \cmidrule(lr){4-6} \cmidrule(lr){7-9} \cmidrule(lr){10-12} 
@@ -27,7 +27,7 @@ $f17$ & 8 & 0.79 & -2.5859  &  42.0074 &  153.4414              &  87.9290 &  29
 %
 \bottomrule
 \end{tabular}
-% \end{adjustbox}
+\end{adjustbox}
 \end{table*}
 
 This is supported by the convergence plots in Figure~\ref{fig:set-a-conv}. Here, it is clear that when the size of the problem is small, the performance of the two algorithms is very similar, with similar convergence rates; but as the size increases, both the average performance, and convergence rate, of \AlgName{} over co-kriging improves significantly --- with the most marked improvement being for problem $f17$. 
@@ -47,25 +47,25 @@ This is supported by the convergence plots in Figure~\ref{fig:set-a-conv}. Here,
   \centering
   \subfloat{\includegraphics{plots/obj_label.tikz}}%
   \addtocounter{subfigure}{-1}%
-  \subfloat[$f11\ (D=3)$\label{fig:f11-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f11_plot.tikz}}
-  \subfloat[$f13\ (D=4)$\label{fig:f13-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f13_plot.tikz}}
-  \subfloat[$f14\ (D=5)$\label{fig:f14-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f14_plot.tikz}}\\
+  \subfloat[$f11\ (D=3)$\label{fig:f11-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/Lv_f11_plot.tikz}}
+  \subfloat[$f13\ (D=4)$\label{fig:f13-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/Lv_f13_plot.tikz}}
+  \subfloat[$f14\ (D=5)$\label{fig:f14-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/Lv_f14_plot.tikz}}\\
   \subfloat{\includegraphics{plots/obj_label.tikz}}%
   \addtocounter{subfigure}{-1}%
-  \subfloat[$f15\ (D=6)$\label{fig:f15-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f15_plot.tikz}}
-  \subfloat[$f16\ (D=8)$\label{fig:f16-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f16_plot.tikz}}
-  \subfloat[$f17\ (D=8)$\label{fig:f17-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/Lv_f17_plot.tikz}}
-  \caption{Mean convergence plots for problem instances $f11$, $f13$, $f14$, $f15$, $f16$ and $f17$ of dataset $A$, over 30 runs.} 
+  \subfloat[$f15\ (D=6)$\label{fig:f15-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/Lv_f15_plot.tikz}}
+  \subfloat[$f16\ (D=8)$\label{fig:f16-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/Lv_f16_plot.tikz}}
+  \subfloat[$f17\ (D=8)$\label{fig:f17-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/Lv_f17_plot.tikz}}
+  \caption{Mean convergence plots for problem instances $f11$, $f13$, $f14$, $f15$, $f16$ and $f17$ of dataset $A$, over 30 runs. Blue and red colours indicate \AlgName{} and the co-kriging baseline, respectively.} 
     \label{fig:set-a-conv}
 \end{figure*}
 
 \subsection*{Test suite B}
-The purpose of test suite$B$ was to observe the effect of problem size on the performance of \AlgName{}, and to do so using two different error functions to ensure the results obtained are consistent and not over-fitted to a particular type of simulation error model. The results in Table~\ref{tab:results-b} compare the performance of \AlgName{}, \motos{} and the baseline co-kriging algorithm over 30 independent runs on the instances of test suite $B$. The test suite comprises of two problem instances from the literature, with varying numbers of decision variables using error functions $e_2$ and $e_6$ as described in~\cite{wang2017generic}.
+The purpose of test suite$B$ was to observe the effect of problem size on the performance of \AlgName{}, and to do so using two different error functions to ensure the results obtained are consistent and not over-fitted to a particular type of simulation error model. The results in Table~\ref{tab:results-b} compare the performance of \AlgName{}, \motos{} and the baseline co-kriging algorithm over 30 independent runs on the instances of test suite $B$. This suite comprises two problem instances from the literature, with variable dimensionailty, using error functions $e_2$ and $e_6$ as described in~\cite{wang2017generic}.
 
 \begin{table*}[h!]
 \centering
 \caption{Results on Griewank and Michalewicz test problems using Wang error functions 2 and 6 (indicated by subscript), comparing \AlgName{} to \motos{} and the base-line co-kriging algorithm. Given are the number of decision variables ($D$), the square of the Pearson correlation coefficient ($r^2$), the best objective obtained, the mean best objective over the full set of runs ($\mu$) and the corresponding standard deviation ($\sigma$).}\label{tab:results-b}
-% \begin{adjustbox}{width=\columnwidth}
+\begin{adjustbox}{width=0.9\textwidth}
 \begin{tabular}{lrrrrrrrrrrr} \toprule
 & & & \multicolumn{3}{c}{Co-kriging} & \multicolumn{3}{c}{\motos{}} & \multicolumn{3}{c}{\AlgName{}}\\
 \cmidrule(lr){4-6} \cmidrule(lr){7-9} \cmidrule(lr){10-12} 
@@ -87,10 +87,10 @@ $Michalewicz_{6}$ & 3 & 0.76 &  -2.7194 & -2.2412 &  0.2978        &   -2.4657 &
 %
 \bottomrule
 \end{tabular}
-% \end{adjustbox}
+\end{adjustbox}
 \end{table*}
 
-Again, the table shows that \AlgName{} outperforms \motos{} in all instances and the co-kriging baseline algorithm, with a few exceptions. For the Michaelwicz problem using error function $e_6$ and with the problem instantiated with five decision variables, the co-kriging base-line algorithm managed to find the best over-all solution. However \AlgName{} still performed better on average. The only time when the co-kriging base-line outperformed \AlgName{} on average was on the two smallest instantiations of the Griewank problem. The convergence plots in Figures~\ref{fig:gw23-conv} and~\ref{fig:gw63-conv} show that the difference between the performance of both algorithms for these instances is reasonably negligible. The remaining plots in Figure~\ref{fig:set-b-conv} agree with the results presented above for test suite $A$.
+Again, the table shows that \AlgName{} outperforms \motos{} in all instances and the co-kriging baseline algorithm, with a few exceptions. For the Michaelwicz problem using error function $e_6$ and with the problem instantiated with five decision variables, the co-kriging base-line algorithm managed to find the best over-all solution. However \AlgName{} still performed better on average. The only time when the co-kriging base-line outperformed \AlgName{} on average was on the two smallest instantiations of the Griewank problem. The convergence plots in Figures~\ref{fig:gw23-conv} and~\ref{fig:gw63-conv} show that the difference between the performance of both algorithms for these instances is reasonably negligible. The remaining plots in Figure~\ref{fig:set-b-conv} agree with the observations for test suite $A$.
 
 % \begin{figure*}[h!]
 %   \centering
@@ -107,15 +107,15 @@ Again, the table shows that \AlgName{} outperforms \motos{} in all instances and
   \centering
   \subfloat{\includegraphics{plots/obj_label.tikz}}%
   \addtocounter{subfigure}{-1}%
-  \subfloat[$Griewank_2\ (D=3)$\label{fig:gw23-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d3_e2_plot.tikz}}
-  \subfloat[$Griewank_2\ (D=5)$\label{fig:gw25-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d5_e2_plot.tikz}}
-  \subfloat[$Griewank_2\ (D=8)$\label{fig:gw28-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d8_e2_plot.tikz}}\\
+  \subfloat[$Griewank_2\ (D=3)$\label{fig:gw23-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/GW_d3_e2_plot.tikz}}
+  \subfloat[$Griewank_2\ (D=5)$\label{fig:gw25-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/GW_d5_e2_plot.tikz}}
+  \subfloat[$Griewank_2\ (D=8)$\label{fig:gw28-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/GW_d8_e2_plot.tikz}}\\
   \subfloat{\includegraphics{plots/obj_label.tikz}}%
   \addtocounter{subfigure}{-1}%
-  \subfloat[$Griewank_6\ (D=3)$\label{fig:gw63-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d3_e6_plot.tikz}}
-  \subfloat[$Griewank_6\ (D=5)$\label{fig:gw65-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d5_e6_plot.tikz}}
-  \subfloat[$Griewank_6\ (D=8)$\label{fig:gw68-conv}]{\includegraphics[width = 0.32\textwidth]{plots/mfits/GW_d8_e6_plot.tikz}}
-  \caption{Mean convergence plots for $Griewank$ problem instance of dataset $B$, over 30 runs.} 
+  \subfloat[$Griewank_6\ (D=3)$\label{fig:gw63-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/GW_d3_e6_plot.tikz}}
+  \subfloat[$Griewank_6\ (D=5)$\label{fig:gw65-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/GW_d5_e6_plot.tikz}}
+  \subfloat[$Griewank_6\ (D=8)$\label{fig:gw68-conv}]{\includegraphics[width = 0.28\textwidth]{plots/mfits/GW_d8_e6_plot.tikz}}
+  \caption{Mean convergence plots for $Griewank$ problem instance of dataset $B$, over 30 runs. Blue and red colours indicate \AlgName{} and the co-kriging baseline, respectively.} 
     \label{fig:set-b-conv}
 \end{figure*}
 
@@ -143,18 +143,26 @@ Table~\ref{tab:mww-test} provides the results of a pairwise comparison of all th
 The results from both test suites suggest a similar pattern. For problems with few decision variables, there is very little difference between \AlgName{} and the base-line co-kriging algorithm. As the size of the problem increases, the convergence rate and performance of \AlgName{} improves over the simple co-kriging algorithm with the greatest improvements observed on the larger problem instances.
 
 Although both algorithms contain the co-kriging technique as their principal constituent, the base-line algorithm uses a random sampling technique which gives it a disadvantage in problems with more decision variables, as it must cover an exponentially larger space with the same computational budget. By using the $LocalOCBA$ procedure to focus the sampling on areas of the search space that have been identified as promising, \AlgName{} can use its budget more efficiently to exploit these regions, which is evidenced by the faster convergence rates for larger problem sizes. %\hemant{Can this be visualized somehow on a couple of individual instances? Explicitly demonstrating it using some snapshot(s) will strengthen the this argument. Perhaps the explored solutions relative to the optimum in a 2D projected space (look up Sammon mapping, e.g.). The concentration of solutions in different areas can give some indicative illustration of how the search went and whether they focussed on the "right" areas. The plot will likely look very different for a low- vs high-dimensional problem, explaining the performance difference.}\angus{i will have a look into this and see if i can come up with something}
+
+This claim is supported by the plots in Figure~\ref{fig:sammon}. This figure shows a Sammon mapping~\cite{sammon1969nonlinear} of the high- and low-fidelity evaluations made by all three algorithms on the three- and eight-dimensional instances of the $Griewank_2$ function from test suite $B$. The purpose of Sammon mapping is to project high dimensional data onto the two-dimensional plane, so it can be visualised, while maintaining similar ratios of euclidean distance ratios between all the points. 
 \begin{figure*}[h!]
   \centering
-  \quad \subfloat[\AlgName{} $(D=3)$\label{fig:sam-3d-mfits}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d3_e2_mfits_proj.tikz}}
-  \subfloat[Co-kriging $(D=3)$\label{fig:sam-3d-cokrig}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d3_e2_cokrig_proj.tikz}}
-  \subfloat[\motos{} $(D=3)$\label{fig:sam-3d-motos}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d3_e2_motos_proj.tikz}}\\
-  \subfloat[\AlgName{} $(D=8)$\label{fig:sam-8d-mfits}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d8_e2_mfits_proj.tikz}}
-  \subfloat[Co-kriging $(D=8)$\label{fig:sam-8d-cokrig}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d8_e2_cokrig_proj.tikz}}
-  \subfloat[\motos{} $(D=8)$\label{fig:sam-8d-motos}]{\includegraphics[width = 0.31\textwidth]{plots/projections/GW_d8_e2_motos_proj.tikz}}
-  \caption{Sammon mapping projection of samples onto the 2D plane for the Griewank function at $D=3$ and $D=8$. Low-fidelity samples are un-filled circles and high-fidelity samples are filled. Blue indicates higher quality solution and red indicates poorer quality.} 
+  \quad \subfloat[\AlgName{} $(D=3)$\label{fig:sam-3d-mfits}]{\includegraphics[width = 0.28\textwidth]{plots/projections/GW_d3_e2_mfits_proj.tikz}}
+  \subfloat[Co-kriging $(D=3)$\label{fig:sam-3d-cokrig}]{\includegraphics[width = 0.28\textwidth]{plots/projections/GW_d3_e2_cokrig_proj.tikz}}
+  \subfloat[\motos{} $(D=3)$\label{fig:sam-3d-motos}]{\includegraphics[width = 0.28\textwidth]{plots/projections/GW_d3_e2_motos_proj.tikz}}\\
+  \subfloat[\AlgName{} $(D=8)$\label{fig:sam-8d-mfits}]{\includegraphics[width = 0.28\textwidth]{plots/projections/GW_d8_e2_mfits_proj.tikz}}
+  \subfloat[Co-kriging $(D=8)$\label{fig:sam-8d-cokrig}]{\includegraphics[width = 0.28\textwidth]{plots/projections/GW_d8_e2_cokrig_proj.tikz}}
+  \subfloat[\motos{} $(D=8)$\label{fig:sam-8d-motos}]{\includegraphics[width = 0.28\textwidth]{plots/projections/GW_d8_e2_motos_proj.tikz}}
+  \caption{Sammon mapping projection of samples onto the 2D plane for the Griewank function at $D=3$ and $D=8$. Points represent high- and low-fidelity samples, indicated by filled and un-filled circles, respectively; colour indicates solution quality, with red and blue being high and low, respectively; and the global optimum $\V{x}^*$ is indicated by the black cross.} 
     \label{fig:sammon}
 \end{figure*}
 
-The \motos{} algorithm performed worse than both \AlgName{} and the base-line co-kriging algorithm for all problem instances. This is predominantly due to the limitations discussed in Section~\ref{sec:back} and demonstrated in Figure~\ref{fig:motos-example}. Because \motos{} can only select candidates for high-fidelity evaluation from the initial set of low-fidelity solutions, it requires a reasonably high density of coverage from initial sampling. In~\cite{xu2016mo2tos}, up to 10,000 initial low-fidelity candidates were used for some problems which is well in-excess of the total computational budget of 2,000 low-fidelity-equivalent evaluations allowed in the experiments conducted here. As \motos{} must decide the finite set of solutions it can choose from \emph{a priori}, it heavily relies on chance as to whether that initial set contains promising candidates or not. This is particularly evident in the results obtained for larger instances of test suite $A$, where the limited budget for initial samples must be spread over a high-dimensional space.
+Figures~\ref{fig:sam-3d-mfits},~\ref{fig:sam-3d-cokrig} and~\ref{fig:sam-3d-motos} give the Sammon mappings on the three-dimensional instance for \AlgName{}, co-kriging baseline and \motos{}, respectively. The Griewank function is highly multimodal, with many local optima and a single global optima, which is indicated by the multiple clusters of reddish coloured samples. The distribution of low-fidelity samples in Figures~\ref{fig:sam-3d-cokrig} and~\ref{fig:sam-3d-motos} is very similar and covers much of the search space, consistent with their policy of random sampling. The co-kriging baseline algorithm fared much better than \motos{} as it uses this information to build a model of the fitness landscape, which it searches globally, allowing it to locate the local optima on the left of the plot, and exploit that region with high-fidelity evaluations. In contrast, \motos{} is only able to evaluate candidate solutions in high-fidelity that it has already evaluated in low-fidelity; this means that, even though it sampled some solutions quite near to the global optimum by chance, it could not refine its search to focus on that area. The result is a set of high-fidelity evaluations which are multimodal, and possibly give a wider range of choices to a decision maker, but not necessarily of high quality. In~\cite{xu2016mo2tos}, up to 10,000 initial low-fidelity candidates were used for some problems which is well in-excess of the total computational budget of 2,000 low-fidelity-equivalent evaluations allowed in the experiments conducted here. As \motos{} must decide the finite set of solutions it can choose from \emph{a priori}, it heavily relies on chance as to whether that initial set contains promising candidates or not. This is particularly evident in the results obtained for larger instances of test suite $A$, where the limited budget for initial samples must be spread over a high-dimensional space.
 
-Finally, although the numerical results and convergence plots do indicate that there is not a significant difference between the performance of \AlgName{} and the base-line co-kriging algorithm on the smaller instances; it is worth noting that for three out of four of these instances, the co-kriging baseline did perform slightly better on average. One possible explanation for this is that the $LocalOCBA$ procedure makes \AlgName{} more greedy, and therefore more likely to become trapped in local optima --- especially for multimodal instances like the Griewank problem. In these smaller instances, the random sampling of the base-line co-kriging algorithm is not as much of a disadvantage and it is more likely to come across good areas of the search space by chance.
+Illustrated by Figure~\ref{fig:sam-3d-mfits}, it can be seen that \AlgName{} identified the same local optima as the co-kriging baseline; however, it did so with a more efficent use of its computing budget. Both algorithms started with exactly the same initial populations, but it is clearly shown in the plots that \AlgName{} takes a much more targeted approach to its low-fidelity sampling than the co-kriging baseline or \motos{}. Another interesting thing to note about this instance is that, although the co-kriging algorithm got stuck in a local optima; towards the very end of the search, \AlgName{} was able to escape this local optima and find a new region to exploit which was much closer to the global optimum, using the mechanism described by Equation~\ref{eq:epsilon} --- had there been more budget allowed, it is likely that \AlgName{} would have continued to exploit this region, eventually finding the global optimum. 
+
+In the three-dimensional case, the ``scatter-gun'' approach to low-fidelity sampling adopted by the co-kriging baseline algorithm and \motos{} is not especially detrimental. The entire space can be covered reasonably effectively with the allocated budget and it does not matter if some of the evaluations are wasted on regions of the search space that are not very productive. The eight-dimensional case depicted in Figures~\ref{fig:sam-8d-mfits},~\ref{fig:sam-8d-cokrig} and~\ref{fig:sam-8d-motos} tells a much different story, however. Here, the search space is exponentially larger and the fixed budget must be spent more thriftily. Figures~\ref{fig:sam-8d-cokrig} and~\ref{fig:sam-8d-motos} show that there is not much difference between \motos{} and the co-kriging baseline; \motos{} takes a one-shot, ``hit-and-hope'' approach, and the co-kriging baseline is unable to garner enough information from randomly sampling to construct a useful model of the search space. 
+
+It is in these higher-dimensional spaces where the targeted approach to low-fidelity sampling taken by \AlgName{}, illustrated in Figure~\ref{fig:sam-8d-mfits}, comes into its own. After spending some time focusing in a less productive area (indicated by the denser pattern of low-fidelity samples to the upper right), the search finally manages to locate a region which it can exploit to produce better quality solutions. This is where the guided DE process described in Section~\ref{sec:method} is important; because even though there are so many directions to get lost in, newly constructed candidate solutions are always pushed towards the region that has proven most fruitful so far.
+
+% Finally, although the numerical results and convergence plots do indicate that there is not a significant difference between the performance of \AlgName{} and the base-line co-kriging algorithm on the smaller instances; it is worth noting that for three out of four of these instances, the co-kriging baseline did perform slightly better on average. One possible explanation for this is that the $LocalOCBA$ procedure makes \AlgName{} more greedy, and therefore more likely to become trapped in local optima --- especially for multimodal instances like the Griewank problem. In these smaller instances, the random sampling of the base-line co-kriging algorithm is not as much of a disadvantage and it is more likely to come across good areas of the search space by chance.
