@@ -4,8 +4,8 @@
 \addplot [color=blue,mark=none] table [col sep=comma] {plots/motos/motos_hf_func.dat};
 \addplot [only marks,mark options={scale=0.6},color=Green] table [col sep=comma] {plots/motos/motos_lf_samples.dat};
 \addplot [only marks,mark options={scale=0.6},color=blue] table [col sep=comma] {plots/motos/motos_hf_samples.dat};
-\addplot [only marks,color=cyan,mark options={scale=1.1}] table [col sep=comma] {plots/motos/motos_hf_best.dat};
-\addplot [only marks,color=Red,mark options={scale=1.5},mark=diamond*] table [col sep=comma] {plots/motos/motos_opt.dat};
+\addplot [only marks,color=Red,mark options={scale=1.2}] table [col sep=comma] {plots/motos/motos_hf_best.dat};
+\addplot [only marks,color=black,mark options={scale=1.6},mark=x,very thick] table [col sep=comma] {plots/motos/motos_opt.dat};
 % Plot code
 \end{axis}
 \end{tikzpicture}

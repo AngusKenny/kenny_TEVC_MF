@@ -361,7 +361,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{An Iterative Two-stage Multi-fidelity Optimization Algorithm for Solving Computationally Expensive Problems}
+\title{\AlgName{}: An Iterative, Two-stage Multi-fidelity Optimization Algorithm for Computationally Expensive Problems}
 %
 %
 % author names and IEEE memberships
@@ -382,7 +382,7 @@
 % \thanks{J. Doe and J. Doe are with Anonymous University.}% <-this % stops a space
 % \thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
 
-\author{Angus~Kenny,~Tapabrata~Ray,~and~Hemant~Kumar~Singh% <-this % stops a space
+\author{Angus~Kenny,~\IEEEmembership{Member,~IEEE,}~Tapabrata~Ray,~\IEEEmembership{Senior Member,~IEEE,}~and~Hemant~Kumar~Singh, \IEEEmembership{Senior~Member,~IEEE,}% <-this % stops a space
 \thanks{The authors are with the School of Engineering and Information Technology, The University of New South Wales, Australia.\\Emails: \{angus.kenny, t.ray, h.singh\}@adfa.edu.au.}}
 % of Electrical and Computer Engineering, Georgia Institute of Technology, Atlanta,
 % GA, 30332 USA e-mail: (see http://www.michaelshell.org/contact.html).}% <-this % stops a space
@@ -443,13 +443,15 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-The abstract goes here.\hemant{Angus, please take a shot at the first version of abstract.}
+In engineering, the evaluation of a single design can be very computationally expensive if doing so requires techniques like finite element analysis or computational fluid dynamic simulation. One advantage of many simulation methods is that they can limit the amount of the (often fixed) computational budget they consume to produce lower fidelity evaluations; the trade-off being that a low-fidelity evaluation is likely to be less accurate. This paper proposes an iterative, two-stage algorithm \AlgName{} which makes use of this multi-fidelity approach to produce good quality solutions to bound-constrained, single-objective optimization problems with continuous variables. It employs historical information from previously evaluated designs to determine a sampling neighbourhood for low-fidelity evalulations, which are used to maintain a co-kriging surrogate model of the objective landscape that is then searched globally to identify a good candidate for high-fidelity evaluation. By restricting the low-fidelity sampling neighbourhood, the computational budget can be used more efficiently, as the search is focused on regions that have historically produced good quality solutions. Experiments on two suites of test problems are carried out to demonstrate the features of \AlgName{} and compare it with two other similar techniques from the literature, which it is shown to outperform.
 
-\angus{Angus can make comments using \texttt{\textbackslash{}angus\{comment\}}}
+% \hemant{Angus, please take a shot at the first version of abstract.}
 
-\ray{Ray can make comments using \texttt{\textbackslash{}ray\{comment\}}}
+% \angus{Angus can make comments using \texttt{\textbackslash{}angus\{comment\}}}
 
-\hemant{Hemant can make comments using \texttt{\textbackslash{}hemant\{comment\}}}
+% \ray{Ray can make comments using \texttt{\textbackslash{}ray\{comment\}}}
+
+% \hemant{Hemant can make comments using \texttt{\textbackslash{}hemant\{comment\}}}
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -479,7 +481,7 @@ IEEE, IEEEtran, journal, \LaTeX, paper, template.
 \input{experiments}
 \input{results}
 \input{concl}
-\input{app}
+
 % \subsection{Subsection Heading Here}
 % Subsection text here.
 
@@ -655,6 +657,10 @@ IEEE, IEEEtran, journal, \LaTeX, paper, template.
 % % set second argument of \begin to the number of references
 % % (used to reserve space for the reference number labels box)
 % \begin{thebibliography}{1}
+
+% supplementary appendix
+\newpage\onecolumn
+\input{app}
 
 % \bibitem{IEEEhowto:kopka}
 % H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus

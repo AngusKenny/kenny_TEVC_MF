@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.9)  29 OCT 2021 02:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.9)  29 OCT 2021 13:05
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1158,6 +1158,8 @@ Package: xstring 2019/02/06 v1.83 String manipulations (CT)
 )
 \tikzscale@measuredSize=\box128
 )
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.co
+lormaps.code.tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.ex
 ternal.code.tex
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/libraries/tikzlibrar
@@ -1846,7 +1848,7 @@ LaTeX Warning: Reference `sec:back' on page 8 undefined on input line 155.
 
 LaTeX Warning: Reference `fig:ex-mfits' on page 8 undefined on input line 155.
 
-(./plots/obj_label_motos.tikz
+(./plots/obj_label.tikz
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./plots/motos/mfits_plot_1.tikz
@@ -1863,7 +1865,7 @@ Overfull \hbox (1065.85335pt too wide) in paragraph at lines 167--171
  [][][][][][][][] 
  []
 
-(./plots/obj_label_motos.tikz
+(./plots/obj_label.tikz
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
 ) (./plots/motos/mfits_plot_4.tikz
@@ -1894,26 +1896,26 @@ LaTeX Warning: Reference `eq:lf-ex' on page 8 undefined on input line 177.
 
 
 LaTeX Warning: Reference `fig:ex-mfits105' on page 8 undefined on input line 18
-3.
+1.
 
 
 LaTeX Warning: Reference `fig:ex-mfits134' on page 8 undefined on input line 18
-3.
+1.
 
 
 LaTeX Warning: Reference `fig:ex-mfits167' on page 8 undefined on input line 18
-3.
+1.
+
+
+LaTeX Warning: Reference `fig:ex-mfits200' on page 8 undefined on input line 18
+1.
 
 
 LaTeX Warning: Reference `fig:ex-mfits200' on page 8 undefined on input line 18
 3.
 
 
-LaTeX Warning: Reference `fig:ex-mfits200' on page 8 undefined on input line 18
-5.
-
-
-LaTeX Warning: Citation `wolpert1997no' on page 8 undefined on input line 185.
+LaTeX Warning: Citation `wolpert1997no' on page 8 undefined on input line 183.
 
 ) (./experiments.tex
 
@@ -1929,7 +1931,7 @@ Underfull \hbox (badness 1394) in paragraph at lines 6--7
  []
 
 
-LaTeX Warning: Citation `lv2021multi' on page 9 undefined on input line 9.
+LaTeX Warning: Citation `lv2021multi' on page 8 undefined on input line 9.
 
 
 LaTeX Warning: Citation `griewank1981generalized' on page 9 undefined on input 
@@ -2149,6 +2151,9 @@ LaTeX Warning: Reference `tab:mww-test' on page 11 undefined on input line 141.
 
 LaTeX Warning: Citation `mann1947test' on page 11 undefined on input line 141.
 
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 (./plots/projections/GW_d3_e2_mfits_proj.tikz
 A tikzpicture has been optimized away. Use '/tikz/external/optimize=false' to d
 isable this.
@@ -2198,45 +2203,42 @@ Underfull \hbox (badness 2762) in paragraph at lines 2--3
 
 ) (./app.tex
 
-LaTeX Warning: Reference `tab:funcs' on page 12 undefined on input line 3.
+LaTeX Warning: Reference `tab:funcs' on page 13 undefined on input line 3.
 
 
-LaTeX Warning: Reference `tab:errfuncs' on page 12 undefined on input line 3.
+LaTeX Warning: Reference `tab:errfuncs' on page 13 undefined on input line 3.
 
 
-LaTeX Warning: Citation `lv2021multi' on page 12 undefined on input line 12.
+LaTeX Warning: Citation `lv2021multi' on page 13 undefined on input line 12.
 
 
-LaTeX Warning: Citation `lv2021multi' on page 12 undefined on input line 15.
+LaTeX Warning: Citation `lv2021multi' on page 13 undefined on input line 15.
 
 
-LaTeX Warning: Citation `lv2021multi' on page 12 undefined on input line 18.
+LaTeX Warning: Citation `lv2021multi' on page 13 undefined on input line 18.
 
 
-LaTeX Warning: Citation `lv2021multi' on page 12 undefined on input line 28.
+LaTeX Warning: Citation `lv2021multi' on page 13 undefined on input line 28.
 
 
-LaTeX Warning: Citation `lv2021multi' on page 12 undefined on input line 31.
+LaTeX Warning: Citation `lv2021multi' on page 13 undefined on input line 31.
 
 
-LaTeX Warning: Citation `lv2021multi' on page 12 undefined on input line 34.
+LaTeX Warning: Citation `lv2021multi' on page 13 undefined on input line 34.
 
 
-LaTeX Warning: Citation `lv2021multi' on page 12 undefined on input line 37.
+LaTeX Warning: Citation `lv2021multi' on page 13 undefined on input line 37.
 
 
-LaTeX Warning: Citation `lv2021multi' on page 12 undefined on input line 40.
+LaTeX Warning: Citation `lv2021multi' on page 13 undefined on input line 40.
 
 
-LaTeX Warning: Citation `griewank1981generalized' on page 12 undefined on input
+LaTeX Warning: Citation `griewank1981generalized' on page 13 undefined on input
  line 43.
 
 
-LaTeX Warning: Citation `michalewicz2013genetic' on page 12 undefined on input 
+LaTeX Warning: Citation `michalewicz2013genetic' on page 13 undefined on input 
 line 45.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -2275,10 +2277,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 38642 strings out of 481239
- 899766 string characters out of 5920378
- 1508807 words of memory out of 5000000
- 52978 multiletter control sequences out of 15000+600000
+ 38686 strings out of 481239
+ 901497 string characters out of 5920378
+ 1524834 words of memory out of 5000000
+ 53020 multiletter control sequences out of 15000+600000
  572195 words of font info for 134 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  87i,21n,146p,1839b,2317s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -2287,7 +2289,7 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/urw/times/utmr8a.pfb>
-Output written on tikzbuild/output-figure0.pdf (1 page, 46290 bytes).
+Output written on tikzbuild/output-figure0.pdf (1 page, 46284 bytes).
 PDF statistics:
  37 PDF objects out of 1000 (max. 8388607)
  25 compressed objects within 1 object stream
