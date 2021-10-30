@@ -28,23 +28,24 @@ Co-kriging is a popular approach used in solving multi-fidelity optimization pro
 
 
 \begin{algorithm}[h!] 
-\caption{Baseline co-kriging procedure}
+\caption{Base-line co-kriging procedure}
 \label{alg:co-kriging}
 \algsetup{linenosize=\footnotesize}
 {\footnotesize
 \begin{algorithmic}[1]
-\REQUIRE{$P$, problem data; $N_{L_{max}}$, max size of LF pop; $T$, maximum number of evaluations; $\Delta$, new LF per iteration.}
+\REQUIRE{$\mathcal{I}$, problem instance; $N_{L}$, max size of LF pop; $T$, maximum number of evaluations; $\Delta$, new LF per iteration.}
 \ENSURE{Best solution found $\V{x}^\beta$.}
-\STATE{$X_v \ot LHS(P),\ \forall v \in \{L,H\}$} \COMMENT{Generate initial populations}
+\STATE{$X_v \ot LHS(\mathcal{I}),\ \forall v \in \{L,H\}$} \COMMENT{Generate initial populations}
+\STATE{$A_v,t \ot f_v(X_v,0),\ \forall v \in \{L,H\}$} \COMMENT{Evaluate initial populations}
 \STATE{$\V{x}^\beta \ot \emptyset$} \COMMENT{Initialize $x_\beta$} 
-\WHILE{$N_e < N_{e_{max}}$}
+\WHILE{$t < T$}
   \STATE{$A_L \ot A_L \cup LHS(\Delta)$} \COMMENT{Add $\Delta$ new solutions to LF archive}
-  \IF{$|A_L| > N_{L_{max}}$}
-    \STATE{$A_L \ot winnow(A_L,N_{L_{max}})$} \COMMENT{Control population size}
+  \IF{$|A_L| > N_L$}
+    \STATE{$A_L \ot Truncate(A_L,N_L)$} \COMMENT{Control population size}
   \ENDIF
   \STATE{$M_C \ot CoKrige(A_L,A_H)$} \COMMENT{Update co-kriging model}
   \STATE{$\V{x} \ot GlobalSearch(M_C)$} \COMMENT{Globally search co-kriging model}
-  \STATE{$\V{\alpha},N_e \ot f_H(\V{x},N_e)$} \COMMENT{Evaluate and update total cost}
+  \STATE{$\V{\alpha},t \ot f_H(\V{x},t)$} \COMMENT{Evaluate and update total cost}
   \STATE{$A_H \ot A_H \cup \{\V{\alpha}\}$} \COMMENT{Add $\V{\alpha}$ to high-fidelity archive}
   \STATE{$\V{x}^\beta \ot \min(f_H(\V{x}^\beta),f_H(\V{x}))$} \COMMENT{Update best solution}
 \ENDWHILE
@@ -52,38 +53,38 @@ Co-kriging is a popular approach used in solving multi-fidelity optimization pro
 }
 \end{algorithm}
 
-The functions here have the same definitions as in Algorithm~\ref{alg:main-alg}. This procedure iteratively updates a co-kriging model by randomly sampling the low-fidelity data using a latin hypercube sampling (LHS) technique; however, the global search method is the same.
+The functions here have the same definitions as in Algorithm~\ref{alg:main-alg}. This procedure iteratively updates a co-kriging model by randomly sampling the low-fidelity data using a Latin hypercube sampling (LHS) technique; however, the global search method is the same.
 
 \subsection{\motos{} algorithm}
 
-The second method used for comparison with \AlgName{} is the \motos{} algorithm described in Section~\ref{sec:back}. The source code for this algorithm could not be retrieved online, so an implementation in MATLAB based on the description in~\cite{xu2016mo2tos} was made, the pseudocode for which is given in Algorithm~\ref{alg:mo2tos}.
+The second method used for comparison with \AlgName{} is the \motos{} algorithm described in Section~\ref{sec:back}. The source code for this algorithm could not be retrieved online, so an implementation in MATLAB based on the description in~\cite{xu2016mo2tos} was made, the pseudo-code for which is given in Algorithm~\ref{alg:mo2tos}.
 \begin{algorithm}[h!] 
 \caption{\motos{} procedure}
 \label{alg:mo2tos}
 \algsetup{linenosize=\footnotesize}
 {\footnotesize
 \begin{algorithmic}[1]
-\REQUIRE{$P$, problem data; $T$, max LF equivalent evals; $n_0$, initial HF evals; $\rho$, HF eval proportion; $k$, number of partitions; $\Delta$, HF evals per statistics update.}
+\REQUIRE{$\mathcal{I}$, problem instance; $T$, max LF equivalent evals; $n_0$, initial HF evals; $\rho_m$, HF eval proportion; $q$, number of partitions; $\Delta$, HF evals per statistics update.}
 \ENSURE{Best solution found $\V{x}^\beta$.}
-\STATE{$X_L \ot LHS(P,N_{e_{max}},\rho)$} \COMMENT{Generate initial population}
-\STATE{$A_L,N_e \ot f_L(X_L,0)$} \COMMENT{Evaluate initial LF population}
-\STATE{$G \ot Partition(A_L,k)$} \COMMENT{Partition solutions into $k$ groups}
-\STATE{$D_i \ot randSelect(G_i,n_0),\ \forall i \in [k]$} \COMMENT{Select initial HF candidates}
-\STATE{$S_i,N_e \ot f_L(D_i,N_e),\ \forall i \in [k]$} \COMMENT{Evaluate selected solutions}
-\STATE{$G_i \ot G_i \setminus D_i,\ \forall i \in [k]$} \COMMENT{Selection without replacement}
-\WHILE{$N_e < N_{e_{max}}$}
-  \STATE{$\hat{\mu}_i,\hat{\sigma}_i \ot$ sample statistics for $S_i$, $\forall i \in [k]$}
+\STATE{$X_L \ot LHS(\mathcal{I},N_{e_{max}},\rho_m)$} \COMMENT{Generate initial population}
+\STATE{$A_L,t \ot f_L(X_L,0)$} \COMMENT{Evaluate initial LF population}
+\STATE{$G \ot Partition(A_L,q)$} \COMMENT{Partition solutions into $k$ groups}
+\STATE{$D_i \ot randSelect(G_i,n_0),\ \forall i \in [q]$} \COMMENT{Select initial HF candidates}
+\STATE{$S_i,t \ot f_L(D_i,t),\ \forall i \in [q]$} \COMMENT{Evaluate selected solutions}
+\STATE{$G_i \ot G_i \setminus D_i,\ \forall i \in [q]$} \COMMENT{Selection without replacement}
+\WHILE{$t < T$}
+  \STATE{$\hat{\mu}_i,\hat{\sigma}_i \ot$ sample statistics for $S_i$, $\forall i \in [q]$}
   \STATE{$R \ot GetRatios(\V{\hat{\mu}},\V{\hat{\sigma}})$} \COMMENT{compute allocation ratios}
-  \STATE{$D \ot Allocate(R,S,G) : \displaystyle\sum_{i \in [k]}|D_i| = \Delta$} \COMMENT{Allocate solutions}
-  \STATE{$D_i,N_e \ot f_L(D_i,N_e),\ \forall i \in [k]$} \COMMENT{Evaluate allocated solutions}
-  \STATE{$S_i \ot S_i \cup D_i,\ \forall i \in [k]$} \COMMENT{Add to selected solutions}
-  \STATE{$G_i \ot G_i \setminus D_i,\ \forall i \in [k]$} \COMMENT{Selection without replacement}
+  \STATE{$D \ot Allocate(R,S,G) : \displaystyle\sum_{i \in [q]}|D_i| = \Delta$} \COMMENT{Allocate solutions}
+  \STATE{$D_i,t \ot f_L(D_i,t),\ \forall i \in [q]$} \COMMENT{Evaluate allocated solutions}
+  \STATE{$S_i \ot S_i \cup D_i,\ \forall i \in [q]$} \COMMENT{Add to selected solutions}
+  \STATE{$G_i \ot G_i \setminus D_i,\ \forall i \in [q]$} \COMMENT{Selection without replacement}
 \ENDWHILE
-\STATE{$\V{x}^\beta \ot \min\left(\displaystyle\bigcup_{i \in [k]} S_i\right)$} \COMMENT{Find best selected solution}
+\STATE{$\V{x}^\beta \ot \min\left(\displaystyle\bigcup_{i \in [q]} S_i\right)$} \COMMENT{Find best selected solution}
 \end{algorithmic}
 }
 \end{algorithm}
 
-Here, most of the subroutines are the same as those previously discussed in Sections~\ref{sec:back} and~\ref{sec:method}. The total computing budget, $T$, must be divided between the initial low-fidelity evaluations and the subsequent high-fidelity ones, with the proportion of the total computing budget allocated to the high-fidelity evaluations given by the parameter $\rho$. In~\cite{xu2016mo2tos}, no guidelines were provided for setting this parameter; however sensitivity analysis experiments showed that a value of around 0.25 for $\rho$ provided the best results for the given problem instances and the computing budget. 
+Here, most of the subroutines are the same as those previously discussed in Sections~\ref{sec:back} and~\ref{sec:method}. The total computing budget, $T$, must be divided between the initial low-fidelity evaluations and the subsequent high-fidelity ones, with the proportion of the total computing budget allocated to the high-fidelity evaluations given by the parameter $\rho_m$. In~\cite{xu2016mo2tos}, no guidelines were provided for setting this parameter; however sensitivity analysis experiments showed that a value of around 0.25 for $\rho_m$ provided the best results for the given problem instances and the computing budget. 
 
-The function $LHS(P,N,\rho)$ takes the problem instance, total budget and $\rho$ as input and returns an initial population of solutions sampled using LHS with size $\frac{N}{1+\rho}$. This population is evaluated in low-fidelity and partitioned using $Partition(A,k)$. It takes an archive of solutions and a specified number of groups $k$ as inputs, ranks the solutions by objective value and returns $k$ equal-size groups based on their ranks. In \cite{xu2016mo2tos}, $k=10$ was used for the experiments. The remainder of the procedure is similar to Algorithm~\ref{alg:local-ocba}, with $\Delta = 5$ corresponding to the value of $\Delta_2$.
+The function $LHS(\mathcal{I},N,\rho_m)$ takes the problem instance, total budget and $\rho_m$ as input and returns an initial population of solutions sampled using LHS with size $\frac{N}{1+\rho_m}$. This population is evaluated in low-fidelity and partitioned using $Partition(A,k)$. It takes an archive of solutions and a specified number of groups $k$ as inputs, ranks the solutions by objective value and returns $k$ equal-size groups based on their ranks. In \cite{xu2016mo2tos}, $q=10$ was used for the experiments. The remainder of the procedure is similar to Algorithm~\ref{alg:local-ocba}, with $\Delta = 5$ corresponding to the value of $\Delta_2$.

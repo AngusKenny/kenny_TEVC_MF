@@ -2,16 +2,16 @@
 This section details the type of problem \AlgName{} is designed to address. It also provides information about two critical components that are used in its construction and summarizes its differences and similarities with existing methods from the literature.
 
 \subsection{Problem type}
-\AlgName{} is designed to solve bound-constrained, single-objective, multi-fidelity optimization problems with continuous variables. Let $P$ be a problem instance with $D$ decision variables and let $\V{x} \in \prod^D_{i=1}[l_i,u_i]$ be a \emph{solution} to $P$, represented by a real vector\footnote{Bold type is used here to indicate a vector (indexed by superscript) and regular type is used for elements (indexed by subscript). E.g., $\V{x}^i$ is the $i$th indexed vector, and $x_j^i$ is the $j$th element of the $i$th vector.} $\V{x}$ such that $l_i \le x_i \le u_i \quad \forall {i \in [D]}$, where $\V{l},\V{u} \in \mathbb{R}^D$ are the lower- and upper-bounds, respectively\footnote{To conserve space, the following shorthand is used in this paper: ${[k] = \{1,2,\dots,k\}}$ and $[k^*] = \{0,1,\dots,k-1\}$.}. The performance of the solution i.e., \emph{objective value} of the solution to $P$ is given by the function
+\AlgName{} is designed to solve bound-constrained, single-objective, multi-fidelity optimization problems with continuous variables. Let $\mathcal{I}$ be a problem instance with $D$ decision variables and let $\V{x} \in \prod^D_{i=1}[l_i,u_i]$ be a \emph{solution} to $\mathcal{I}$, represented by a real vector\footnote{Bold type is used here to indicate a vector (indexed by superscript) and regular type is used for elements (indexed by subscript). E.g., $\V{x}^i$ is the $i$th indexed vector, and $x_j^i$ is the $j$th element of the $i$th vector.} $\V{x}$ such that $l_i \le x_i \le u_i \quad \forall {i \in [D]}$, where $\V{l},\V{u} \in \mathbb{R}^D$ are the lower- and upper-bounds, respectively\footnote{To conserve space, the following shorthand is used in this paper: ${[k] = \{1,2,\dots,k\}}$ and $[k^*] = \{0,1,\dots,k-1\}$.}. The performance of the solution i.e., \emph{objective value} of the solution to $\mathcal{I}$ is given by the function
 \begin{equation}
 f:\displaystyle\prod^D_{i=1}[l_i,u_i]\to \mathbb{R},\ \V{x} \mapsto f(\V{x})\,, \label{eq:objective}
 \end{equation}
-which is typically smooth. When this objective function is optimized, the \emph{optimal} solution to $P$ is $\V{x}^*$, such that $f(\V{x}^*) \leq f(\V{x})$ for all $\V{x} \in \prod^D_{i=1}[l_i,u_i]$. Without loss of generality, the problems are presented in a minimization sense throughout this paper. 
+which is typically smooth. When this objective function is optimized, the \emph{optimal} solution to $\mathcal{I}$ is $\V{x}^*$, such that $f(\V{x}^*) \leq f(\V{x})$ for all $\V{x} \in \prod^D_{i=1}[l_i,u_i]$. Without loss of generality, the problems are presented in a minimization sense throughout this paper. 
 To facilitate development and testing of optimization algorithms, a range of test problems have been proposed in the literature. They are very fast to evaluate and can be customized to gauge the performance of the algorithms across a variety of fitness landscapes, before their application to the real-world problems.
 
-From the standard version of the test functions discussed above, multi-fidelity benchmark functions are generated using additional transformations. The test functions in Lv et al.~\cite{lv2021multi} uses the customized addition, removal and modification of terms to produce a transformed function with a desired correlation to the original. While this method allows control over the shape of the fitness landscape, it requires analysing each test function individually and only permits a single level of fidelity for each transformation.
+From the standard version of the test functions discussed above, multi-fidelity benchmark functions are generated using additional transformations. The test functions in Lv et al.~\cite{lv2021multi} uses the customized addition, removal and modification of terms to produce a transformed function with a desired correlation to the original. While this method allows control over the shape of the fitness landscape, it requires analyzing each test function individually and only permits a single level of fidelity for each transformation.
 
-The second strategy introduces external noise, modelling the errors that occur with decreased simulation fidelity. Wang et al.~\cite{wang2017generic} analysed the behaviour of many numerical simulations under different fidelity conditions and formulated a generic transformation function to turn any test function $f$ of the form in Equation~\ref{eq:objective} into a low-fidelity version $\tilde f$:
+The second strategy introduces external noise, modelling the errors that occur with decreased simulation fidelity. Wang et al.~\cite{wang2017generic} analyzed the behaviour of many numerical simulations under different fidelity conditions and formulated a generic transformation function to turn any test function $f$ of the form in Equation~\ref{eq:objective} into a low-fidelity version $\tilde f$:
 \begin{equation}
 \tilde f: \displaystyle\prod^D_{i=1}[l_i,u_i] \times [0,10000] \to \mathbb{R},\ (\V{x},\phi) \mapsto f(\V{x}) + e(\V{x},\phi)\,,\label{eq:error-fn}
 \end{equation}
@@ -22,9 +22,9 @@ Because the error function is always independent of $f(\V{x})$, this method can 
 The cost ratio of high- to low-fidelity evaluations, $R_c$, is a problem characteristic that affects the relative number of low- and high-fidelity evaluations that can be performed within a given computational budget. When $R_c=1$, there is no difference in cost between the two, meaning that every candidate solution can be evaluated in high-fidelity; however, as $R_c$ tends toward zero, high-fidelity evaluations need to be used sparingly~(while a much larger number of low-fidelity evaluations may be affordable), to avoid depleting the budget before a good solution can be obtained. For the specific problem instances presented in Section~\ref{sec:exp}, $R_c=0.2$ is used, which is in agreement with the experiments in~\cite{lv2021multi}. That is to say, an HF evaluation is considered 5 times more expensive than an LF evaluation.
 
 \subsection{Kriging and co-kriging}
-Kriging model~\cite{forrester2008engineering} originated from geostatistical methods used for ore valuation in mining research, but has since been applied across a number of domains. Kriging is an interpolation technique that uses a limited set of samples to predict the objective value at as yet unsampled points.
+Kriging model~\cite{forrester2008engineering} originated from geostatistical methods used for ore valuation in mining research, but has since been applied across a number of domains. Kriging is an interpolation technique that uses a limited set of samples to predict the objective value at as yet un-sampled points.
 
-Let $P$ be a problem instance with $D$ decision variables and let $X = \{\V{x}^1,\V{x}^2,\dots,\V{x}^n\}$ be a set of $n$ sample points with observed objective values $\V{y} = \{y_1,y_2,\dots,y_n\}$, where $\V{x}^i \in \mathbb{R}^D$ for $i \in [n]$. A kriging model of these samples is the Gaussian process 
+Let $\mathcal{I}$ be a problem instance with $D$ decision variables and let $X = \{\V{x}^1,\V{x}^2,\dots,\V{x}^n\}$ be a set of $n$ sample points with observed objective values $\V{y} = \{y_1,y_2,\dots,y_n\}$, where $\V{x}^i \in \mathbb{R}^D$ for $i \in [n]$. A kriging model of these samples is the Gaussian process 
 \begin{equation}
 Y(\V{x}) = f(\V{x}) + Z(\V{x}),\label{eq:krig}
 \end{equation}
@@ -34,9 +34,9 @@ Low-fidelity samples are typically much cheaper to evaluate than high-fidelity o
 
 Let $X_H = \{\V{x}_H^1,\V{x}_H^2,\dots,\V{x}_H^n\}$ be the set of $n$ high-fidelity sample points with observed objective values $\V{y}_H = \{y_{H(1)},y_{H(2)},\dots,y_{H(n)}\}$ and $X_L = \{\V{x}_L^1,\V{x}_L^2,\dots,\V{x}_L^m\}$ be the set of $m$ low-fidelity\footnote{Although only two fidelity levels are employed here, without loss of generality, the method can be extended to an arbitrary number of fidelities.} sample points with observed objective values $\V{y}_L = \{y_{L(1)},y_{L(2)},\dots,y_{L(m)}\}$. A kriging model $Y_L(\V{x})$ of the low-fidelity samples is constructed according to Equation~\ref{eq:krig}. Using this, the high-fidelity model is represented as
 \begin{equation}
-Y_H(\V{x}) = \rho(\V{x})\mu_L(\V{x}) + Z_d(\V{x}),
+Y_H(\V{x}) = \rho_s(\V{x})\mu_L(\V{x}) + Z_d(\V{x}),
 \end{equation} 
-where $\rho(\V{x})$ is a scaling factor, determined as part of the maximum likelihood estimation of the second model; $\mu_L(\V{x})$ is the mean of $Y_L(\V{x})$; and $Z_d(\V{x})$ is a Gaussian process modelling the difference between $Y_H(\V{x})$ and $\rho(\V{x})\mu_L(\V{x})$.
+where $\rho_s(\V{x})$ is a scaling factor, determined as part of the maximum likelihood estimation of the second model; $\mu_L(\V{x})$ is the mean of $Y_L(\V{x})$; and $Z_d(\V{x})$ is a Gaussian process modelling the difference between $Y_H(\V{x})$ and $\rho_s(\V{x})\mu_L(\V{x})$.
 
 For a more in-depth mathematical treatment of kriging, co-kriging and how to use these models to make predictions, interested readers are referred to \cite{forrester2008engineering,forrester2007multi,kennedy2001bayesian,kennedy2000predicting}.
 
@@ -59,7 +59,7 @@ where $N_i$ is the total replications allocated to design $i$, $\sigma_i$ is the
 
 The implications of Equations~\ref{eq:apcs1} and~\ref{eq:apcs2} are such that additional computing resources are not only allocated to those designs with a small sample mean, but also to potentially promising designs that have a high variance. A high variance indicates uncertainty in the prediction, which the increased volume of replications will help to reduce.
 
-Using the above results, Algorithm~\ref{alg:ocba} details an iterative process to select a design, based on maximising APCS.
+Using the above results, Algorithm~\ref{alg:ocba} details an iterative process to select a design, based on maximizing APCS.
 
 \begin{algorithm}[h!] 
 \caption{OCBA procedure}
@@ -88,7 +88,7 @@ In this algorithm, $Sim(n)$ returns the output of running the stochastic simulat
 \subsection{\motos{}}
 Optimal computing budget allocation (OCBA) operates on the assumption that each stochastic simulation being performed will have the same input parameters, and does not consider the case where the fitness of a solution may be evaluated with different fidelities. The multi-fidelity optimization with ordinal transformation and optimal sampling (\motos{})~\cite{xu2016mo2tos} framework is a two-stage algorithm that takes this into consideration, by combining ideas from OCBA with ordinal transformation~\cite{xu2014ordinal}.
 
-Given a problem instance $P$ and a finite computing budget $T$, the \motos{} algorithm takes advantage of the relatively low cost of low-fidelity evaluations to identify promising regions of the search space that can subsequently be exploited by iterative high-fidelity evaluations.
+Given a problem instance $\mathcal{I}$ and a finite computing budget $T$, the \motos{} algorithm takes advantage of the relatively low cost of low-fidelity evaluations to identify promising regions of the search space that can subsequently be exploited by iterative high-fidelity evaluations.
 
 A large population of solutions is evaluated in low-fidelity and then ranked based on the evaluated values. This ranked population is then partitioned into equal-sized groups. The reason for ranking the solutions before partitioning, is to increase the probability that solutions which share a group are close to each other in the transformed objective space, as opposed to the original design space. As a result, regardless of where the solutions may be, it is more likely that solutions within a group will have a similar performance.
 
@@ -100,7 +100,7 @@ The value of $\Delta$ is typically quite small, as there may be significant bias
 
 Two critical limitations of the \motos{} framework are that it determines the  low-fidelity samples \emph{a priori} and it is a two-step process that operates directly on the high- and low-fidelity functions, as opposed to an iterative one. Without any prior information, the sampling must occur uniformly across the entire design space. This means that computational budget is likely to be expended in areas which are not helpful to the search. Similarly, it initializes by evaluating solutions from each group in high-fidelity, resulting in further unnecessary expenditure of computational budget.
 
-Algorithm~\ref{alg:mo2tos} in Section~\ref{sec:exp} provides the basic structure of the \motos{} procedure used for numerical benchmarking in this paper and more details can be found in~\cite{xu2016mo2tos}.
+Algorithm~\ref{alg:mo2tos} in Section~\ref{sec:exp} provides the basic structure of the \motos{} procedure used for numerical bench-marking in this paper and more details can be found in~\cite{xu2016mo2tos}.
 
 \subsection{A motivating example}
 

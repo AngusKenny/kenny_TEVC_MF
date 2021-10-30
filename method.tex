@@ -7,9 +7,9 @@ The multi-fidelity optimization algorithm proposed in this paper relies on an it
 \algsetup{linenosize=\footnotesize}
 {\footnotesize 
 \begin{algorithmic}[1]
-\REQUIRE{$P$, problem data; $N_L$, max size of low-fidelity population; $T$, maximum number of evaluations; $\rho$, parameter set for LocalOCBA.}
+\REQUIRE{$\mathcal{I}$, problem instance; $N_L$, max size of low-fidelity population; $T$, maximum number of evaluations; $\rho$, parameter set for LocalOCBA.}
 \ENSURE{Best solution found $\V{x}^\beta$.}
-\STATE{$X_v \ot LHS(P),\ \forall v \in \{L,H\}$} \COMMENT{Generate initial populations}
+\STATE{$X_v \ot LHS(\mathcal{I}),\ \forall v \in \{L,H\}$} \COMMENT{Generate initial populations}
 \STATE{$A_v,t \ot f_v(X_v,0),\ \forall v \in \{L,H\}$} \COMMENT{Evaluate initial populations}
 \STATE{$\V{x}^\beta \ot \emptyset$} \COMMENT{Initialize $\V{x}^\beta$} 
 \WHILE{$t < T$}
@@ -22,7 +22,7 @@ The multi-fidelity optimization algorithm proposed in this paper relies on an it
   \STATE{$\varepsilon \ot getEpsilon(t,T,A_L,\rho)$} \COMMENT{Determine size of neighbourhood}
   \STATE{$A_L,t \ot LocalOCBA(\rho,M_L,A_L,\V{x}^\beta,\varepsilon)$} \COMMENT{Locally search low-fidelity model}
   \IF{$|A_L| > N_L$}
-    \STATE{$A_L \ot Winnow(A_L,N_L)$} \COMMENT{Control population size}
+    \STATE{$A_L \ot Truncate(A_L,N_L)$} \COMMENT{Control population size}
   \ENDIF
 \ENDWHILE
 \end{algorithmic}
@@ -30,7 +30,7 @@ The multi-fidelity optimization algorithm proposed in this paper relies on an it
 \end{algorithm}
 
 \subsection{Initialization, evaluation and surrogate models}
-The function $LHS(P)$ returns an initial population generated from a latin hypercube sampling~(LHS), the bounds of which are defined in $P$. LHS is used as it can provide well distributed solutions in the variable space without requiring exponential number of them, unlike full-factorial sampling. The solutions are evaluated using the function $f_v(X,t)$, at some fidelity $v\in \{L,H\}$, which returns a set of ``archive'' pairs comprising the solution and its objective value. It also updates the total cost incurred, $t$, taking into account the cost of evaluating the solutions at fidelity $v$. 
+The function $LHS(P)$ returns an initial population generated from a Latin hypercube sampling~(LHS), the bounds of which are defined in $\mathcal{I}$. LHS is used as it can provide well distributed solutions in the variable space without requiring exponential number of them, unlike full-factorial sampling. The solutions are evaluated using the function $f_v(X,t)$, at some fidelity $v\in \{L,H\}$, which returns a set of ``archive'' pairs comprising the solution and its objective value. It also updates the total cost incurred, $t$, taking into account the cost of evaluating the solutions at fidelity $v$. 
 
 Two surrogate models are built: $Krige(A_L)$ takes the low-fidelity samples and returns a kriging model approximating it, and $CoKrige(A_L,A_H)$ takes both the low- and high-fidelity archive and returns a co-kriging model that approximates the fitness landscape of the high-fidelity objective function. The function $GlobalSearch(M_C)$ takes the co-kriging model as input and returns the best solution that it can find using some global search method~(on the surrogate model). The solution identified from the above process is evaluated in high-fidelity and the information is used to update the co-kriging model, and also to determine the restricted neighbourhood to be used for search using the low-fidelity kriging model, discussed next.
 
@@ -72,7 +72,7 @@ If this was the only translation applied, then all possible solutions produced b
 \begin{equation}\label{eq:nudge2}
 \V{x}^{c''} = \V{x}^{c'} + \V{r} \cdot (\V{x}^\beta - \V{x}^{c'})\,,
 \end{equation}
-where, $\V{r}\in [0,1]^D$ is a random vector with $D$ components. By making $\V{r}$ a vector and not a scalar, the set of solutions that can be produced is no longer restricted to a line; instead, any solution within the $D$-dimensional hyperrectangle with with diagonal vertices at $\V{x}^\beta$ and $\V{x}^{c'}$ (indicated by the shaded rectangles in Figure~\ref{fig:guide-DE}) can be produced.
+where, $\V{r}\in [0,1]^D$ is a random vector with $D$ components. By making $\V{r}$ a vector and not a scalar, the set of solutions that can be produced is no longer restricted to a line; instead, any solution within the $D$-dimensional hyper-rectangle with with diagonal vertices at $\V{x}^\beta$ and $\V{x}^{c'}$ (indicated by the shaded rectangles in Figure~\ref{fig:guide-DE}) can be produced.
 
 In combining these two translation operations, the guided DE makes an initial ``bee-line'' for $\V{x}^\beta$ by some factor $\varepsilon$, determined by how much of the search has been completed, effectively pruning a lot of the search space, before randomly searching the vicinity of $\V{x}^\beta$ to produce the resultant child solution $\V{x}^{c''}$. Substituting Equation~\ref{eq:nudge1} into Equation~\ref{eq:nudge2} gives
 \begin{align}\label{eq:nudge3}
@@ -85,9 +85,9 @@ If this process is continued for all solutions in the population, the result is 
  
 As mentioned, the value of $\varepsilon$ should be small at the beginning of the search, and tending towards 1 and flattening by around 80\% --- consistent with the principles of $\varepsilon$ADE. One function which exhibits these properties is the logistic sigmoid curve
 \begin{equation}\label{eq:logistic}
-\varsigma = \dfrac{L}{1+e^{-k(x-x_0)}}\,,
+\varsigma = \dfrac{L}{1+e^{-k_s(x-x_0)}}\,,
 \end{equation}
-where $x_0$ is the $x$ value of the sigmoid's midpoint, $L$ is the curve's maximum and $k$ is the steepness parameter, which controls how fast the function rises. Figure~\ref{fig:logistic} gives a plot of the logistic sigmoid curve with $L=0.99$, $k=10$ and $x_0 = 0.2$.  Crucially, these parameters are intuitive to set and do not require tuning to achieve the desired behaviour.
+where $x_0$ is the $x$ value of the sigmoid's midpoint, $L$ is the curve's maximum and $k_s$ is the steepness parameter, which controls how fast the function rises. Figure~\ref{fig:logistic} gives a plot of the logistic sigmoid curve with $L=0.99$, $k_s=10$ and $x_0 = 0.2$.  Crucially, these parameters are intuitive to set and do not require tuning to achieve the desired behaviour.
 \begin{figure}[h!]
   \centering
   % \includegraphics[width = 0.40\textwidth]{img/logistic.eps}
@@ -118,7 +118,7 @@ Once the candidate solutions have been been generated in the vicinity of $\V{x}^
 \algsetup{linenosize=\footnotesize}
 {\footnotesize
 \begin{algorithmic}[1]
-\REQUIRE{$\rho=\{\Delta_1$, total to be sampled; $\Delta_2$, samples per statistics update$\}$; $M$, low-fidelity model; $A_L$, low-fidelity archive; $\V{x}^\beta$, best high-fidelity solution ; $\varepsilon$, sigmoid value; $t$, total cost incurred.}
+\REQUIRE{$\rho=\{\Delta_1$, total to be sampled; $\Delta_2$, samples per statistics update$\}$; $M$, low-fidelity model; $A_L$, low-fidelity archive; $\V{x}^\beta$, best high-fidelity solution ; $\varepsilon$, epsilon value; $t$, total cost incurred.}
 \ENSURE{$A_L$, updated low-fidelity archive; $t$, updated total cost.}
 \STATE{$X \ot GuidedDE(A_L,\V{x}^\beta,\varepsilon)$} \COMMENT{Generate child population}
 \STATE{$A_X \ot f_{M}(X)$} \COMMENT{Approximate each child by model $M$}
@@ -146,7 +146,7 @@ Once $\Delta_1$ solutions have been selected in the set $S$, they are evaluated 
 \subsection{Archive size control}
 Due to the fact that many more low-fidelity solutions are added to the archive between each high-fidelity evaluation, the size of the low-fidelity archive can become too big for some kriging and co-kriging algorithms, or too concentrated if the search is focused on the same area for too long. Therefore, a maximum archive size $N_L$ is set such that once it reaches that threshold, the population should be maintained at that level. Choosing a steady-state method such as ranking the solutions by their value and selecting the top $N_L$ will cause the population to converge and lose diversity over time. As the purpose of maintaining the low-fidelity population is to provide the co-kriging model with information about the shape of the fitness landscape, this loss of diversity can be detrimental. 
 
-The function $Winnow(A_L,N_L)$ processes an archive of solutions and returns a winnowed archive with exactly $N_L$ solutions. It does this by partitioning the solutions in the decision space into $N_L$ different groups using a clustering algorithm, such as $k$-means clustering. Most of these clusters will contain only one solution which are directly added to the winnowed archive; for those that have more than one solution, only the solution with the best value is selected. This ensures that the archive never has more than $N_L$ solutions, but diversity is maintained throughout the population.
+The function $Truncate(A_L,N_L)$ processes an archive of solutions and returns a truncated version of the archive with exactly $N_L$ solutions. It does this by partitioning the solutions in the decision space into $N_L$ different groups using a clustering algorithm, such as $k$-means clustering. Most of these clusters will contain only one solution which are directly added to the truncated archive; for those that have more than one solution, only the solution with the best value is selected. This ensures that the archive never has more than $N_L$ solutions, but diversity is maintained throughout the population.
 
 \subsection{Similarities and differences to \motos{}}
 There exist some similarities between \AlgName{} and the \motos{} framework. For example, both use a two-step process of ordering a population of solutions and then selecting from them using ideas from OCBA. Despite the similarities, there are several key aspects which differentiate the two algorithms from each other. 
@@ -160,7 +160,7 @@ The fact that \motos{} must determine all of its candidates \emph{a priori} mean
 Finally, \motos{} partitions the ranked population into a fixed number of equal-sized groups, whereas \AlgName{} uses a clustering algorithm to determine the number and size of partitions. This ensures that the average distance between groups in objective space is maximized. %\hemant{Referring back to my comment in the previous section, here is where you can revisit/redraw the figure and show how the next selected point(s) are of higher quality for your algorithm. Of course it will not demonstrate every component of your algorithm, but at least the concept demonstration why your selection method is likely to improve performance.}
 
 \subsection{Proof of concept}
-To visualise the operation of the proposed method and demonstrate its advantages, \AlgName{} is applied to the motivating example given in Section~\ref{sec:back} with a limited computational budget (200 low-fidelity-equivalent evaluations) to highlight the shortcomings of the \motos{} algorithm (Figure~\ref{fig:ex-mfits}).
+To visualize the operation of the proposed method and demonstrate its advantages, \AlgName{} is applied to the motivating example given in Section~\ref{sec:back} with a limited computational budget (200 low-fidelity-equivalent evaluations) to highlight the shortcomings of the \motos{} algorithm (Figure~\ref{fig:ex-mfits}).
 % \begin{figure*}[t]
 %   \centering
 %   \subfloat[105 unit cost, $x^\beta = -1.4202$\label{fig:ex-mfits105}]{\includegraphics[width = 0.25\textwidth]{img/ex_mfits_01.eps}} 
