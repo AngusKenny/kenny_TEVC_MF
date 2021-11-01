@@ -361,7 +361,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{\AlgName{}: An Iterative, Two-stage Multi-fidelity Optimization Algorithm for Computationally Expensive Problems}
+\title{An Iterative Two-stage Multi-fidelity Optimization Algorithm for Computationally Expensive Problems}
 %
 %
 % author names and IEEE memberships
@@ -410,8 +410,8 @@
 
 
 % The paper headers
-\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
-{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
+% \markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
+% {Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
 % The only time the second header will appear is for the odd numbered pages
 % after the title page when using the twoside option.
 % 
@@ -443,20 +443,16 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-In engineering, the evaluation of a single design can be very computationally expensive if doing so requires techniques like finite element analysis or computational fluid dynamic simulation. One advantage of many simulation methods is that they can limit the amount of the (often fixed) computational budget through the use of lower fidelity evaluations; the trade-off being that a low-fidelity evaluation is likely to be less accurate. This paper proposes an iterative, two-stage algorithm \AlgName{} which makes use of this multi-fidelity approach to produce good quality solutions to bound-constrained, single-objective optimization problems with continuous variables. It exploits historical information from previously evaluated designs to determine a sampling neighbourhood for low-fidelity evaluations, which are used to maintain a co-kriging surrogate model of the objective landscape that is then searched globally to identify a good candidate for high-fidelity evaluation. By restricting the low-fidelity sampling neighbourhood, the computational budget can be used more efficiently, as the search is focused on regions that have historically produced good quality solutions. Experiments on two suites of test problems are carried out to demonstrate the features of \AlgName{} and the results are compared with two other similar techniques from the literature.
 
-% \hemant{Angus, please take a shot at the first version of abstract.}
 
-% \angus{Angus can make comments using \texttt{\textbackslash{}angus\{comment\}}}
+Engineering design optimization often involves use of numerical simulations to assess the performance of candidate designs. The simulations for computing high-fidelity~(HF) performance estimates, such as finite element analysis or computational fluid dynamics, are typically computationally expensive. In some cases, it may also be possible to run an alternate or cheaper version of the simulation~(through, e.g., use of a coarse mesh) to yield a low-fidelity~(LF) performance estimate. Multi-fidelity optimization refers to the class of methods that aim to manage LF and HF evaluations efficiently to optimize computationally expensive problems within a limited computing budget. Among the prominent existing multi-fidelity approaches, some of them depend on a sufficiently dense \emph{a priori} sampling; while others use unidirectional information exchange from LF to HF; both of which lead to a possibility of spending evaluation budget on unpromising search regions. This paper proposes an improved multi-fidelity approach using an iterative, two-stage scheme~(\AlgName{}). It uses the collective information from previously evaluated designs to determine a sampling neighbourhood for LF evaluations. These samples are in-turn used for building a co-kriging surrogate model that is then searched globally to identify a good candidate for HF evaluation. By restricting the LF sampling neighbourhood, the computational budget can be used more efficiently, as the search is focused on regions that have historically produced good quality solutions. Numerical experiments and benchmarking are conducted on two suites of test problems to demonstrate the efficacy of \AlgName{}.
+% In engineering, the evaluation of a single design can be very computationally expensive if doing so requires techniques like finite element analysis or computational fluid dynamic simulation. One advantage of many simulation methods is that they can limit the amount of the (often fixed) computational budget through the use of lower fidelity evaluations; the trade-off being that a low-fidelity evaluation is likely to be less accurate. This paper proposes an multi-fidelity approach using an iterative, two-stage scheme~(\AlgName{}) to solve expensive optimization problems. It exploits historical information from previously evaluated designs to determine a sampling neighbourhood for low-fidelity evaluations, which are used to maintain a co-kriging surrogate model of the objective landscape that is then searched globally to identify a good candidate for high-fidelity evaluation. By restricting the low-fidelity sampling neighbourhood, the computational budget can be used more efficiently, as the search is focused on regions that have historically produced good quality solutions. Experiments on two suites of test problems are carried out to demonstrate the features of \AlgName{} and the results are compared with two other similar techniques from the literature.
 
-% \ray{Ray can make comments using \texttt{\textbackslash{}ray\{comment\}}}
-
-% \hemant{Hemant can make comments using \texttt{\textbackslash{}hemant\{comment\}}}
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-IEEE, IEEEtran, journal, \LaTeX, paper, template.
+Multi-fidelity Optimization, Computationally Expensive Optimization.
 \end{IEEEkeywords}
 
 
